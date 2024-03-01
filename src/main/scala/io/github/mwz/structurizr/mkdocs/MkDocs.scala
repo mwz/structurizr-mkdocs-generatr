@@ -5,19 +5,28 @@ import fs2.Stream
 import fs2.io.file.Files
 import fs2.io.file.Flags
 import fs2.io.file.Path as fs2Path
+import io.circe.*
+import io.circe.syntax.*
+import io.circe.yaml.v12.Printer
+import io.circe.yaml.v12.Printer.Config
+import io.circe.yaml.v12.parser
+import io.circe.yaml.v12.syntax.*
+
 import java.nio.file.Path
 
-trait MkDocs {
+trait MkDocs:
   def writeSections(sections: Stream[IO, Section]): IO[Unit]
-}
+  def writeMkDocsConfig(sections: Stream[IO, Section]): IO[Unit]
 
-object MkDocs {
+object MkDocs:
+  val printer = Printer.make(Config(preserveOrder = true))
+
   def apply(basePath: Path) = new MkDocs:
     def writeSections(sections: Stream[IO, Section]): IO[Unit] =
       val path = fs2Path.fromNioPath(basePath)
       Files.forIO.exists(path).ifM(IO.unit, Files.forIO.createDirectory(path)) >>
         sections
-          .evalTap(section => IO.println(s"Processing ${section.filename}"))
+          .evalTap(section => IO.println(s"Processing ${section.title} ${section.filename}"))
           .flatMap { section =>
             val path = fs2Path.fromNioPath(basePath) / fs2Path(section.filename)
             Stream(section.md)
@@ -25,4 +34,40 @@ object MkDocs {
           }
           .compile
           .drain
-}
+
+    // Write the mkdocs config file.
+    // TODO: use a default minimal config if no template is provided
+    def writeMkDocsConfig(sections: Stream[IO, Section]): IO[Unit] =
+      val sectionsJson: IO[Json] = sections.compile.toList.map(
+        _.map(s => JsonObject(s.title -> s.filename.asJson)).asJson
+      )
+      val template = Files[IO]
+        .readAll(fs2Path("mkdocs.tmpl.yml"))
+        .through(fs2.text.utf8.decode)
+        .compile
+        .string
+
+      // populate the nav section
+      for {
+        sectionsJson <- sectionsJson
+        json <- template
+          .flatMap(s => IO.fromEither(parser.parse(s)))
+          .flatTap(s => IO.println(s))
+          .map(
+            _.hcursor
+              .downField("nav")
+              .withFocus { focus =>
+                val arr = focus.asArray.getOrElse(Vector.empty)
+                Json.fromValues(
+                  sectionsJson.asArray.map(arr ++ _).getOrElse(arr)
+                )
+              }
+              .top
+              .getOrElse(Json.Null)
+          )
+          .flatTap(s => IO.println(s))
+        _ <- Stream(printer.pretty(json))
+          .through(Files[IO].writeUtf8(fs2Path("mkdocs.yml"), Flags.Write))
+          .compile
+          .drain
+      } yield ()

@@ -32,7 +32,7 @@ object mainApp extends IOApp.Simple:
     val sections: Stream[IO, Section] =
       Stream.emits(docs.sections()) ++
         Stream.emit(softwareSystems.section)
-    mkDocs.writeSections(sections)
+    mkDocs.writeSections(sections) >> mkDocs.writeMkDocsConfig(sections)
 
   // TODO:
   // Fill content:
@@ -50,7 +50,8 @@ object mainApp extends IOApp.Simple:
   // Save file
   //  - remove flexmark extensions
   //  - resolve paths to embedded diagrams
-  // ⬜︎ Generate mkdocs config and add files to the nav
+  // ✅ Generate mkdocs config and add files to the nav
+  //  - support system hierarchy in nav
   // Generate diagrams
   //  - export with element links (custom C4PlantUMLExporter)
   //  - save as svg (can svg be used in mkdocs?)

@@ -12,7 +12,15 @@ object Docs {
   def apply(ssections: Seq[SSection]) = new Docs {
     def sections(): Seq[Section] =
       ssections.map { section =>
-        Section(section.getTitle(), section.getContent(), section.getFilename())
+        val title: String =
+          section
+            .getContent()
+            .stripLeading()
+            .linesIterator
+            .find(_.nonEmpty)
+            .map(_.replaceAll("#+", "").trim())
+            .getOrElse("Untitled")
+        Section(title, section.getContent(), section.getFilename())
       }
   }
 }
