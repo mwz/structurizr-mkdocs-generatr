@@ -101,7 +101,7 @@ object SoftwareSystems {
           case System(group, system) =>
             val description = Option(system.getDescription())
               .filter(_.trim().nonEmpty)
-              .fold("")(d => s"  \n${indent(level)}  ${d}")
+              .fold("")(d => s"  \n${indent(level)}  `${d}`")
             s"\n${indent(level)}- ${system.getName()}${description}"
           case Group(name, children) =>
             val prefix = level match
