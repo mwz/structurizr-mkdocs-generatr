@@ -48,7 +48,7 @@ object MkDocs:
         .string
 
       // populate the nav section
-      for {
+      for
         sectionsJson <- sectionsJson
         json <- template
           .flatMap(s => IO.fromEither(parser.parse(s)))
@@ -65,4 +65,4 @@ object MkDocs:
           .through(Files[IO].writeUtf8(fs2Path("mkdocs.yml"), Flags.Write))
           .compile
           .drain
-      } yield ()
+      yield ()

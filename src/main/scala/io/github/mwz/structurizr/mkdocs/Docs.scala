@@ -4,11 +4,10 @@ import com.structurizr.documentation.Section as SSection
 
 case class Section(title: Option[String], md: String, filename: String)
 
-trait Docs {
+trait Docs:
   def sections(): Seq[Section]
-}
 
-object Docs {
+object Docs:
   def apply(ssections: Seq[SSection]) = new Docs {
     def sections(): Seq[Section] =
       ssections.zipWithIndex.map { case (section, i) =>
@@ -23,4 +22,3 @@ object Docs {
         Section(title, section.getContent(), filename)
       }
   }
-}

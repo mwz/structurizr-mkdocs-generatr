@@ -8,16 +8,15 @@ trait Tree
 case class System(group: List[String], system: SoftwareSystem)  extends Tree
 case class Group(name: String, children: TreeMap[String, Tree]) extends Tree
 
-trait SoftwareSystems {
+trait SoftwareSystems:
   def allSystems: Seq[System]
   def tree: TreeMap[String, Tree]
   def prettyPrint: String
   def summaryView: String
   def section: Section
-}
 
-object SoftwareSystems {
-  def apply(systems: Seq[SoftwareSystem], separator: String) = new SoftwareSystems {
+object SoftwareSystems:
+  def apply(systems: Seq[SoftwareSystem], separator: String) = new SoftwareSystems:
     lazy val allSystems =
       systems.map { system =>
         system.getGroup() match {
@@ -119,5 +118,3 @@ object SoftwareSystems {
         }
 
     lazy val section = Section(Some("Software Systems"), summaryView, "software-systems.md")
-  }
-}

@@ -5,11 +5,10 @@ import cats.effect.IO
 import com.structurizr.dsl.StructurizrDslParser
 import java.io.File
 
-trait Workspace {
+trait Workspace:
   def get(): IO[SWorkspace]
-}
 
-object Workspace {
+object Workspace:
   def apply(): Workspace = new Workspace {
     def get(): IO[SWorkspace] = IO.blocking {
       val parser = StructurizrDslParser()
@@ -17,4 +16,3 @@ object Workspace {
       parser.getWorkspace()
     }
   }
-}

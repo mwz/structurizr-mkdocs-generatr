@@ -16,7 +16,7 @@ import java.nio.file.Path
 
 object mainApp extends IOApp.Simple:
 
-  val run: IO[Unit] = for {
+  val run: IO[Unit] = for
     workspace <- Workspace().get()
     docs = Docs(workspace.getDocumentation().getSections().asScala.toSeq)
     softwareSystems = SoftwareSystems(
@@ -24,7 +24,7 @@ object mainApp extends IOApp.Simple:
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
     _ <- exec(docs, softwareSystems, MkDocs())
-  } yield ()
+  yield ()
 
   def exec(docs: Docs, softwareSystems: SoftwareSystems, mkDocs: MkDocs): IO[Unit] =
     val sections: Stream[IO, Section] =
