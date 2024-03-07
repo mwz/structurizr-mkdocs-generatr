@@ -3,6 +3,7 @@ ThisBuild / scalaVersion := "3.4.0"
 
 lazy val root = (project in file(".")).settings(
   name := "structurizr-mkdocs-generatr",
+  javacOptions ++= Seq("-source", "21", "-target", "21"),
   libraryDependencies ++= Seq(
     "io.circe"       %% "circe-core"         % "0.14.6",
     "io.circe"       %% "circe-parser"       % "0.14.6",
