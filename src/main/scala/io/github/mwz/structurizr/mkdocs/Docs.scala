@@ -11,7 +11,8 @@ trait Docs {
 object Docs {
   def apply(ssections: Seq[SSection]) = new Docs {
     def sections(): Seq[Section] =
-      ssections.map { section =>
+      ssections.zipWithIndex.map { case (section, i) =>
+        val filename: String = if i == 0 then "index.md" else section.getFilename()
         val title: String =
           section
             .getContent()
@@ -20,7 +21,7 @@ object Docs {
             .find(_.nonEmpty)
             .map(_.replaceAll("#+", "").trim())
             .getOrElse("Untitled")
-        Section(title, section.getContent(), section.getFilename())
+        Section(title, section.getContent(), filename)
       }
   }
 }

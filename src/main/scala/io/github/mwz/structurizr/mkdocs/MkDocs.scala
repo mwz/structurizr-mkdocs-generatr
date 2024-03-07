@@ -21,7 +21,7 @@ trait MkDocs:
 object MkDocs:
   val printer = Printer.make(Config(preserveOrder = true))
 
-  def apply(basePath: Path) = new MkDocs:
+  def apply(basePath: Path = Path.of("./mkdocs")) = new MkDocs:
     def writeSections(sections: Stream[IO, Section]): IO[Unit] =
       val path = fs2Path.fromNioPath(basePath)
       Files.forIO.exists(path).ifM(IO.unit, Files.forIO.createDirectory(path)) >>
@@ -53,17 +53,12 @@ object MkDocs:
         json <- template
           .flatMap(s => IO.fromEither(parser.parse(s)))
           .flatTap(s => IO.println(s))
-          .map(
-            _.hcursor
-              .downField("nav")
-              .withFocus { focus =>
-                val arr = focus.asArray.getOrElse(Vector.empty)
-                Json.fromValues(
-                  sectionsJson.asArray.map(arr ++ _).getOrElse(arr)
-                )
-              }
+          .map(json =>
+            json.hcursor
+              .withFocus(_.mapObject(_.add("docs_dir", basePath.toString.asJson)))
+              .withFocus(_.mapObject(_.add("nav", Json.fromValues(sectionsJson.asArray.getOrElse(Vector.empty)))))
               .top
-              .getOrElse(Json.Null)
+              .getOrElse(json)
           )
           .flatTap(s => IO.println(s))
         _ <- Stream(printer.pretty(json))

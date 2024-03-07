@@ -1,5 +1,5 @@
 ThisBuild / organization := "com.example"
-ThisBuild / scalaVersion := "3.3.1"
+ThisBuild / scalaVersion := "3.4.0"
 
 lazy val root = (project in file(".")).settings(
   name := "structurizr-mkdocs-generatr",

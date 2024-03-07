@@ -23,9 +23,7 @@ object mainApp extends IOApp.Simple:
       workspace.getModel().getSoftwareSystems().asScala.toSeq,
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
-    // TODO: make mkDocs path configurable
-    mkDocs = MkDocs(Path.of("./mkdocs"))
-    _ <- exec(docs, softwareSystems, mkDocs)
+    _ <- exec(docs, softwareSystems, MkDocs())
   } yield ()
 
   def exec(docs: Docs, softwareSystems: SoftwareSystems, mkDocs: MkDocs): IO[Unit] =
@@ -36,8 +34,9 @@ object mainApp extends IOApp.Simple:
 
   // TODO:
   // Fill content:
-  //  - ✅ homepage - 1st doc section
+  //  - ✅ homepage - 1st doc section - rename to index
   //  - ✅ docs
+  //  - generate empty index if no docs are present
   //  - ✅ software systems summary
   //  - software system
   //    - info
@@ -51,7 +50,7 @@ object mainApp extends IOApp.Simple:
   //  - remove flexmark extensions
   //  - resolve paths to embedded diagrams
   // ✅ Generate mkdocs config and add files to the nav
-  //  - support system hierarchy in nav
+  //  - support system hierarchy in nav/toc
   // Generate diagrams
   //  - export with element links (custom C4PlantUMLExporter)
-  //  - save as svg (can svg be used in mkdocs?)
+  //  - save as svg (can svg with links be used in mkdocs?)
