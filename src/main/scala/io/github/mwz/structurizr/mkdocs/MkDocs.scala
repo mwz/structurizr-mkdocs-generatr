@@ -39,7 +39,7 @@ object MkDocs:
     // TODO: use a default minimal config if no template is provided
     def writeMkDocsConfig(sections: Stream[IO, Section]): IO[Unit] =
       val sectionsJson: IO[Json] = sections.compile.toList.map(
-        _.map(s => JsonObject(s.title -> s.filename.asJson)).asJson
+        _.map(s => JsonObject(s.title.getOrElse("") -> s.filename.asJson)).asJson
       )
       val template = Files[IO]
         .readAll(fs2Path("mkdocs.tmpl.yml"))

@@ -118,6 +118,6 @@ object SoftwareSystems {
           s + md(tree, "")
         }
 
-    lazy val section = Section("Software Systems", summaryView, "software-systems.md")
+    lazy val section = Section(Some("Software Systems"), summaryView, "software-systems.md")
   }
 }
