@@ -29,7 +29,7 @@ object mainApp extends IOApp.Simple:
   def exec(docs: Docs, softwareSystems: SoftwareSystems, mkDocs: MkDocs): IO[Unit] =
     val sections: Stream[IO, Section] =
       Stream.emits(docs.sections()) ++
-        Stream.emit(softwareSystems.section)
+        Stream.emit(softwareSystems.summarySection)
     mkDocs.writeSections(sections) >> mkDocs.writeMkDocsConfig(sections)
 
   // TODO:

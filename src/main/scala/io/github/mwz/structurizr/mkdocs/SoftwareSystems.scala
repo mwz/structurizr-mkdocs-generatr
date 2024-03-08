@@ -14,6 +14,7 @@ trait SoftwareSystems:
   def prettyPrint: String
   def summaryView: String
   def section: Section
+  def summarySection: Section
 
 object SoftwareSystems:
   def apply(systems: Seq[SoftwareSystem], separator: String) = new SoftwareSystems:
@@ -117,4 +118,4 @@ object SoftwareSystems:
           s + md(tree, "")
         }
 
-    lazy val section = Section(Some("Software Systems"), summaryView, "software-systems.md")
+    lazy val summarySection = Section(Some("Software Systems"), summaryView, "software-systems.md")

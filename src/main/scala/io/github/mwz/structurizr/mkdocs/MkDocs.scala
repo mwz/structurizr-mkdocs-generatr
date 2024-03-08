@@ -14,6 +14,8 @@ import io.circe.yaml.v12.syntax.*
 
 import java.nio.file.Path
 
+case class Section(title: Option[String], md: String, filename: String)
+
 trait MkDocs:
   def writeSections(sections: Stream[IO, Section]): IO[Unit]
   def writeMkDocsConfig(sections: Stream[IO, Section]): IO[Unit]
@@ -39,7 +41,9 @@ object MkDocs:
     // TODO: use a default minimal config if no template is provided
     def writeMkDocsConfig(sections: Stream[IO, Section]): IO[Unit] =
       val sectionsJson: IO[Json] = sections.compile.toList.map(
-        _.map(s => JsonObject(s.title.getOrElse("") -> s.filename.asJson)).asJson
+        _.map(s =>
+          s.title.fold(ifEmpty = s.filename.asJson)(title => JsonObject(title -> s.filename.asJson).asJson)
+        ).asJson
       )
       val template = Files[IO]
         .readAll(fs2Path("mkdocs.tmpl.yml"))
