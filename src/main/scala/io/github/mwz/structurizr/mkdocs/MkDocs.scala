@@ -14,21 +14,50 @@ import io.circe.yaml.v12.syntax.*
 
 import java.nio.file.Path
 
-case class Section(title: Option[String], md: String, filename: String)
+trait SectionHierarchy
+case class SectionGroup(title: Option[String], sections: Seq[SectionHierarchy]) extends SectionHierarchy
+case class Section(title: Option[String], md: String, filename: String)         extends SectionHierarchy
 
 trait MkDocs:
   def writeSections(sections: Stream[IO, Section]): IO[Unit]
-  def writeMkDocsConfig(sections: Stream[IO, Section]): IO[Unit]
+  def writeSectionHierarchy(sectionHierarchy: Stream[IO, SectionHierarchy]): IO[Unit]
+  def writeMkDocsConfig(sections: Stream[IO, SectionHierarchy]): IO[Unit]
 
 object MkDocs:
   val printer = Printer.make(Config(preserveOrder = true))
 
+  // Custom encoder for SectionHierarchy
+  given encodeSectionHierarchy: Encoder[SectionHierarchy] = new Encoder[SectionHierarchy]:
+    final def apply(h: SectionHierarchy): Json = h match
+      case sg: SectionGroup =>
+        Json.obj(sg.title.getOrElse("untitled") -> sg.sections.asJson)
+      case s: Section =>
+        s.title.fold(s.filename.asJson)(title => JsonObject(title -> s.filename.asJson).asJson)
+
   def apply(basePath: Path = Path.of("./mkdocs")) = new MkDocs:
+    def flatten(sections: Stream[IO, SectionHierarchy]): Stream[IO, Section] =
+      sections.flatMap {
+        case SectionGroup(title, sections) => Stream.emits(sections).covary[IO].through(flatten)
+        case s: Section                    => Stream.emit(s)
+      }
+
+    def writeSectionHierarchy(sectionHierarchy: Stream[IO, SectionHierarchy]): IO[Unit] =
+      writeSections(flatten(sectionHierarchy))
+
     def writeSections(sections: Stream[IO, Section]): IO[Unit] =
       val path = fs2Path.fromNioPath(basePath)
       Files.forIO.exists(path).ifM(IO.unit, Files.forIO.createDirectory(path)) >>
         sections
           .evalTap(section => IO.println(s"Processing ${section.title} ${section.filename}"))
+          .evalTap { s =>
+            val filename = path / fs2Path(s.filename)
+            IO.fromOption(filename.parent)(new RuntimeException(s"Path doesn't have a parent directory: $filename"))
+              .flatMap { parent =>
+                Files[IO]
+                  .exists(parent)
+                  .ifM(IO.unit, Files[IO].createDirectories(parent))
+              }
+          }
           .flatMap { section =>
             val path = fs2Path.fromNioPath(basePath) / fs2Path(section.filename)
             Stream(section.md)
@@ -39,12 +68,11 @@ object MkDocs:
 
     // Write the mkdocs config file.
     // TODO: use a default minimal config if no template is provided
-    def writeMkDocsConfig(sections: Stream[IO, Section]): IO[Unit] =
-      val sectionsJson: IO[Json] = sections.compile.toList.map(
-        _.map(s =>
-          s.title.fold(ifEmpty = s.filename.asJson)(title => JsonObject(title -> s.filename.asJson).asJson)
-        ).asJson
-      )
+    def writeMkDocsConfig(sections: Stream[IO, SectionHierarchy]): IO[Unit] =
+      val sectionsJson: IO[Json] =
+        sections.compile.toList
+          .map(_.asJson)
+
       val template = Files[IO]
         .readAll(fs2Path("mkdocs.tmpl.yml"))
         .through(fs2.text.utf8.decode)

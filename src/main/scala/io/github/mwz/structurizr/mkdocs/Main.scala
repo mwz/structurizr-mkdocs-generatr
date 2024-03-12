@@ -27,10 +27,11 @@ object mainApp extends IOApp.Simple:
   yield ()
 
   def exec(docs: Docs, softwareSystems: SoftwareSystems, mkDocs: MkDocs): IO[Unit] =
-    val sections: Stream[IO, Section] =
+    val sections: Stream[IO, SectionHierarchy] =
       Stream.emits(docs.sections()) ++
-        Stream.emit(softwareSystems.summarySection)
-    mkDocs.writeSections(sections) >> mkDocs.writeMkDocsConfig(sections)
+        Stream.emit(softwareSystems.summarySection) ++
+        Stream.emit(softwareSystems.sectionHierarchy())
+    mkDocs.writeSectionHierarchy(sections) >> mkDocs.writeMkDocsConfig(sections)
 
   // TODO:
   // Fill content:
@@ -39,10 +40,10 @@ object mainApp extends IOApp.Simple:
   //  - generate empty index if no docs are present
   //  - ✅ software systems summary
   //  - software system
-  //    - info
-  //    - context views
-  //    - container views
-  //    - dynamic views
+  //    - ✅ info
+  //    - context view
+  //    - container view
+  //    - dynamic view
   //    - dependencies
   //      - inbound
   //      - outbound

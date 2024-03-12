@@ -13,8 +13,8 @@ trait SoftwareSystems:
   def tree: TreeMap[String, Tree]
   def prettyPrint: String
   def summaryView: String
-  def section: Section
   def summarySection: Section
+  def sectionHierarchy(): SectionHierarchy
 
 object SoftwareSystems:
   def apply(systems: Seq[SoftwareSystem], separator: String) = new SoftwareSystems:
@@ -48,6 +48,7 @@ object SoftwareSystems:
 
     // Populate the tree recursively
     // TODO: Optimise this
+    // TODO: Stack safety
     private def populateTree(
         tree: TreeMap[String, Tree],
         groups: List[String],
@@ -98,10 +99,12 @@ object SoftwareSystems:
         tree match {
 
           // TODO: Add link to system page
+        tree match
           case System(group, system) =>
             val description = Option(system.getDescription())
               .filter(_.trim().nonEmpty)
               .fold("")(d => s"  \n${indent(level)}  `${d}`")
+            // TODO: Add link to system page
             s"\n${indent(level)}- ${system.getName()}${description}"
           case Group(name, children) =>
             val prefix = level match
@@ -111,6 +114,7 @@ object SoftwareSystems:
                 s + md(c._2, "", level + 1)
               }}"
         }
+
       "# Software Systems\n" +
         groups.foldLeft("") { case (s, (_, tree)) =>
           s + md(tree, "")
@@ -119,3 +123,52 @@ object SoftwareSystems:
         }
 
     lazy val summarySection = Section(Some("Software Systems"), summaryView, "software-systems.md")
+    lazy val summarySection =
+      Section(Some("Software Systems - Summary"), summaryView, "software-systems.md")
+
+    // TODO: Section Group with the following sections:
+    // - ✅ Info
+    // - Context view
+    // - Container view
+    // - Dynamic view
+    // - Dependencies
+    //   - Inbound
+    //   - Outbound
+    def sectionHierarchy(): SectionHierarchy =
+      def convert(tree: Tree): SectionHierarchy =
+        tree match
+          case System(group, system @ given SoftwareSystem) =>
+            val sections = Seq.empty ++ info()
+            val default =
+              Section(Some(system.getName()), "", s"software-systems/${normaliseName(system.getName())}.md")
+            if sections.nonEmpty then SectionGroup(Some(system.getName()), sections)
+            else default
+
+          case Group(name, children) =>
+            SectionGroup(
+              Some(name),
+              children.values.map(convert).toSeq
+            )
+
+      // recursively transform systems tree into section hierarchy
+      SectionGroup(
+        Some("Software Systems"),
+        tree.values.map(convert).toSeq
+      )
+
+    // TODO: Include System documentation
+    def info()(using system: SoftwareSystem): Option[Section] =
+      val description =
+        Option(system.getDescription())
+          .filter(_.trim().nonEmpty)
+      description.map { description =>
+        val info     = s"#Description\n${description}"
+        val fileName = normaliseName(system.getName())
+        Section(Some("Info"), info, s"software-systems/${fileName}.md")
+      }
+
+    def normaliseName(name: String): String =
+      name
+        .replaceAll(" ", "-")
+        .replaceAll("[^a-zA-Z0-9-]", "")
+        .toLowerCase()
