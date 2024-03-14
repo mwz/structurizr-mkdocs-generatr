@@ -39,6 +39,7 @@ object mainApp extends IOApp.Simple:
   //  - ✅ docs
   //  - generate empty index if no docs are present
   //  - ✅ software systems summary
+  //       - ✅ link to software systems
   //  - software system
   //    - ✅ info
   //    - context view
@@ -47,11 +48,11 @@ object mainApp extends IOApp.Simple:
   //    - dependencies
   //      - inbound
   //      - outbound
-  // Save file
+  // Save file:
   //  - remove flexmark extensions
   //  - resolve paths to embedded diagrams
-  // ✅ Generate mkdocs config and add files to the nav
-  //  - support system hierarchy in nav/toc
-  // Generate diagrams
+  // Generate mkdocs config and add files to the nav:
+  //   - ✅ support system hierarchy in nav/toc
+  // Generate diagrams:
   //  - export with element links (custom C4PlantUMLExporter)
   //  - save as svg (can svg with links be used in mkdocs?)

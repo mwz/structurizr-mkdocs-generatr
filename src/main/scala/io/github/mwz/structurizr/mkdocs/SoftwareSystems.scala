@@ -96,16 +96,13 @@ object SoftwareSystems:
         else "  " * level
 
       def md(tree: Tree, string: String, level: Int = 0): String =
-        tree match {
-
-          // TODO: Add link to system page
         tree match
           case System(group, system) =>
             val description = Option(system.getDescription())
               .filter(_.trim().nonEmpty)
               .fold("")(d => s"  \n${indent(level)}  `${d}`")
-            // TODO: Add link to system page
-            s"\n${indent(level)}- ${system.getName()}${description}"
+            val link = s"[${system.getName()}](software-systems/${normaliseName(system.getName())}.md)"
+            s"\n${indent(level)}- ${link}${description}"
           case Group(name, children) =>
             val prefix = level match
               case 0 => s"##"
@@ -113,7 +110,6 @@ object SoftwareSystems:
             s"\n${prefix} ${name}${children.foldLeft("") { (s, c) =>
                 s + md(c._2, "", level + 1)
               }}"
-        }
 
       "# Software Systems\n" +
         groups.foldLeft("") { case (s, (_, tree)) =>
@@ -122,7 +118,6 @@ object SoftwareSystems:
           s + md(tree, "")
         }
 
-    lazy val summarySection = Section(Some("Software Systems"), summaryView, "software-systems.md")
     lazy val summarySection =
       Section(Some("Software Systems - Summary"), summaryView, "software-systems.md")
 
