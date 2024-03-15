@@ -1,18 +1,20 @@
 package io.github.mwz.structurizr.mkdocs
 
 import cats.effect.*
+import cats.syntax.parallel.*
 import com.structurizr.dsl.StructurizrDslParser
-import java.io.File
-import scala.jdk.CollectionConverters.*
 import com.structurizr.model.SoftwareSystem
-import fs2.Stream
+import com.structurizr.Workspace as SWorkspace
 import fs2.Pipe
+import fs2.Stream
 import fs2.io.file.Files
 import fs2.io.file.Flags
 import fs2.io.stdoutLines
-import com.structurizr.Workspace as SWorkspace
-import scala.collection.immutable.TreeMap
+
+import java.io.File
 import java.nio.file.Path
+import scala.collection.immutable.TreeMap
+import scala.jdk.CollectionConverters.*
 
 object mainApp extends IOApp.Simple:
 
@@ -23,15 +25,21 @@ object mainApp extends IOApp.Simple:
       workspace.getModel().getSoftwareSystems().asScala.toSeq,
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
-    _ <- exec(docs, softwareSystems, MkDocs())
+    diagrams = Diagrams(workspace)
+    _ <- exec(docs, softwareSystems, diagrams, MkDocs())
   yield ()
 
-  def exec(docs: Docs, softwareSystems: SoftwareSystems, mkDocs: MkDocs): IO[Unit] =
+  def exec(docs: Docs, softwareSystems: SoftwareSystems, diagrams: Diagrams, mkDocs: MkDocs): IO[Unit] =
     val sections: Stream[IO, SectionHierarchy] =
       Stream.emits(docs.sections()) ++
         Stream.emit(softwareSystems.summarySection) ++
         Stream.emit(softwareSystems.sectionHierarchy())
-    mkDocs.writeSectionHierarchy(sections) >> mkDocs.writeMkDocsConfig(sections)
+    val actions = Seq(
+      mkDocs.writeSectionHierarchy(sections),
+      mkDocs.writeMkDocsConfig(sections),
+      diagrams.exportAll()
+    )
+      actions.parSequence.void
 
   // TODO:
   // Fill content:
@@ -54,5 +62,6 @@ object mainApp extends IOApp.Simple:
   // Generate mkdocs config and add files to the nav:
   //   - ✅ support system hierarchy in nav/toc
   // Generate diagrams:
-  //  - export with element links (custom C4PlantUMLExporter)
-  //  - save as svg (can svg with links be used in mkdocs?)
+  //  - ⬜︎ save as svg (can svg with links be used in mkdocs?)
+  //  - include in system views
+  //  - export with element links (custom C4PlantUMLExporter?)
