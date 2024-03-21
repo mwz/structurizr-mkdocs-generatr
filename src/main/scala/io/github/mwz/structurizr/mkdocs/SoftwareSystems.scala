@@ -1,6 +1,7 @@
 package io.github.mwz.structurizr.mkdocs
 
 import com.structurizr.model.SoftwareSystem
+import com.structurizr.view.StaticView
 import com.structurizr.view.ViewSet
 
 import java.nio.file.Path
@@ -147,7 +148,8 @@ object SoftwareSystems:
             val name = system.getName()
             val sections = Seq.empty ++
               info() ++
-              context()
+              context() ++
+              container()
             val default =
               Section(Some(name), "", s"software-systems/${normaliseName(name)}.md")
             if sections.nonEmpty then SectionGroup(Some(name), sections)
@@ -177,20 +179,25 @@ object SoftwareSystems:
       }
 
     def context()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
-      val fileName = normaliseName(system.getName())
-      val contextViews = views
-        .getSystemContextViews()
-        .asScala
-        .toSeq
-        .filter(_.getSoftwareSystemId() == system.getId())
-      val md = contextViews.foldLeft("") { (s, view) =>
+      val contextViews = views.getSystemContextViews().asScala.toSeq
+      static(system, contextViews, "Context view")
+
+    def container()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
+      val containerViews = views.getContainerViews().asScala.toSeq
+      static(system, containerViews, "Container view")
+
+    def static(system: SoftwareSystem, staticViews: Seq[StaticView], name: String) =
+      val views    = staticViews.filter(_.getSoftwareSystemId() == system.getId())
+      val baseName = normaliseName(system.getName())
+      val fileName = s"software-systems/${baseName}-${normaliseName(name)}.md"
+      val md = views.foldLeft("") { (s, view) =>
         val svg = s"../img/${view.getKey()}.svg"
         s + s"\n\n![${view.getName()}](${svg})" +
           s"\n<center>([svg](${svg}))</center>"
       }
       Option(md)
         .filter(_.nonEmpty)
-        .map(md => Section(Some("Context Views"), md, s"software-systems/${fileName}-context-views.md"))
+        .map(md => Section(Some(name), md, fileName))
 
     def normaliseName(name: String): String =
       name

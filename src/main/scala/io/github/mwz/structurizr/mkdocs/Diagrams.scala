@@ -30,6 +30,7 @@ object Diagrams:
     def all(): Seq[Diagram] =
       diagrams
 
+    // TODO: save as png as well
     def save(path: fs2Path, diagram: Diagram): IO[Unit] =
       val file   = path / fs2Path(s"${diagram.getKey()}.svg")
       val reader = SourceStringReader(diagram.getDefinition())
