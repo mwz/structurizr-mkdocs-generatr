@@ -7,6 +7,7 @@ import com.structurizr.view.ViewSet
 import java.nio.file.Path
 import scala.collection.JavaConverters.*
 import scala.collection.immutable.TreeMap
+import com.structurizr.view.ModelView
 
 trait Tree
 case class System(group: List[String], system: SoftwareSystem)  extends Tree
@@ -149,7 +150,8 @@ object SoftwareSystems:
             val sections = Seq.empty ++
               info() ++
               context() ++
-              container()
+              container() ++
+              dynamic()
             val default =
               Section(Some(name), "", s"software-systems/${normaliseName(name)}.md")
             if sections.nonEmpty then SectionGroup(Some(name), sections)
@@ -180,20 +182,25 @@ object SoftwareSystems:
 
     def context()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val contextViews = views.getSystemContextViews().asScala.toSeq
-      static(system, contextViews, "Context view")
+      sectionFromViews(system, contextViews, "Context views")
 
     def container()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val containerViews = views.getContainerViews().asScala.toSeq
-      static(system, containerViews, "Container view")
+      sectionFromViews(system, containerViews, "Container views")
 
-    def static(system: SoftwareSystem, staticViews: Seq[StaticView], name: String) =
-      val views    = staticViews.filter(_.getSoftwareSystemId() == system.getId())
+    def dynamic()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
+      val dynamicViews = views.getDynamicViews().asScala.toSeq
+      sectionFromViews(system, dynamicViews, "Dynamic views")
+
+    // TODO: Add description if available
+    def sectionFromViews(system: SoftwareSystem, modelViews: Seq[ModelView], name: String) =
+      val views    = modelViews.filter(_.getSoftwareSystemId() == system.getId())
       val baseName = normaliseName(system.getName())
       val fileName = s"software-systems/${baseName}-${normaliseName(name)}.md"
       val md = views.foldLeft("") { (s, view) =>
         val svg = s"../img/${view.getKey()}.svg"
-        s + s"\n\n![${view.getName()}](${svg})" +
-          s"\n<center>([svg](${svg}))</center>"
+        s + s"\n\n<center>![${view.getName()}](${svg})</center>" +
+          s"\n<center>${view.getKey()} ([svg](${svg}))</center>"
       }
       Option(md)
         .filter(_.nonEmpty)

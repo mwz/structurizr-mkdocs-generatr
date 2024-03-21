@@ -57,10 +57,10 @@ object mainApp extends IOApp.Simple:
   //      - docs
   //      - ADRs
   //    - ✅ Context views
-  //    - Container views
+  //    - ✅ Container views
   //      - docs
   //      - ADRs
-  //    - Dynamic views
+  //    - ✅ Dynamic views
   //    - Dependencies
   //      - Inbound
   //      - Outbound
