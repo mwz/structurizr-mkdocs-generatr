@@ -17,16 +17,20 @@ import scala.collection.immutable.TreeMap
 import scala.jdk.CollectionConverters.*
 
 object mainApp extends IOApp.Simple:
+  // TODO: Make the base path configurable via a command line argument
+  val basePath: Path = Path.of("./mkdocs")
 
   val run: IO[Unit] = for
     workspace <- Workspace().get()
     docs = Docs(workspace.getDocumentation().getSections().asScala.toSeq)
     softwareSystems = SoftwareSystems(
       workspace.getModel().getSoftwareSystems().asScala.toSeq,
+      workspace.getViews(),
+      basePath,
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
-    diagrams = Diagrams(workspace)
-    _ <- exec(docs, softwareSystems, diagrams, MkDocs())
+    diagrams = Diagrams(workspace, basePath)
+    _ <- exec(docs, softwareSystems, diagrams, MkDocs(basePath))
   yield ()
 
   def exec(docs: Docs, softwareSystems: SoftwareSystems, diagrams: Diagrams, mkDocs: MkDocs): IO[Unit] =
@@ -39,7 +43,7 @@ object mainApp extends IOApp.Simple:
       mkDocs.writeMkDocsConfig(sections),
       diagrams.exportAll()
     )
-      actions.parSequence.void
+    actions.parSequence.void
 
   // TODO:
   // Fill content:
@@ -49,19 +53,28 @@ object mainApp extends IOApp.Simple:
   //  - ✅ software systems summary
   //       - ✅ link to software systems
   //  - software system
-  //    - ✅ info
-  //    - context view
-  //    - container view
-  //    - dynamic view
-  //    - dependencies
-  //      - inbound
-  //      - outbound
+  //    - ✅ Info
+  //      - docs
+  //      - ADRs
+  //    - ✅ Context views
+  //    - Container views
+  //      - docs
+  //      - ADRs
+  //    - Dynamic views
+  //    - Dependencies
+  //      - Inbound
+  //      - Outbound
+  //    - Component view
+  //    - Deployment view
   // Save file:
   //  - remove flexmark extensions
   //  - resolve paths to embedded diagrams
-  // Generate mkdocs config and add files to the nav:
+  // ✅ Generate mkdocs config and add files to the nav:
   //   - ✅ support system hierarchy in nav/toc
   // Generate diagrams:
-  //  - ⬜︎ save as svg (can svg with links be used in mkdocs?)
-  //  - include in system views
-  //  - export with element links (custom C4PlantUMLExporter?)
+  //  - ✅ save as svg
+  //  - save as png
+  //  - ✅ add a link to the image
+  //  - generate custom css for improved diagram styling + add to mkdocs config
+  //  - ⬜︎ include in system views
+  //  - export with element links (custom C4PlantUMLExporter)

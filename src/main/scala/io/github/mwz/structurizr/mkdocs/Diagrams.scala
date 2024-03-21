@@ -22,7 +22,7 @@ trait Diagrams:
   def exportAll(): IO[Unit]
 
 object Diagrams:
-  def apply(workspace: SWorkspace, basePath: Path = Path.of("./mkdocs")): Diagrams = new Diagrams:
+  def apply(workspace: SWorkspace, basePath: Path): Diagrams = new Diagrams:
     val plantUMLExporter = C4PlantUMLExporter()
     val diagrams: Seq[Diagram] =
       plantUMLExporter.`export`(workspace).asScala.toSeq
@@ -33,18 +33,21 @@ object Diagrams:
     def save(path: fs2Path, diagram: Diagram): IO[Unit] =
       val file   = path / fs2Path(s"${diagram.getKey()}.svg")
       val reader = SourceStringReader(diagram.getDefinition())
-      Resource
-        .make(IO(new FileOutputStream(file.toString))) { os => IO(os.close()) }
-        .use { os =>
-          IO(reader.outputImage(os, FileFormatOption(FileFormat.SVG, false)))
-        }
+      IO.println(s"Writing diagram: ${diagram.getKey()}") >>
+        Resource
+          .make(IO(new FileOutputStream(file.toString))) { os =>
+            IO(os.close()).handleErrorWith(_ => IO.unit)
+          }
+          .use { os =>
+            IO.blocking(reader.outputImage(os, FileFormatOption(FileFormat.SVG, false)))
+          }
 
     def exportAll(): IO[Unit] =
       val dir = fs2Path.fromNioPath(basePath) / "img"
       val exportDiagrams: IO[Unit] =
         Stream
           .emits[IO, Diagram](diagrams)
-          .mapAsyncUnordered(10)(diagram => save(dir, diagram))
+          .mapAsync(4)(diagram => save(dir, diagram))
           .compile
           .drain
       Files[IO].exists(dir).ifM(IO.unit, Files[IO].createDirectories(dir)) >>

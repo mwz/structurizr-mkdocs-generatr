@@ -34,7 +34,7 @@ object MkDocs:
       case s: Section =>
         s.title.fold(s.filename.asJson)(title => JsonObject(title -> s.filename.asJson).asJson)
 
-  def apply(basePath: Path = Path.of("./mkdocs")) = new MkDocs:
+  def apply(basePath: Path) = new MkDocs:
     def flatten(sections: Stream[IO, SectionHierarchy]): Stream[IO, Section] =
       sections.flatMap {
         case SectionGroup(title, sections) => Stream.emits(sections).covary[IO].through(flatten)
@@ -48,7 +48,7 @@ object MkDocs:
       val path = fs2Path.fromNioPath(basePath)
       Files.forIO.exists(path).ifM(IO.unit, Files.forIO.createDirectory(path)) >>
         sections
-          .evalTap(section => IO.println(s"Processing ${section.title} ${section.filename}"))
+          .evalTap(section => IO.println(s"Processing ${section.title.getOrElse("")} - ${section.filename}"))
           .evalTap { s =>
             val filename = path / fs2Path(s.filename)
             IO.fromOption(filename.parent)(new RuntimeException(s"Path doesn't have a parent directory: $filename"))

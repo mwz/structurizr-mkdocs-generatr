@@ -1,7 +1,10 @@
 package io.github.mwz.structurizr.mkdocs
 
 import com.structurizr.model.SoftwareSystem
+import com.structurizr.view.ViewSet
 
+import java.nio.file.Path
+import scala.collection.JavaConverters.*
 import scala.collection.immutable.TreeMap
 
 trait Tree
@@ -17,7 +20,9 @@ trait SoftwareSystems:
   def sectionHierarchy(): SectionHierarchy
 
 object SoftwareSystems:
-  def apply(systems: Seq[SoftwareSystem], separator: String) = new SoftwareSystems:
+  def apply(systems: Seq[SoftwareSystem], views: ViewSet, basePath: Path, separator: String) = new SoftwareSystems:
+    given v: ViewSet = views
+
     lazy val allSystems =
       systems.map { system =>
         system.getGroup() match {
@@ -121,22 +126,31 @@ object SoftwareSystems:
     lazy val summarySection =
       Section(Some("Software Systems - Summary"), summaryView, "software-systems.md")
 
-    // TODO: Section Group with the following sections:
+    // TODO: Create Software System sections with the following views:
     // - ✅ Info
-    // - Context view
-    // - Container view
-    // - Dynamic view
+    //   - Documentation
+    //   - ADRs
+    // - ✅ Context views
+    // - Container views
+    //   - Documentation
+    //   - ADRs
+    // - Dynamic views
     // - Dependencies
     //   - Inbound
     //   - Outbound
+    // - Component view
+    // - Deployment view
     def sectionHierarchy(): SectionHierarchy =
       def convert(tree: Tree): SectionHierarchy =
         tree match
           case System(group, system @ given SoftwareSystem) =>
-            val sections = Seq.empty ++ info()
+            val name = system.getName()
+            val sections = Seq.empty ++
+              info() ++
+              context()
             val default =
-              Section(Some(system.getName()), "", s"software-systems/${normaliseName(system.getName())}.md")
-            if sections.nonEmpty then SectionGroup(Some(system.getName()), sections)
+              Section(Some(name), "", s"software-systems/${normaliseName(name)}.md")
+            if sections.nonEmpty then SectionGroup(Some(name), sections)
             else default
 
           case Group(name, children) =>
@@ -161,6 +175,22 @@ object SoftwareSystems:
         val fileName = normaliseName(system.getName())
         Section(Some("Info"), info, s"software-systems/${fileName}.md")
       }
+
+    def context()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
+      val fileName = normaliseName(system.getName())
+      val contextViews = views
+        .getSystemContextViews()
+        .asScala
+        .toSeq
+        .filter(_.getSoftwareSystemId() == system.getId())
+      val md = contextViews.foldLeft("") { (s, view) =>
+        val svg = s"../img/${view.getKey()}.svg"
+        s + s"\n\n![${view.getName()}](${svg})" +
+          s"\n<center>([svg](${svg}))</center>"
+      }
+      Option(md)
+        .filter(_.nonEmpty)
+        .map(md => Section(Some("Context Views"), md, s"software-systems/${fileName}-context-views.md"))
 
     def normaliseName(name: String): String =
       name
