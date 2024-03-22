@@ -75,6 +75,5 @@ object mainApp extends IOApp.Simple:
   //  - ✅ save as svg
   //  - save as png
   //  - ✅ add a link to the image
-  //  - generate custom css for improved diagram styling + add to mkdocs config
   //  - ⬜︎ include in system views
   //  - export with element links (custom C4PlantUMLExporter)

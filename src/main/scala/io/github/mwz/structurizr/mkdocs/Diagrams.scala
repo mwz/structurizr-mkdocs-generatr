@@ -24,6 +24,9 @@ trait Diagrams:
 object Diagrams:
   def apply(workspace: SWorkspace, basePath: Path): Diagrams = new Diagrams:
     val plantUMLExporter = C4PlantUMLExporter()
+    plantUMLExporter.addSkinParam("svgDimensionStyle", "false")
+    plantUMLExporter.addSkinParam("preserveAspectRatio", "meet")
+
     val diagrams: Seq[Diagram] =
       plantUMLExporter.`export`(workspace).asScala.toSeq
 
