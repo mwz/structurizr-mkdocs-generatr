@@ -68,6 +68,7 @@ object MkDocs:
 
     // Write the mkdocs config file.
     // TODO: use a default minimal config if no template is provided
+    // TODO: add inline-select-svg plugin
     def writeMkDocsConfig(sections: Stream[IO, SectionHierarchy]): IO[Unit] =
       val sectionsJson: IO[Json] =
         sections.compile.toList

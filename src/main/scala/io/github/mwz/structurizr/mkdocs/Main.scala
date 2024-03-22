@@ -71,6 +71,7 @@ object mainApp extends IOApp.Simple:
   //  - resolve paths to embedded diagrams
   // ✅ Generate mkdocs config and add files to the nav:
   //   - ✅ support system hierarchy in nav/toc
+  //   - add inline-select-svg plugin
   // Generate diagrams:
   //  - ✅ save as svg
   //  - save as png
