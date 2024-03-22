@@ -148,13 +148,15 @@ object SoftwareSystems:
           case System(group, system @ given SoftwareSystem) =>
             val name = system.getName()
             val sections = Seq.empty ++
-              info() ++
               context() ++
               container() ++
               dynamic()
             val default =
               Section(Some(name), "", s"software-systems/${normaliseName(name)}.md")
-            if sections.nonEmpty then SectionGroup(Some(name), sections)
+
+            // create a group if there are sections & add info section,
+            // otherwise just add an empty section
+            if sections.nonEmpty then SectionGroup(Some(name), info() +: sections)
             else default
 
           case Group(name, children) =>
@@ -170,15 +172,15 @@ object SoftwareSystems:
       )
 
     // TODO: Include System documentation
-    def info()(using system: SoftwareSystem): Option[Section] =
+    def info()(using system: SoftwareSystem): Section =
       val description =
         Option(system.getDescription())
           .filter(_.trim().nonEmpty)
-      description.map { description =>
-        val info     = s"#Description\n${description}"
-        val fileName = normaliseName(system.getName())
-        Section(Some("Info"), info, s"software-systems/${fileName}.md")
-      }
+      val fileName = normaliseName(system.getName())
+      val info = description
+        .map(desc => s"#Description\n${desc}")
+        .getOrElse("")
+      Section(Some("Info"), info, s"software-systems/${fileName}.md")
 
     def context()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val contextViews = views.getSystemContextViews().asScala.toSeq
