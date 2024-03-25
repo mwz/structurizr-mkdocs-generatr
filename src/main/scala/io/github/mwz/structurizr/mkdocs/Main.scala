@@ -31,7 +31,7 @@ object mainApp extends IOApp.Simple:
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
     diagrams = Diagrams(workspace, basePath)
-    _ <- exec(docs, softwareSystems, diagrams, MkDocs(basePath))
+    _ <- exec(docs, softwareSystems, diagrams, MkDocs(basePath, Clock[IO]))
   yield ()
 
   def exec(docs: Docs, softwareSystems: SoftwareSystems, diagrams: Diagrams, mkDocs: MkDocs): IO[Unit] =

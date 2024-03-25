@@ -1,6 +1,7 @@
 package io.github.mwz.structurizr.mkdocs
 
 import cats.effect.IO
+import cats.effect.kernel.Clock
 import fs2.Stream
 import fs2.io.file.Files
 import fs2.io.file.Flags
@@ -13,6 +14,8 @@ import io.circe.yaml.v12.parser
 import io.circe.yaml.v12.syntax.*
 
 import java.nio.file.Path
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 trait SectionHierarchy
 case class SectionGroup(title: Option[String], sections: Seq[SectionHierarchy]) extends SectionHierarchy
@@ -24,7 +27,8 @@ trait MkDocs:
   def writeMkDocsConfig(sections: Stream[IO, SectionHierarchy]): IO[Unit]
 
 object MkDocs:
-  val printer = Printer.make(Config(preserveOrder = true))
+  val printer   = Printer.make(Config(preserveOrder = true))
+  val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy @ HH:mm")
 
   // Custom encoder for SectionHierarchy
   given encodeSectionHierarchy: Encoder[SectionHierarchy] = new Encoder[SectionHierarchy]:
@@ -34,7 +38,7 @@ object MkDocs:
       case s: Section =>
         s.title.fold(s.filename.asJson)(title => JsonObject(title -> s.filename.asJson).asJson)
 
-  def apply(basePath: Path) = new MkDocs:
+  def apply(basePath: Path, clock: Clock[IO]) = new MkDocs:
     def flatten(sections: Stream[IO, SectionHierarchy]): Stream[IO, Section] =
       sections.flatMap {
         case SectionGroup(title, sections) => Stream.emits(sections).covary[IO].through(flatten)
@@ -45,7 +49,8 @@ object MkDocs:
       writeSections(flatten(sectionHierarchy))
 
     def writeSections(sections: Stream[IO, Section]): IO[Unit] =
-      val path = fs2Path.fromNioPath(basePath)
+      val generatedAt = clock.realTimeInstant.map(_.atZone(ZoneId.systemDefault))
+      val path        = fs2Path.fromNioPath(basePath)
       Files.forIO.exists(path).ifM(IO.unit, Files.forIO.createDirectory(path)) >>
         sections
           .evalTap(section => IO.println(s"Processing ${section.title.getOrElse("")} - ${section.filename}"))
@@ -60,7 +65,16 @@ object MkDocs:
           }
           .flatMap { section =>
             val path = fs2Path.fromNioPath(basePath) / fs2Path(section.filename)
-            Stream(section.md)
+            val footer = generatedAt.map { time =>
+              s"""\n
+              |<div style="font-size: small; font-style: italic;">
+              |${formatter.format(time)}
+              |</div>""".stripMargin
+            }
+            val content = footer.map(s => section.md + s)
+
+            Stream
+              .eval(content)
               .through(Files[IO].writeUtf8(path, Flags.Write))
           }
           .compile
