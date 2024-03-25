@@ -1,13 +1,16 @@
 package io.github.mwz.structurizr.mkdocs
 
+import cats.syntax.contravariantSemigroupal.*
+import com.structurizr.model.Element
+import com.structurizr.model.Relationship
 import com.structurizr.model.SoftwareSystem
+import com.structurizr.view.ModelView
 import com.structurizr.view.StaticView
 import com.structurizr.view.ViewSet
 
 import java.nio.file.Path
 import scala.collection.JavaConverters.*
 import scala.collection.immutable.TreeMap
-import com.structurizr.view.ModelView
 
 trait Tree
 case class System(group: List[String], system: SoftwareSystem)  extends Tree
@@ -22,8 +25,15 @@ trait SoftwareSystems:
   def sectionHierarchy(): SectionHierarchy
 
 object SoftwareSystems:
-  def apply(systems: Seq[SoftwareSystem], views: ViewSet, basePath: Path, separator: String) = new SoftwareSystems:
-    given v: ViewSet = views
+  def apply(
+      systems: Seq[SoftwareSystem],
+      views: ViewSet,
+      relationships: Set[Relationship],
+      basePath: Path,
+      separator: String
+  ) = new SoftwareSystems:
+    given viewSet: ViewSet        = views
+    given rels: Set[Relationship] = relationships
 
     lazy val allSystems =
       systems.map { system =>
@@ -108,7 +118,7 @@ object SoftwareSystems:
             val description = Option(system.getDescription())
               .filter(_.trim().nonEmpty)
               .fold("")(d => s"  \n${indent(level)}  `${d}`")
-            val link = s"[${system.getName()}](software-systems/${normaliseName(system.getName())}.md)"
+            val link = s"[${system.getName()}](${normaliseName(system.getName())})"
             s"\n${indent(level)}- ${link}${description}"
           case Group(name, children) =>
             val prefix = level match
@@ -150,7 +160,8 @@ object SoftwareSystems:
             val sections = Seq.empty ++
               context() ++
               container() ++
-              dynamic()
+              dynamic() ++
+              dependencies()
             val default =
               Section(Some(name), "", s"software-systems/${normaliseName(name)}.md")
 
@@ -207,6 +218,53 @@ object SoftwareSystems:
       Option(md)
         .filter(_.nonEmpty)
         .map(md => Section(Some(name), md, fileName))
+
+    def dependencies()(using system: SoftwareSystem, relationships: Set[Relationship]): Option[Section] =
+      val inbound: Set[Relationship] =
+        (relationships ++ system.getRelationships().asScala.toSet)
+          .filter(r =>
+            r.getSource().isInstanceOf[SoftwareSystem] &&
+              r.getDestination().getId() == system.getId()
+          )
+      val in: Seq[Relationship] = inbound.toSeq.sortBy(_.getSource().getName())
+
+      val outbound: Set[Relationship] =
+        (relationships ++ system.getRelationships().asScala.toSet)
+          .filter(r =>
+            r.getDestination().isInstanceOf[SoftwareSystem] &&
+              r.getSource().getId() == system.getId()
+          )
+      val out: Seq[Relationship] = outbound.toSeq.sortBy(_.getDestination().getName())
+
+      val header = """
+      \| System | Description | Technology |
+      \| ------ | ----------- | ---------- |
+      """.stripMargin('\\').trim()
+
+      def makeMd(
+          heading: String,
+          relationships: Seq[Relationship],
+          getSystem: Relationship => Element
+      ): Option[String] =
+        if relationships.isEmpty then None
+        else
+          val md = relationships.foldLeft(heading + "\n" + header) { (s, r) =>
+            val system = getSystem(r)
+            val link   = s"../${normaliseName(system.getName())} "
+            val desc   = Option(r.getDescription()).getOrElse("")
+            val tech   = Option(r.getTechnology()).getOrElse("")
+            s + s"\n| [${system.getName()}](${link}) | ${desc} | ${tech} |"
+          }
+          Some(md)
+
+      val inMd  = makeMd("## Inbound", in, _.getSource())
+      val outMd = makeMd("## Outbound", out, _.getDestination())
+
+      (inMd, outMd)
+        .mapN { (inMd, outMd) => s"${inMd}\n\n${outMd}" }
+        .map { md =>
+          Section(Some("Dependencies"), md, s"software-systems/${normaliseName(system.getName())}-dependencies.md")
+        }
 
     def normaliseName(name: String): String =
       name

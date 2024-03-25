@@ -26,6 +26,7 @@ object mainApp extends IOApp.Simple:
     softwareSystems = SoftwareSystems(
       workspace.getModel().getSoftwareSystems().asScala.toSeq,
       workspace.getViews(),
+      workspace.getModel().getRelationships().asScala.toSet,
       basePath,
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
