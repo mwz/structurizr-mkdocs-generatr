@@ -7,6 +7,7 @@ import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.ModelView
 import com.structurizr.view.StaticView
 import com.structurizr.view.ViewSet
+import mouse.string.*
 
 import java.nio.file.Path
 import scala.collection.JavaConverters.*
@@ -167,7 +168,7 @@ object SoftwareSystems:
 
             // create a group if there are sections & add info section,
             // otherwise just add an empty section
-            if sections.nonEmpty then SectionGroup(Some(name), info() +: sections)
+            if sections.nonEmpty then SectionGroup(Some(name), about() +: sections)
             else default
 
           case Group(name, children) =>
@@ -183,15 +184,29 @@ object SoftwareSystems:
       )
 
     // TODO: Include System documentation
-    def info()(using system: SoftwareSystem): Section =
+    def about()(using system: SoftwareSystem): Section =
       val description =
         Option(system.getDescription())
           .filter(_.trim().nonEmpty)
       val fileName = normaliseName(system.getName())
-      val info = description
+      val url      = system.getUrl().parseURLOption
+      val properties = system
+        .getProperties()
+        .asScala
+        .filterNot((k, _) => k == "structurizr.dsl.identifier")
+        .toMap
+      val allProperties = url.fold(properties) { url =>
+        properties + ("url" -> url.toString())
+      }
+
+      val propertiesMd = allProperties.foldLeft("\n") { case (s, (k, v)) =>
+        val parsed = v.parseURLOption.fold(s"`${v}`")(url => s"[${v}](${url})")
+        s + s"\n- `${k}`: ${parsed}"
+      }
+      val content = description
         .map(desc => s"#Description\n${desc}")
-        .getOrElse("")
-      Section(Some("Info"), info, s"software-systems/${fileName}.md")
+        .getOrElse("") + propertiesMd
+      Section(Some("About"), content, s"software-systems/${fileName}.md")
 
     def context()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val contextViews = views.getSystemContextViews().asScala.toSeq

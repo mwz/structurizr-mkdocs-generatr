@@ -8,6 +8,7 @@ lazy val root = (project in file(".")).settings(
     "io.circe"                %% "circe-core"         % "0.14.6",
     "io.circe"                %% "circe-parser"       % "0.14.6",
     "io.circe"                %% "circe-yaml-v12"     % "0.15.1",
+    "org.typelevel"           %% "mouse"              % "1.2.3",
     "org.typelevel"           %% "toolkit"            % "0.1.22",
     "com.structurizr"          % "structurizr-core"   % "1.29.0",
     "com.structurizr"          % "structurizr-dsl"    % "1.35.0",
