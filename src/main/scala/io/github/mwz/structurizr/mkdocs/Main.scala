@@ -54,7 +54,7 @@ object mainApp extends IOApp.Simple:
   //  - ✅ software systems summary
   //       - ✅ link to software systems
   //  - software system
-  //    - ✅ Info
+  //    - ✅ About
   //      - docs
   //      - ADRs
   //    - ✅ Context views
@@ -62,9 +62,9 @@ object mainApp extends IOApp.Simple:
   //      - docs
   //      - ADRs
   //    - ✅ Dynamic views
-  //    - Dependencies
-  //      - Inbound
-  //      - Outbound
+  //    - ✅ Dependencies
+  //      - ✅ Inbound
+  //      - ✅ Outbound
   //    - Component view
   //    - Deployment view
   // Save file:
@@ -77,5 +77,5 @@ object mainApp extends IOApp.Simple:
   //  - ✅ save as svg
   //  - save as png
   //  - ✅ add a link to the image
-  //  - ⬜︎ include in system views
-  //  - export with element links (custom C4PlantUMLExporter)
+  //  - ✅ include in system views
+  //  - export SVGs with element links (custom C4PlantUMLExporter)

@@ -140,17 +140,17 @@ object SoftwareSystems:
       Section(Some("Software Systems - Summary"), summaryView, "software-systems.md")
 
     // TODO: Create Software System sections with the following views:
-    // - ✅ Info
+    // - ✅ About
     //   - Documentation
     //   - ADRs
     // - ✅ Context views
-    // - Container views
+    // - ✅ Container views
     //   - Documentation
     //   - ADRs
-    // - Dynamic views
-    // - Dependencies
-    //   - Inbound
-    //   - Outbound
+    // - ✅ Dynamic views
+    // - ✅ Dependencies
+    //   - ✅ Inbound
+    //   - ✅ Outbound
     // - Component view
     // - Deployment view
     def sectionHierarchy(): SectionHierarchy =
