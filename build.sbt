@@ -1,4 +1,4 @@
-ThisBuild / organization := "com.example"
+ThisBuild / organization := "io.github.mwz"
 ThisBuild / scalaVersion := "3.4.0"
 
 lazy val root = (project in file(".")).settings(
