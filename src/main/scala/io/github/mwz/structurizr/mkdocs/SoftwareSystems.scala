@@ -221,7 +221,7 @@ object SoftwareSystems:
       sectionFromViews(system, dynamicViews, "Dynamic views")
 
     // TODO: Add description if available
-    def sectionFromViews(system: SoftwareSystem, modelViews: Seq[ModelView], name: String) =
+    def sectionFromViews(system: SoftwareSystem, modelViews: Seq[ModelView], name: String): Option[Section] =
       val views    = modelViews.filter(_.getSoftwareSystemId() == system.getId())
       val baseName = normaliseName(system.getName())
       val fileName = s"software-systems/${baseName}-${normaliseName(name)}.md"
