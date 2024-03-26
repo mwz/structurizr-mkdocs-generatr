@@ -9,11 +9,11 @@ lazy val root = (project in file(".")).settings(
     "io.circe"                %% "circe-parser"       % "0.14.6",
     "io.circe"                %% "circe-yaml-v12"     % "0.15.1",
     "org.typelevel"           %% "mouse"              % "1.2.3",
-    "org.typelevel"           %% "toolkit"            % "0.1.22",
+    "org.typelevel"           %% "toolkit"            % "0.1.23",
     "com.structurizr"          % "structurizr-core"   % "1.29.0",
     "com.structurizr"          % "structurizr-dsl"    % "1.35.0",
     "com.structurizr"          % "structurizr-export" % "1.19.0",
     "net.sourceforge.plantuml" % "plantuml"           % "1.2024.3",
-    "org.typelevel"           %% "toolkit-test"       % "0.1.22" % Test
+    "org.typelevel"           %% "toolkit-test"       % "0.1.23" % Test
   )
 )
