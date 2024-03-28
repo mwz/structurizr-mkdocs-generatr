@@ -7,21 +7,25 @@ trait Docs:
 
 object Docs:
   def apply(ssections: Seq[SSection]) = new Docs {
-
-    // TODO: generate empty index if no docs are present
     def sections(): Seq[Section] =
-      ssections.zipWithIndex.map { case (section, i) =>
-        // make the first section the index
-        val filename: String = if i == 0 then "index.md" else section.getFilename()
-        val title: Option[String] =
-          section
-            .getContent()
-            .stripLeading()
-            .linesIterator
-            .find(_.nonEmpty)
-            .map(_.replaceAll("#+", "").trim())
-        Section(title, resolveEmbedded(section.getContent()), filename)
-      }
+      val sections: Seq[Section] =
+        ssections.zipWithIndex.map { case (section, i) =>
+          // make the first section the index
+          val filename: String = if i == 0 then "index.md" else s"docs/${section.getFilename()}"
+          val title: Option[String] =
+            section
+              .getContent()
+              .stripLeading()
+              .linesIterator
+              .find(_.nonEmpty)
+              .map(_.replaceAll("#+", "").trim())
+          Section(title, resolveEmbedded(section.getContent()), filename)
+        }
+
+      // generate empty index if no docs are present
+      if sections.isEmpty
+      then Seq(Section(Some("Home"), "", "index.md"))
+      else sections
 
     // Replace embedded image references from the docs (embed:ImageId)
     // with the actual svg image
@@ -31,8 +35,9 @@ object Docs:
         md,
         m => {
           Option(m.group(1)).map(imgId =>
-            val svg = s"img/${imgId}.svg"
-            s"(${svg}) <center>${imgId} ([svg](${svg}))</center>"
+            val svg = s"../img/${imgId}.svg"
+            val png = s"../img/${imgId}.png"
+            s"(${svg}) <center>${imgId} ([png](${png}))</center>"
           )
         }
       )

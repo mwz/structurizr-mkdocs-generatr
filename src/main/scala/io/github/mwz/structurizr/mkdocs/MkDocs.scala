@@ -11,7 +11,6 @@ import io.circe.syntax.*
 import io.circe.yaml.v12.Printer
 import io.circe.yaml.v12.Printer.Config
 import io.circe.yaml.v12.parser
-import io.circe.yaml.v12.syntax.*
 
 import java.nio.file.Path
 import java.time.ZoneId

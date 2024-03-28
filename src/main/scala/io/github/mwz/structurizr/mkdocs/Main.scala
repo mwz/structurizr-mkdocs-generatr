@@ -1,22 +1,13 @@
 package io.github.mwz.structurizr.mkdocs
 
 import cats.effect.*
-import cats.syntax.parallel.*
-import com.structurizr.dsl.StructurizrDslParser
-import com.structurizr.model.SoftwareSystem
 import com.structurizr.Workspace as SWorkspace
-import fs2.Pipe
 import fs2.Stream
-import fs2.io.file.Files
-import fs2.io.file.Flags
-import fs2.io.stdoutLines
 
-import java.io.File
 import java.nio.file.Path
-import scala.collection.immutable.TreeMap
 import scala.jdk.CollectionConverters.*
 
-object mainApp extends IOApp.Simple:
+object Main extends IOApp.Simple:
   // TODO: Make the base path configurable via a command line argument
   val basePath: Path = Path.of("./mkdocs")
 
@@ -39,18 +30,15 @@ object mainApp extends IOApp.Simple:
       Stream.emits(docs.sections()) ++
         Stream.emit(softwareSystems.summarySection) ++
         Stream.emit(softwareSystems.sectionHierarchy())
-    val actions = Seq(
-      mkDocs.writeSectionHierarchy(sections),
-      mkDocs.writeMkDocsConfig(sections),
+    (mkDocs.writeSectionHierarchy(sections) &> mkDocs.writeMkDocsConfig(sections)) >>
+      // export diagrams at the end as this mutates the elements' url property
       diagrams.exportAll()
-    )
-    actions.parSequence.void
 
   // TODO:
   // Fill content:
   //  - ✅ homepage - 1st doc section - rename to index
   //  - ✅ docs
-  //  - generate empty index if no docs are present
+  //  - ✅ generate empty index if no docs are present
   //  - ✅ software systems summary
   //       - ✅ link to software systems
   //  - software system
@@ -75,7 +63,9 @@ object mainApp extends IOApp.Simple:
   //   - add inline-select-svg plugin
   // Generate diagrams:
   //  - ✅ save as svg
-  //  - save as png
+  //  - ✅ save as png
   //  - ✅ add a link to the image
   //  - ✅ include in system views
   //  - export SVGs with element links (custom C4PlantUMLExporter)
+  //    - ✅ System elements
+  //    - Container elements

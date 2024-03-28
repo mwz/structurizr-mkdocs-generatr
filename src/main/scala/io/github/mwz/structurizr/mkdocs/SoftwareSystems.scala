@@ -5,13 +5,12 @@ import com.structurizr.model.Element
 import com.structurizr.model.Relationship
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.ModelView
-import com.structurizr.view.StaticView
 import com.structurizr.view.ViewSet
 import mouse.string.*
 
 import java.nio.file.Path
-import scala.collection.JavaConverters.*
 import scala.collection.immutable.TreeMap
+import scala.jdk.CollectionConverters.*
 
 trait Tree
 case class System(group: List[String], system: SoftwareSystem)  extends Tree
@@ -151,8 +150,8 @@ object SoftwareSystems:
     // - ✅ Dependencies
     //   - ✅ Inbound
     //   - ✅ Outbound
-    // - Component view
-    // - Deployment view
+    // - Component views
+    // - Deployment views
     def sectionHierarchy(): SectionHierarchy =
       def convert(tree: Tree): SectionHierarchy =
         tree match
@@ -183,7 +182,6 @@ object SoftwareSystems:
         tree.values.map(convert).toSeq
       )
 
-    // TODO: Include System documentation
     def about()(using system: SoftwareSystem): Section =
       val description =
         Option(system.getDescription())
@@ -204,7 +202,7 @@ object SoftwareSystems:
         s + s"\n- `${k}`: ${parsed}"
       }
       val content = description
-        .map(desc => s"#Description\n${desc}")
+        .map(desc => s"#About\n${desc}")
         .getOrElse("") + propertiesMd
       Section(Some("About"), content, s"software-systems/${fileName}.md")
 
@@ -227,8 +225,9 @@ object SoftwareSystems:
       val fileName = s"software-systems/${baseName}-${normaliseName(name)}.md"
       val md = views.foldLeft("") { (s, view) =>
         val svg = s"../img/${view.getKey()}.svg"
+        val png = s"../img/${view.getKey()}.png"
         s + s"\n\n<center>![${view.getName()}](${svg})</center>" +
-          s"\n<center>${view.getKey()} ([svg](${svg}))</center>"
+          s"\n<center>${view.getKey()} ([png](${png}))</center>"
       }
       Option(md)
         .filter(_.nonEmpty)
@@ -281,8 +280,8 @@ object SoftwareSystems:
           Section(Some("Dependencies"), md, s"software-systems/${normaliseName(system.getName())}-dependencies.md")
         }
 
-    def normaliseName(name: String): String =
-      name
-        .replaceAll(" ", "-")
-        .replaceAll("[^a-zA-Z0-9-]", "")
-        .toLowerCase()
+  def normaliseName(name: String): String =
+    name
+      .replaceAll(" ", "-")
+      .replaceAll("[^a-zA-Z0-9-]", "")
+      .toLowerCase()
