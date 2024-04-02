@@ -12,6 +12,8 @@ import java.nio.file.Path
 import scala.collection.immutable.TreeMap
 import scala.jdk.CollectionConverters.*
 
+import markdown.escape
+
 trait Tree
 case class System(group: List[String], system: SoftwareSystem)  extends Tree
 case class Group(name: String, children: TreeMap[String, Tree]) extends Tree
@@ -264,10 +266,10 @@ object SoftwareSystems:
         else
           val md = relationships.foldLeft(heading + "\n" + header) { (s, r) =>
             val system = getSystem(r)
-            val link   = s"../${normaliseName(system.getName())} "
-            val desc   = Option(r.getDescription()).getOrElse("")
-            val tech   = Option(r.getTechnology()).getOrElse("")
-            s + s"\n| [${system.getName()}](${link}) | ${desc} | ${tech} |"
+            val link   = s"../${normaliseName(system.getName())}"
+            val desc   = Option(r.getDescription()).map(escape).getOrElse("")
+            val tech   = Option(r.getTechnology()).map(escape).getOrElse("")
+            s + s"\n| [${escape(system.getName())}](${link}) | ${desc} | ${tech} |"
           }
           Some(md)
 
