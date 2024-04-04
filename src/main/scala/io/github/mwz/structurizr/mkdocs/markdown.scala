@@ -1,6 +1,6 @@
 package io.github.mwz.structurizr.mkdocs
 
-object markdown {
+object markdown:
 
   /**
    * Escape the following literal characters:
@@ -29,4 +29,13 @@ object markdown {
           else s"\\\\$s"
         }
     )
-}
+
+  // generate content tabs with images
+  def imgTabs(id: String): String =
+    val svg = s"../img/${id}.svg"
+    val png = s"../img/${id}.png"
+    s"""${id}
+        |=== "SVG"
+        |    <center>![${id}SVG](${svg})</center>
+        |=== "PNG"
+        |    <center>![${id}PNG](${png})</center>\n""".stripMargin

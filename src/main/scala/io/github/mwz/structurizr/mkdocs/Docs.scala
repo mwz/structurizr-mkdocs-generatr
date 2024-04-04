@@ -1,5 +1,6 @@
 package io.github.mwz.structurizr.mkdocs
 
+import io.github.mwz.structurizr.mkdocs.markdown.imgTabs
 import com.structurizr.documentation.Section as SSection
 
 trait Docs:
@@ -30,15 +31,9 @@ object Docs:
     // Replace embedded image references from the docs (embed:ImageId)
     // with the actual svg image
     def resolveEmbedded(md: String): String =
-      val embedPattern = """\(embed:([a-zA-z0-9]+)\)""".r
+      val embedPattern = """(!\[.*?\])\(embed:(\w+)\)""".r
       embedPattern.replaceSomeIn(
         md,
-        m => {
-          Option(m.group(1)).map(imgId =>
-            val svg = s"../img/${imgId}.svg"
-            val png = s"../img/${imgId}.png"
-            s"(${svg}) <center>${imgId} ([png](${png}))</center>"
-          )
-        }
+        m => (Option(m.group(2)).map(imgTabs))
       )
   }

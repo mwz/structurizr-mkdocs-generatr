@@ -12,6 +12,7 @@ import java.nio.file.Path
 import scala.collection.immutable.TreeMap
 import scala.jdk.CollectionConverters.*
 
+import markdown.imgTabs
 import markdown.escape
 
 trait Tree
@@ -226,10 +227,7 @@ object SoftwareSystems:
       val baseName = normaliseName(system.getName())
       val fileName = s"software-systems/${baseName}-${normaliseName(name)}.md"
       val md = views.foldLeft("") { (s, view) =>
-        val svg = s"../img/${view.getKey()}.svg"
-        val png = s"../img/${view.getKey()}.png"
-        s + s"\n\n<center>![${view.getName()}](${svg})</center>" +
-          s"\n<center>${view.getKey()} ([png](${png}))</center>"
+        s + imgTabs(view.getKey())
       }
       Option(md)
         .filter(_.nonEmpty)
