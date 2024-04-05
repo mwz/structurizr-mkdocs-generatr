@@ -46,6 +46,7 @@ object Diagrams:
       IO.println(s"Generating diagram: ${diagram.getKey()}") >>
         write(DiagramFormat.SVG) &> write(DiagramFormat.PNG)
 
+    // TODO: Skip generating diagram if up-to-date (use puml definition to compare)
     def exportAll(): IO[Unit] =
       val dir = fs2Path.fromNioPath(basePath) / "img"
       val exportDiagrams: IO[Unit] =

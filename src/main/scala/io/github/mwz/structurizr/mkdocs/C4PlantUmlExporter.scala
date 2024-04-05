@@ -2,6 +2,7 @@ package io.github.mwz.structurizr.mkdocs
 
 import com.structurizr.`export`.IndentingWriter
 import com.structurizr.`export`.plantuml.C4PlantUMLExporter
+import com.structurizr.model.Container
 import com.structurizr.model.Element
 import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.ModelView
@@ -19,16 +20,19 @@ object CustomC4PlantUMLExporter:
       element match
         case system: SoftwareSystem =>
           write(view, system, writer)
+        case container: Container =>
+          write(view, container, writer)
         case _ =>
           super.writeElement(view, element, writer)
 
+    // Write Software System element
     def write(view: ModelView, system: SoftwareSystem, writer: IndentingWriter): Unit =
       Option(workspace.getModel().getSoftwareSystemWithId(system.getId())) match
         case None =>
           super.writeElement(view, system, writer)
         case Some(system) =>
           val baseUrl = s"${tmpUrl}../../software-systems/${SoftwareSystems.normaliseName(system.getName())}"
-          // Determine the url based on whether a system context view exists
+          // Determine the url based on whether a system context views exist
           val targetUrl = workspace
             .getViews()
             .getSystemContextViews()
@@ -36,6 +40,27 @@ object CustomC4PlantUMLExporter:
             .find(_.getSoftwareSystem().getId() == system.getId())
             .fold(baseUrl)(_ => s"${baseUrl}-context-views")
           writeWithUrl(view, system, writer, targetUrl)
+
+    // Write Container element
+    def write(view: ModelView, container: Container, writer: IndentingWriter): Unit =
+      val system = for
+        containerSystem <- Option(container.getSoftwareSystem())
+        system          <- Option(workspace.getModel().getSoftwareSystemWithId(containerSystem.getId()))
+      yield system
+
+      system match
+        case None =>
+          super.writeElement(view, container, writer)
+        case Some(system) =>
+          val baseUrl = s"${tmpUrl}../../software-systems/${SoftwareSystems.normaliseName(system.getName())}"
+          // Determine the url based on whether a container views exist
+          val targetUrl = workspace
+            .getViews()
+            .getContainerViews()
+            .asScala
+            .find(_.getSoftwareSystemId() == system.getId())
+            .fold(baseUrl)(_ => s"${baseUrl}-container-views")
+          writeWithUrl(view, container, writer, targetUrl)
 
     def writeWithUrl(view: ModelView, element: Element, writer: IndentingWriter, url: String): Unit =
       val elementUrl = element.getUrl()
