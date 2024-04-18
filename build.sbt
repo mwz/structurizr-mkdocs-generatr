@@ -9,6 +9,7 @@ lazy val root = (project in file("."))
   .enablePlugins(AssemblyPlugin)
   .settings(
     name                       := "structurizr-mkdocs-generatr",
+    crossPaths                 := false,
     assembly / mainClass       := Some("io.github.mwz.structurizr.mkdocs.Main"),
     assembly / assemblyJarName := "structurizr-mkdocs-generatr.jar",
     assembly / assemblyMergeStrategy := {
