@@ -1,0 +1,23 @@
+name: release-snapshot
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Scala
+        uses: japgolly/setup-everything-scala@v3.1
+        with:
+          java-version: "temurin:1.21"
+      - name: Test
+        run: sbt test
+      - name: Release snapshot
+        run: sbt publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
