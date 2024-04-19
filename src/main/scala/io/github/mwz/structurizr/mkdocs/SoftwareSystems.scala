@@ -8,6 +8,7 @@ import com.structurizr.view.ModelView
 import com.structurizr.view.ViewSet
 import mouse.string.*
 
+import java.net.URL
 import java.nio.file.Path
 import scala.collection.immutable.TreeMap
 import scala.jdk.CollectionConverters.*
@@ -155,11 +156,13 @@ object SoftwareSystems:
         tree match
           case System(group, system @ given SoftwareSystem) =>
             val name = system.getName()
-            val sections = Seq.empty ++
-              context() ++
-              container() ++
-              dynamic() ++
-              dependencies()
+            val sections: Seq[Section] =
+              Seq.empty ++
+                context() ++
+                container() ++
+                dynamic() ++
+                dependencies()
+
             val default =
               Section(Some(name), "", s"software-systems/${normaliseName(name)}.md")
 
@@ -175,33 +178,31 @@ object SoftwareSystems:
             )
 
       // recursively transform systems tree into section hierarchy
-      SectionGroup(
-        Some("Software Systems"),
-        tree.values.map(convert).toSeq
-      )
+      SectionGroup(Some("Software Systems"), tree.values.map(convert).toSeq)
 
     def about()(using system: SoftwareSystem): Section =
-      val description =
-        Option(system.getDescription())
-          .filter(_.trim().nonEmpty)
-      val fileName = normaliseName(system.getName())
-      val url      = system.getUrl().parseURLOption
-      val properties = system
-        .getProperties()
-        .asScala
-        .filterNot((k, _) => k == "structurizr.dsl.identifier")
-        .toMap
+      val description      = Option(system.getDescription()).filter(_.trim().nonEmpty)
+      val fileName         = normaliseName(system.getName())
+      val url: Option[URL] = system.getUrl().parseURLOption
+      val properties: Map[String, String] =
+        system
+          .getProperties()
+          .asScala
+          .filterNot((k, _) => k == "structurizr.dsl.identifier")
+          .toMap
       val allProperties = url.fold(properties) { url =>
         properties + ("url" -> url.toString())
       }
 
-      val propertiesMd = allProperties.foldLeft("\n") { case (s, (k, v)) =>
+      val propertiesMd: String = allProperties.foldLeft("\n") { case (s, (k, v)) =>
         val parsed = v.parseURLOption.fold(s"`${v}`")(url => s"[${v}](${url})")
         s + s"\n- `${k}`: ${parsed}"
       }
-      val content = description
-        .map(desc => s"#About\n${desc}")
-        .getOrElse("") + propertiesMd
+      val content: String =
+        description
+          .map(desc => s"#About\n${desc}")
+          .getOrElse("") + propertiesMd
+
       Section(Some("About"), content, s"software-systems/${fileName}.md")
 
     def context()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
@@ -218,10 +219,10 @@ object SoftwareSystems:
 
     // TODO: Add description if available
     def sectionFromViews(system: SoftwareSystem, modelViews: Seq[ModelView], name: String): Option[Section] =
-      val views    = modelViews.filter(_.getSoftwareSystemId() == system.getId())
-      val baseName = normaliseName(system.getName())
-      val fileName = s"software-systems/${baseName}-${normaliseName(name)}.md"
-      val md = views.foldLeft("") { (s, view) =>
+      val views: Seq[ModelView] = modelViews.filter(_.getSoftwareSystemId() == system.getId())
+      val baseName              = normaliseName(system.getName())
+      val fileName              = s"software-systems/${baseName}-${normaliseName(name)}.md"
+      val md: String = views.foldLeft("") { (s, view) =>
         s + imgTabs(view.getKey())
       }
       Option(md)
