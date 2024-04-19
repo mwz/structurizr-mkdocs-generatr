@@ -33,39 +33,3 @@ object Main extends IOApp.Simple:
     (mkDocs.writeSectionHierarchy(sections) &> mkDocs.writeMkDocsConfig(sections)) >>
       // export diagrams at the end as this mutates the elements' url property
       diagrams.exportAll()
-
-  // TODO:
-  // Fill content:
-  //  - ✅ homepage - 1st doc section - rename to index
-  //  - ✅ docs
-  //  - ✅ generate empty index if no docs are present
-  //  - ✅ software systems summary
-  //       - ✅ link to software systems
-  //  - software system
-  //    - ✅ About
-  //      - docs
-  //      - ADRs
-  //    - ✅ Context views
-  //    - ✅ Container views
-  //      - docs
-  //      - ADRs
-  //    - ✅ Dynamic views
-  //    - ✅ Dependencies
-  //      - ✅ Inbound
-  //      - ✅ Outbound
-  //    - Component view
-  //    - Deployment view
-  // Save file:
-  //  - remove flexmark extensions
-  //  - ✅ resolve paths to embedded diagrams
-  // ✅ Generate mkdocs config and add files to the nav:
-  //   - ✅ support system hierarchy in nav/toc
-  //   - add inline-select-svg plugin
-  // Generate diagrams:
-  //  - ✅ save as svg
-  //  - ✅ save as png
-  //  - ✅ add a link to the image
-  //  - ✅ include in system views
-  //  - export SVGs with element links (custom C4PlantUMLExporter)
-  //    - ✅ System elements
-  //    - ✅ Container elements

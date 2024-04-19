@@ -1,0 +1,37 @@
+Fill content:
+  about:
+    ☐ docs
+    ☐ ADRs
+  container views:
+    ☐ docs
+    ☐ ADRs
+  ☐ Component view
+  ☐ Deployment view
+
+Save file:
+  ☐ remove flexmark extensions?
+  ☐ add inline-select-svg plugin to mkdocs config
+
+Archive:
+  ✔ homepage - 1st doc section rename to index @done(24-04-19 11:38) @project(Fill content)
+  ✔ docs @project(Fill content)
+  ✔ generate empty index if no docs are present @project(Fill content)
+  ✔ software systems summary @project(Fill content)
+  ✔ link to software systems @project(Fill content)
+  ✔ About @project(Fill content.software system)
+  ✔ Context views @project(Fill content.software system)
+  ✔ Container views @project(Fill content.software system)
+  ✔ Dynamic views @project(Fill content.software system)
+  ✔ Dependencies @project(Fill content.software system)
+  ✔ Inbound @project(Fill content.software system)
+  ✔ Outbound @project(Fill content.software system)
+  ✔ resolve paths to embedded diagrams @project(Save file)
+  ✔ Generate mkdocs config and add files to the nav: @done(24-04-19 11:41) @project(Save file)
+  ✔ support system hierarchy in nav/toc @project(Save file)
+  ✔ save as svg @project(Generate diagrams)
+  ✔ save as png @project(Generate diagrams)
+  ✔ add a link to the image @project(Generate diagrams)
+  ✔ include in system views @project(Generate diagrams)
+  ✔ export SVGs with element links (custom C4PlantUMLExporter) @project(Generate diagrams)
+  ✔ System elements @project(Generate diagrams)
+  ✔ Container elements @project(Generate diagrams)
