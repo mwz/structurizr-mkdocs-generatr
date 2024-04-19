@@ -17,6 +17,8 @@ jobs:
           java-version: "temurin:1.21"
       - name: Test
         run: sbt test
+        env:
+          GITHUB_TOKEN: ""
       - name: Release snapshot
         run: sbt publish
         env:
