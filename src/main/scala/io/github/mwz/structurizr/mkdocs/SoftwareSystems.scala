@@ -17,15 +17,15 @@ import markdown.imgTabs
 import markdown.escape
 
 trait Tree
-case class System(group: List[String], system: SoftwareSystem)  extends Tree
+case class System(groups: List[String], system: SoftwareSystem) extends Tree
 case class Group(name: String, children: TreeMap[String, Tree]) extends Tree
 
 trait SoftwareSystems:
-  def allSystems: Seq[System]
-  def tree: TreeMap[String, Tree]
-  def prettyPrint: String
-  def summaryView: String
-  def summarySection: Section
+  def allSystems(): Seq[System]
+  def tree(): TreeMap[String, Tree]
+  def prettyPrint(): String
+  def summaryView(): String
+  def summarySection(): Section
   def sectionHierarchy(): SectionHierarchy
 
 object SoftwareSystems:
@@ -39,7 +39,7 @@ object SoftwareSystems:
     given viewSet: ViewSet        = views
     given rels: Set[Relationship] = relationships
 
-    lazy val allSystems =
+    def allSystems(): Seq[System] =
       systems.map { system =>
         system.getGroup() match {
           case null  => System(List.empty, system)
@@ -47,13 +47,13 @@ object SoftwareSystems:
         }
       }
 
-    lazy val tree: TreeMap[String, Tree] =
-      allSystems.foldLeft(TreeMap.empty[String, Tree]) { (tree, system) =>
-        populateTree(tree, system.group, None, system)
+    def tree(): TreeMap[String, Tree] =
+      allSystems().foldLeft(TreeMap.empty[String, Tree]) { (tree, system) =>
+        populateTree(tree, system.groups, None, system)
       }
 
     // pretty print tree with indentation
-    lazy val prettyPrint: String =
+    def prettyPrint(): String =
       def prettyPrint(tree: Tree, string: String, indent: String = ""): String =
         tree match {
           case System(group, system) =>
@@ -63,7 +63,7 @@ object SoftwareSystems:
                 s + prettyPrint(c._2, "", indent + "  ")
               }}"
         }
-      tree.foldLeft("") { case (s, (_, tree)) =>
+      tree().foldLeft("") { case (s, (_, tree)) =>
         s + prettyPrint(tree, "")
       }
 
@@ -73,10 +73,10 @@ object SoftwareSystems:
     private def populateTree(
         tree: TreeMap[String, Tree],
         groups: List[String],
-        group: Option[Group],
+        parentGroup: Option[Group],
         system: System
     ): TreeMap[String, Tree] =
-      group match
+      parentGroup match
         // initial case
         case None =>
           groups match
@@ -91,22 +91,22 @@ object SoftwareSystems:
                   // Name collision
                   tree
         // recursive call
-        case Some(group) =>
+        case Some(parentGroup) =>
           groups match
             case Nil =>
-              group.children + (system.system.getName() -> system)
+              parentGroup.children + (system.system.getName() -> system)
             case head :: next =>
-              group.children.getOrElse(head, Group(head, TreeMap.empty)) match
+              parentGroup.children.getOrElse(head, Group(head, TreeMap.empty)) match
                 case group: Group =>
                   val children = populateTree(group.children + (head -> group), next, Some(group), system)
-                  group.children + (group.name -> Group(group.name, children))
+                  parentGroup.children + (group.name -> Group(group.name, children))
                 case _ =>
                   // Name collision
                   tree
 
     // A summary view of all software systems
-    lazy val summaryView: String =
-      val (groups, others) = tree.partition((_, t) => t.isInstanceOf[Group])
+    def summaryView(): String =
+      val (groups, others) = tree().partition((_, t) => t.isInstanceOf[Group])
       val hasGroups        = groups.nonEmpty
       val othersGroups =
         if (!hasGroups) others
@@ -139,8 +139,8 @@ object SoftwareSystems:
           s + md(tree, "")
         }
 
-    lazy val summarySection =
-      Section(Some("Software Systems - Summary"), summaryView, "software-systems.md")
+    def summarySection(): Section =
+      Section(Some("Software Systems - Summary"), summaryView(), "software-systems.md")
 
     // TODO: Create Software System sections with the following views:
     // - About:
@@ -178,7 +178,7 @@ object SoftwareSystems:
             )
 
       // recursively transform systems tree into section hierarchy
-      SectionGroup(Some("Software Systems"), tree.values.map(convert).toSeq)
+      SectionGroup(Some("Software Systems"), tree().values.map(convert).toSeq)
 
     def about()(using system: SoftwareSystem): Section =
       val description      = Option(system.getDescription()).filter(_.trim().nonEmpty)

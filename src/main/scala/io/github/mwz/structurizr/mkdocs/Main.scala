@@ -28,7 +28,7 @@ object Main extends IOApp.Simple:
   def exec(docs: Docs, softwareSystems: SoftwareSystems, diagrams: Diagrams, mkDocs: MkDocs): IO[Unit] =
     val sections: Stream[IO, SectionHierarchy] =
       Stream.emits(docs.sections()) ++
-        Stream.emit(softwareSystems.summarySection) ++
+        Stream.emit(softwareSystems.summarySection()) ++
         Stream.emit(softwareSystems.sectionHierarchy())
     (mkDocs.writeSectionHierarchy(sections) &> mkDocs.writeMkDocsConfig(sections)) >>
       // export diagrams at the end as this mutates the elements' url property

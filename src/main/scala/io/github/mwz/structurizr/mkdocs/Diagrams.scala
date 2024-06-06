@@ -2,8 +2,8 @@ package io.github.mwz.structurizr.mkdocs
 
 import cats.effect.IO
 import cats.effect.kernel.Resource
-import com.structurizr.`export`.Diagram
 import com.structurizr.Workspace as SWorkspace
+import com.structurizr.`export`.Diagram
 import fs2.Stream
 import fs2.io.file.Files
 import fs2.io.file.Path as fs2Path

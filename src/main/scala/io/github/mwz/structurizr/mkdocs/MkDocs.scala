@@ -15,6 +15,7 @@ import io.circe.yaml.v12.parser
 import java.nio.file.Path
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.ZonedDateTime
 
 trait SectionHierarchy
 case class SectionGroup(title: Option[String], sections: Seq[SectionHierarchy]) extends SectionHierarchy
@@ -40,16 +41,18 @@ object MkDocs:
   def apply(basePath: Path, clock: Clock[IO]) = new MkDocs:
     def flatten(sections: Stream[IO, SectionHierarchy]): Stream[IO, Section] =
       sections.flatMap {
-        case SectionGroup(title, sections) => Stream.emits(sections).covary[IO].through(flatten)
-        case s: Section                    => Stream.emit(s)
+        case SectionGroup(title, sections) =>
+          Stream.emits(sections).covary[IO].through(flatten)
+        case s: Section =>
+          Stream.emit(s)
       }
 
     def writeSectionHierarchy(sectionHierarchy: Stream[IO, SectionHierarchy]): IO[Unit] =
       writeSections(flatten(sectionHierarchy))
 
     def writeSections(sections: Stream[IO, Section]): IO[Unit] =
-      val generatedAt = clock.realTimeInstant.map(_.atZone(ZoneId.systemDefault))
-      val path        = fs2Path.fromNioPath(basePath)
+      val generatedAt: IO[ZonedDateTime] = clock.realTimeInstant.map(_.atZone(ZoneId.systemDefault))
+      val path                           = fs2Path.fromNioPath(basePath)
       Files.forIO.exists(path).ifM(IO.unit, Files.forIO.createDirectory(path)) >>
         sections
           .evalTap(section => IO.println(s"Processing ${section.title.getOrElse("")} - ${section.filename}"))
