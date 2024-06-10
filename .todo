@@ -5,14 +5,14 @@ Fill content:
   container views:
     ☐ docs
     ☐ ADRs
-  ☐ Component view
-  ☐ Deployment view
+  ☐ Deployment views
 
 Save file:
   ☐ remove flexmark extensions?
   ☐ add inline-select-svg plugin to mkdocs config
 
 Archive:
+  ✔ Component view @project(Fill content) @started(24-05-21 17:35) @done(24-06-10 18:03) @lasted(2w6d28m2s) @project(Fill content)
   ✔ homepage - 1st doc section rename to index @done(24-04-19 11:38) @project(Fill content)
   ✔ docs @project(Fill content)
   ✔ generate empty index if no docs are present @project(Fill content)
