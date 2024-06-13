@@ -14,8 +14,8 @@ import io.circe.yaml.v12.parser
 
 import java.nio.file.Path
 import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 trait SectionHierarchy
 case class SectionGroup(title: Option[String], sections: Seq[SectionHierarchy]) extends SectionHierarchy
@@ -51,7 +51,7 @@ object MkDocs:
       writeSections(flatten(sectionHierarchy))
 
     def writeSections(sections: Stream[IO, Section]): IO[Unit] =
-      val generatedAt: IO[ZonedDateTime] = clock.realTimeInstant.map(_.atZone(ZoneId.systemDefault))
+      val generatedAt: IO[ZonedDateTime] = clock.realTimeInstant.map(_.atZone(ZoneId.of("UTC")))
       val path                           = fs2Path.fromNioPath(basePath)
       Files.forIO.exists(path).ifM(IO.unit, Files.forIO.createDirectory(path)) >>
         sections
@@ -86,20 +86,26 @@ object MkDocs:
     // TODO: use a default minimal config if no template is provided
     // TODO: add inline-select-svg plugin
     def writeMkDocsConfig(sections: Stream[IO, SectionHierarchy]): IO[Unit] =
+      val parentPath = IO.fromOption(fs2Path.fromNioPath(basePath).parent)(
+        new RuntimeException(s"Path doesn't have a parent directory: $basePath")
+      )
+
       val sectionsJson: IO[Json] =
         sections.compile.toList
           .map(_.asJson)
 
-      val template = Files[IO]
-        .readAll(fs2Path("mkdocs.tmpl.yml"))
-        .through(fs2.text.utf8.decode)
-        .compile
-        .string
+      def template(path: fs2Path) =
+        Files[IO]
+          .readAll(path / "mkdocs.tmpl.yml")
+          .through(fs2.text.utf8.decode)
+          .compile
+          .string
 
       // populate the nav section
       for
+        parent       <- parentPath
         sectionsJson <- sectionsJson
-        json <- template
+        json <- template(parent)
           .flatMap(s => IO.fromEither(parser.parse(s)))
           .flatTap(s => IO.println(s))
           .map(json =>
@@ -111,7 +117,7 @@ object MkDocs:
           )
           .flatTap(s => IO.println(s))
         _ <- Stream(printer.pretty(json))
-          .through(Files[IO].writeUtf8(fs2Path("mkdocs.yml"), Flags.Write))
+          .through(Files[IO].writeUtf8(parent / "mkdocs.yml", Flags.Write))
           .compile
           .drain
       yield ()
