@@ -7,9 +7,17 @@ Fill content:
     ☐ ADRs
   ☐ Deployment views
 
-Save file:
+Save files:
   ☐ remove flexmark extensions?
+
+Diagrams:
+  ☐ skip generating diagrams when up-to-date
+  ☐ add diagram description if available
+
+Config:
+  ☐ make base dir configurable
   ☐ add inline-select-svg plugin to mkdocs config
+  ☐ generate a basic mkdocs.tmpl.yml file if it doesn't exist
 
 Archive:
   ✔ Component view @project(Fill content) @started(24-05-21 17:35) @done(24-06-10 18:03) @lasted(2w6d28m2s) @project(Fill content)
