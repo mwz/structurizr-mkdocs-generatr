@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: "temurin:1.21"
       - name: Test
-        run: sbt test
+        run: sbt coverage test coverageReport
         env:
           GITHUB_TOKEN: ""
       - name: Release snapshot
