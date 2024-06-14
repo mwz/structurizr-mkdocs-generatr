@@ -111,6 +111,34 @@ Missing features:
   pip install mkdocs-techdocs-core
   ```
 
+## Development
+
+To run this project locally, you need to have JDK 21+ installed on your machine.
+
+To run using sbt:
+
+```bash
+sbt run
+```
+
+Alternatively run the project using an IDE of your choice. There is a
+`launch.json` configuration provided for VSCode.
+
+You'll need to place your `workspace.dsl` and other Structurizr files in the
+root of this project and create a `mkdocs.tmpl.yml` file as described above.
+
+Once executed, you can preview the website using the following command:
+
+```bash
+ mkdocs serve -w mkdocs
+```
+
+or for TechDocs:
+
+```bash
+techdocs-cli serve --no-docker -v
+```
+
 ## Contributing
 
 Please feel free to contribute to this project by opening an issue or a pull

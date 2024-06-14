@@ -7,6 +7,9 @@ project/plugins/project/
 boot/
 lib_managed/
 src_managed/
+.scala-build
+dest/
+out/
 
 # vim
 *.sw?
@@ -14,18 +17,19 @@ src_managed/
 # intellij
 .idea/
 
+# vscode
+.vscode/*
+!.vscode/launch.json
+
 # ignore [ce]tags files
 tags
 
+# metals
 .metals/
 .bsp/
 .bloop/
 metals.sbt
-.vscode
 .bsp
-.scala-build
-dest/
-out/
 
 # npm
 node_modules/
