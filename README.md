@@ -30,7 +30,7 @@ yet. Here's a list of features that are currently supported:
 Missing features (planned for future releases):
 
 - system and container docs
-- system and container adrs
+- workspace, system and container adrs
   ([reference](https://docs.structurizr.com/dsl/language#adrs))
 - system deployment views
   ([reference](https://docs.structurizr.com/dsl/language#deployment-view))

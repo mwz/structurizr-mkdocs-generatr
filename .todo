@@ -1,11 +1,13 @@
 Fill content:
-  about:
+  software system:
     ☐ docs
     ☐ ADRs
-  container views:
+  containers:
     ☐ docs
     ☐ ADRs
+  ☐ Workspace ADRs
   ☐ Deployment views
+  ☐ Static image views
 
 Save files:
   ☐ remove flexmark extensions?
