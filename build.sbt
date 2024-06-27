@@ -1,5 +1,5 @@
 ThisBuild / organization := "io.github.mwz"
-ThisBuild / scalaVersion := "3.4.0"
+ThisBuild / scalaVersion := "3.4.2"
 
 // sbt github packages plugin settings
 ThisBuild / githubOwner      := "mwz"
@@ -26,11 +26,18 @@ lazy val root = (project in file("."))
       "io.circe"                %% "circe-yaml-v12"     % "0.15.1",
       "org.typelevel"           %% "mouse"              % "1.2.3",
       "org.typelevel"           %% "toolkit"            % "0.1.23",
+      "io.circe"                   %% "circe-core"         % "0.14.8",
+      "io.circe"                   %% "circe-parser"       % "0.14.8",
+      "io.circe"                   %% "circe-yaml-v12"     % "0.15.2",
+      "org.typelevel"              %% "mouse"              % "1.2.4",
+      "org.typelevel"              %% "toolkit"            % "0.1.26",
       "com.structurizr"          % "structurizr-core"   % "1.29.0",
       "com.structurizr"          % "structurizr-dsl"    % "1.35.0",
       "com.structurizr"          % "structurizr-export" % "1.19.0",
       "net.sourceforge.plantuml" % "plantuml"           % "1.2024.3",
       "org.typelevel"           %% "toolkit-test"       % "0.1.23" % Test,
+      "net.sourceforge.plantuml"    % "plantuml"           % "1.2024.5",
+      "org.typelevel"              %% "toolkit-test"       % "0.1.26" % Test,
       "org.typelevel"           %% "munit-cats-effect"  % "2.0.0"  % Test
     )
   )

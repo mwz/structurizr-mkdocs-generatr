@@ -9,7 +9,6 @@ import fs2.io.file.Path as fs2Path
 import io.circe.*
 import io.circe.syntax.*
 import io.circe.yaml.v12.Printer
-import io.circe.yaml.v12.Printer.Config
 import io.circe.yaml.v12.parser
 
 import java.nio.file.Path
@@ -27,7 +26,7 @@ trait MkDocs:
   def writeMkDocsConfig(sections: Stream[IO, SectionHierarchy]): IO[Unit]
 
 object MkDocs:
-  val printer   = Printer.make(Config(preserveOrder = true))
+  val printer   = Printer.builder.withPreserveOrder(true).build()
   val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy @ HH:mm")
 
   // Custom encoder for SectionHierarchy
