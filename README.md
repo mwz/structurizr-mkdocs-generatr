@@ -10,7 +10,8 @@ Backstage.
 
 ## Features
 
-These are the features that are currently supported by this project:
+This project is in development and not all Structurizr features are supported
+yet. Here's a list of features that are currently supported:
 
 - project-level docs
   ([reference](https://docs.structurizr.com/dsl/language#docs))
@@ -95,12 +96,25 @@ Missing features (planned for future releases):
      published to GitHub Packages, you'll need additional Coursier configuration
      to make it work)
 
+3. Preview the generated site:
+   - MkDocs ([installation](https://www.mkdocs.org/getting-started))
+     ```bash
+     mkdocs serve -w mkdocs
+     ```
+   - TechDocs CLI
+     ([installation](https://backstage.io/docs/features/techdocs/cli))
+     ```bash
+     techdocs-cli serve --no-docker -v
+     ```
+
 ## Requirements
 
 - **Java 21+**  
   The project is written in Scala and requires Java 21 or higher to run. I
   recommend using
   [Temurin LTS](https://adoptium.net/temurin/releases/?version=21).
+  `.tool-versions` files is provided, so you can used
+  [asdf](https://asdf-vm.com/guide/getting-started.html) to install it.
 
 - **svg inlining**  
   The project generates diagrams in png and svg formats. The svg images need to
@@ -120,6 +134,12 @@ Missing features (planned for future releases):
   ```bash
   pip install mkdocs-techdocs-core
   ```
+
+- **MkDocs or TechDocs CLI** (to preview)  
+  Either MkDocs or TechDocs CLI is required to preview the generated site. See
+  the docs on how to install those tools:
+  - [MkDocs](https://www.mkdocs.org/getting-started)
+  - [TechDocs](https://backstage.io/docs/features/techdocs/cli)
 
 ## Development
 
@@ -156,7 +176,7 @@ request.
 
 If you have any questions, please open a new discussion.
 
-## Credits
+## Acknowledgments
 
 This project is inspired by
-[structurizr-site-generatr](https://github.com/avisi-cloud/structurizr-site-generatr).
+[avisi-cloud/structurizr-site-generatr](https://github.com/avisi-cloud/structurizr-site-generatr).
