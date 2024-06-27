@@ -13,19 +13,28 @@ Backstage.
 These are the features that are currently supported by this project:
 
 - project-level docs
+  ([reference](https://docs.structurizr.com/dsl/language#docs))
 - systems overview page
 - system context views
+  ([reference](https://docs.structurizr.com/dsl/language#systemcontext-view))
 - system container views
+  ([reference](https://docs.structurizr.com/dsl/language#container-view))
 - system component views
+  ([reference](https://docs.structurizr.com/dsl/language#component-view))
 - system dynamic views
-- system dependencies
+  ([reference](https://docs.structurizr.com/dsl/language#dynamic-view))
+- system dependencies view
 - svg diagrams with hyperlinks
 
-Missing features:
+Missing features (planned for future releases):
 
 - system and container docs
 - system and container adrs
+  ([reference](https://docs.structurizr.com/dsl/language#adrs))
 - system deployment views
+  ([reference](https://docs.structurizr.com/dsl/language#deployment-view))
+- image views
+  ([reference](https://docs.structurizr.com/dsl/language#image-view))
 
 ## How to use
 
@@ -73,7 +82,7 @@ Missing features:
      java -jar structurizr-mkdocs-generatr.jar
      ```
 
-   - download the jar from GitHub Packages and run it:
+   - or download the jar from GitHub Packages and run it:
 
      ```bash
      curl -H "Authorization: token $GITHUB_TOKEN" -L -O \
@@ -82,7 +91,7 @@ Missing features:
      java -jar structurizr-mkdocs-generatr-0.1.0.jar
      ```
 
-   - use [Coursier](https://get-coursier.io) to run it (since the artifact is
+   - or use [Coursier](https://get-coursier.io) to run it (since the artifact is
      published to GitHub Packages, you'll need additional Coursier configuration
      to make it work)
 
@@ -90,7 +99,8 @@ Missing features:
 
 - **Java 21+**  
   The project is written in Scala and requires Java 21 or higher to run. I
-  recommend using [Temurin](https://adoptium.net/temurin/releases).
+  recommend using
+  [Temurin LTS](https://adoptium.net/temurin/releases/?version=21).
 
 - **svg inlining**  
   The project generates diagrams in png and svg formats. The svg images need to
@@ -130,7 +140,7 @@ root of this project and create a `mkdocs.tmpl.yml` file as described above.
 Once executed, you can preview the website using the following command:
 
 ```bash
- mkdocs serve -w mkdocs
+mkdocs serve -w mkdocs
 ```
 
 or for TechDocs:
@@ -144,7 +154,7 @@ techdocs-cli serve --no-docker -v
 Please feel free to contribute to this project by opening an issue or a pull
 request.
 
-If you have any questions, please open a new discussion thread.
+If you have any questions, please open a new discussion.
 
 ## Credits
 
