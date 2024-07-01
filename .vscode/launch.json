@@ -7,9 +7,18 @@
     {
       "type": "scala",
       "request": "launch",
-      "name": "Scala",
+      "name": "Scala - root",
       "mainClass": "io.github.mwz.structurizr.mkdocs.Main",
       "args": [],
+      "jvmOptions": [],
+      "env": {}
+    },
+    {
+      "type": "scala",
+      "request": "launch",
+      "name": "Scala - example project",
+      "mainClass": "io.github.mwz.structurizr.mkdocs.Main",
+      "args": ["--path", "example"],
       "jvmOptions": [],
       "env": {}
     }

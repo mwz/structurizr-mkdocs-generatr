@@ -160,9 +160,6 @@ To run using sbt:
 sbt run
 ```
 
-Alternatively run the project using an IDE of your choice. There is a
-`launch.json` configuration provided for VSCode.
-
 You'll need to place your `workspace.dsl` and other Structurizr files in the
 root of this project and create a `mkdocs.tmpl.yml` file as described above.
 
@@ -183,6 +180,10 @@ To run the the project against the `example` directory execute the following:
 ```bash
 sbt "run --path example"
 ```
+
+Alternatively run the project using an IDE of your choice. There is a
+`launch.json` configuration provided for VSCode to run the project against the
+root and the example directory.
 
 ## Contributing
 
