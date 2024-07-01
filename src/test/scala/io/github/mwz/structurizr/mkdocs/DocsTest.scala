@@ -45,6 +45,24 @@ class DocsTest extends FunSuite:
       )
     )
 
+  test("don't resolve embedded images in markdown code block"):
+    val ssections = testSsections(
+      Seq(TestSection("# Hello\n\nContent\n```markdown\n![](embed:Diagram)\n```", "index.md"))
+    )
+
+    val content = """# Hello
+                    |
+                    |Content
+                    |```markdown
+                    |![](embed:Diagram)
+                    |```""".stripMargin
+    assertEquals(
+      Docs(ssections).sections(),
+      Seq(
+        Section(Some("Hello"), content, "index.md")
+      )
+    )
+
   test("resolve embedded images in markdown"):
     val ssections = testSsections(
       Seq(TestSection("# Hello\n\nContent\n![](embed:Diagram)", "index.md"))

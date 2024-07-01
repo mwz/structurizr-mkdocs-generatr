@@ -36,6 +36,7 @@ Missing features (planned for future releases):
   ([reference](https://docs.structurizr.com/dsl/language#deployment-view))
 - image views
   ([reference](https://docs.structurizr.com/dsl/language#image-view))
+- copy static images to the output directory
 
 ## How to use
 
@@ -74,8 +75,8 @@ Missing features (planned for future releases):
    ```
 
 2. Run the generator in the directory where the Structurizr `workspace.dsl` and
-   `mkdocs.tmpl.yml` files are located. It will create `mkdocs` directory with
-   all the static content and `mkdocs.yml` config.
+   `mkdocs.tmpl.yml` files are located. It will create `docs` directory with all
+   the static content and `mkdocs.yml` config.
 
    - download the jar from Github Releases and run it:
 
@@ -99,7 +100,7 @@ Missing features (planned for future releases):
 3. Preview the generated site:
    - MkDocs ([installation](https://www.mkdocs.org/getting-started))
      ```bash
-     mkdocs serve -w mkdocs
+     mkdocs serve -w docs
      ```
    - TechDocs CLI
      ([installation](https://backstage.io/docs/features/techdocs/cli))
@@ -107,37 +108,45 @@ Missing features (planned for future releases):
      techdocs-cli serve --no-docker -v
      ```
 
+### Arguments
+
+The generator accepts the following arguments:
+
+- `--path` - path to the root of the project containing the Structurizr
+  `workspace.dsl` and the `mkdocs.tmpl.yml` files (defaults to current working
+  directory `./`)
+- `--docs-dir` - the directory where the documentation markdown files will be
+  generated, relative to the `path` argument. Needs to match MkDocs' `docs_dir`
+  setting (defaults to `docs`)
+
 ## Requirements
 
-- **Java 21+**  
-  The project is written in Scala and requires Java 21 or higher to run. I
-  recommend using
+- **Java 21+** The project is written in Scala and requires Java 21 or higher to
+  run. I recommend using
   [Temurin LTS](https://adoptium.net/temurin/releases/?version=21).
   `.tool-versions` files is provided, so you can used
   [asdf](https://asdf-vm.com/guide/getting-started.html) to install it.
 
-- **svg inlining**  
-  The project generates diagrams in png and svg formats. The svg images need to
-  be inlined to support hyperlinks for navigation. Please use an svg inline
-  plugin of your choice, I recommend using
+- **svg inlining** The project generates diagrams in png and svg formats. The
+  svg images need to be inlined to support hyperlinks for navigation. Please use
+  an svg inline plugin of your choice, I recommend using
   [mkdocs-plugin-inline-svg](https://pypi.org/project/mkdocs-plugin-inline-ext-svg).
 
   ```bash
   pip install mkdocs-plugin-inline-svg
   ```
 
-- **TechDocs**  
-  To generate a TechDocs site, you need to include the `techdocs-core` plugin in
-  the `mkdocs.tmpl.yml` file. This plugin is not needed for a standalone MkDocs
-  site.
+- **TechDocs** To generate a TechDocs site, you need to include the
+  `techdocs-core` plugin in the `mkdocs.tmpl.yml` file. This plugin is not
+  needed for a standalone MkDocs site.
 
   ```bash
   pip install mkdocs-techdocs-core
   ```
 
-- **MkDocs or TechDocs CLI** (to preview)  
-  Either MkDocs or TechDocs CLI is required to preview the generated site. See
-  the docs on how to install those tools:
+- **MkDocs or TechDocs CLI** (to preview) Either MkDocs or TechDocs CLI is
+  required to preview the generated site. See the docs on how to install those
+  tools:
   - [MkDocs](https://www.mkdocs.org/getting-started)
   - [TechDocs](https://backstage.io/docs/features/techdocs/cli)
 
@@ -160,13 +169,19 @@ root of this project and create a `mkdocs.tmpl.yml` file as described above.
 Once executed, you can preview the website using the following command:
 
 ```bash
-mkdocs serve -w mkdocs
+mkdocs serve -w docs
 ```
 
 or for TechDocs:
 
 ```bash
 techdocs-cli serve --no-docker -v
+```
+
+To run the the project against the `example` directory execute the following:
+
+```bash
+sbt "run --path example"
 ```
 
 ## Contributing

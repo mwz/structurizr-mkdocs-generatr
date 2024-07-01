@@ -5,13 +5,12 @@ import cats.effect.kernel.Clock
 import fs2.Stream
 import fs2.io.file.Files
 import fs2.io.file.Flags
-import fs2.io.file.Path as fs2Path
+import fs2.io.file.Path as FS2Path
 import io.circe.*
 import io.circe.syntax.*
 import io.circe.yaml.v12.Printer
 import io.circe.yaml.v12.parser
 
-import java.nio.file.Path
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -37,7 +36,7 @@ object MkDocs:
       case s: Section =>
         s.title.fold(s.filename.asJson)(title => JsonObject(title -> s.filename.asJson).asJson)
 
-  def apply(basePath: Path, clock: Clock[IO]) = new MkDocs:
+  def apply(conf: PathConfig, clock: Clock[IO]) = new MkDocs:
     def flatten(sections: Stream[IO, SectionHierarchy]): Stream[IO, Section] =
       sections.flatMap {
         case SectionGroup(title, sections) =>
@@ -51,12 +50,11 @@ object MkDocs:
 
     def writeSections(sections: Stream[IO, Section]): IO[Unit] =
       val generatedAt: IO[ZonedDateTime] = clock.realTimeInstant.map(_.atZone(ZoneId.of("UTC")))
-      val path                           = fs2Path.fromNioPath(basePath)
-      Files.forIO.exists(path).ifM(IO.unit, Files.forIO.createDirectory(path)) >>
+      Files[IO].exists(conf.docsPath.fs2Path).ifM(IO.unit, Files[IO].createDirectory(conf.docsPath.fs2Path)) >>
         sections
           .evalTap(section => IO.println(s"Processing ${section.title.getOrElse("")} - ${section.filename}"))
           .evalTap { s =>
-            val filename = path / fs2Path(s.filename)
+            val filename = conf.docsPath.fs2Path / FS2Path(s.filename)
             IO.fromOption(filename.parent)(new RuntimeException(s"Path doesn't have a parent directory: $filename"))
               .flatMap { parent =>
                 Files[IO]
@@ -65,7 +63,7 @@ object MkDocs:
               }
           }
           .flatMap { section =>
-            val path = fs2Path.fromNioPath(basePath) / fs2Path(section.filename)
+            val filePath = conf.docsPath.fs2Path / FS2Path(section.filename)
             val footer = generatedAt.map { time =>
               s"""\n
               |<div style="font-size: small; font-style: italic;">
@@ -76,7 +74,7 @@ object MkDocs:
 
             Stream
               .eval(content)
-              .through(Files[IO].writeUtf8(path, Flags.Write))
+              .through(Files[IO].writeUtf8(filePath, Flags.Write))
           }
           .compile
           .drain
@@ -85,15 +83,11 @@ object MkDocs:
     // TODO: use a default minimal config if no template is provided
     // TODO: add inline-select-svg plugin
     def writeMkDocsConfig(sections: Stream[IO, SectionHierarchy]): IO[Unit] =
-      val parentPath = IO.fromOption(fs2Path.fromNioPath(basePath).parent)(
-        new RuntimeException(s"Path doesn't have a parent directory: $basePath")
-      )
-
       val sectionsJson: IO[Json] =
         sections.compile.toList
           .map(_.asJson)
 
-      def template(path: fs2Path) =
+      def template(path: FS2Path) =
         Files[IO]
           .readAll(path / "mkdocs.tmpl.yml")
           .through(fs2.text.utf8.decode)
@@ -102,21 +96,20 @@ object MkDocs:
 
       // populate the nav section
       for
-        parent       <- parentPath
         sectionsJson <- sectionsJson
-        json <- template(parent)
+        json <- template(conf.basePath.fs2Path)
           .flatMap(s => IO.fromEither(parser.parse(s)))
           .flatTap(s => IO.println(s))
           .map(json =>
             json.hcursor
-              .withFocus(_.mapObject(_.add("docs_dir", basePath.toString.asJson)))
+              .withFocus(_.mapObject(_.add("docs_dir", conf.basePath.relativize(conf.docsPath).toString.asJson)))
               .withFocus(_.mapObject(_.add("nav", Json.fromValues(sectionsJson.asArray.getOrElse(Vector.empty)))))
               .top
               .getOrElse(json)
           )
           .flatTap(s => IO.println(s))
         _ <- Stream(printer.pretty(json))
-          .through(Files[IO].writeUtf8(parent / "mkdocs.yml", Flags.Write))
+          .through(Files[IO].writeUtf8(conf.basePath.fs2Path / "mkdocs.yml", Flags.Write))
           .compile
           .drain
       yield ()

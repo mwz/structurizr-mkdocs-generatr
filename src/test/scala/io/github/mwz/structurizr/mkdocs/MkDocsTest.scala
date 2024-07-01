@@ -26,25 +26,27 @@ class MkDocsTest extends CatsEffectSuite:
   override def munitFixtures = List(tmpDir)
 
   test("write section hierarchy"):
-    val dir      = tmpDir()
-    val basePath = dir / "mkdocs"
+    val basePath = tmpDir()
+    val docsDir  = basePath / "mkdocs"
+    val conf     = PathConfig(basePath.toNioPath, docsDir.toNioPath)
 
     val sections = SectionGroup(
       Some("Section Group"),
       Seq(Section(Some("Title"), "# Title\n\nContent", "index.md"))
     )
-    val prog = MkDocs(basePath.toNioPath, Clock[IO])
+    val prog = MkDocs(conf, Clock[IO])
       .writeSectionHierarchy(Stream.emit(sections))
 
     TestControl
       .execute(prog)
       .flatMap(_.advanceAndTick(fixedDuration)) *>
-      assertIO(Files[IO].walk(dir).drop(1).compile.toList, List(basePath, basePath / "index.md")) *>
-      assertIO(Files[IO].readUtf8(basePath / "index.md").compile.string, "# Title\n\nContent" + contentSuffix)
+      assertIO(Files[IO].walk(docsDir).compile.toList, List(docsDir, docsDir / "index.md")) *>
+      assertIO(Files[IO].readUtf8(docsDir / "index.md").compile.string, "# Title\n\nContent" + contentSuffix)
 
   test("write MkDocs config"):
-    val dir      = tmpDir()
-    val basePath = dir / "mkdocs"
+    val basePath = tmpDir()
+    val docsDir  = basePath / "mkdocs"
+    val conf     = PathConfig(basePath.toNioPath, docsDir.toNioPath)
 
     val ymlTemplate =
       """site_name: Test
@@ -69,7 +71,7 @@ class MkDocsTest extends CatsEffectSuite:
           |  name: material
           |  features:
           |  - content.tabs.link
-          |docs_dir: ${basePath.toString}
+          |docs_dir: ${conf.relativeDocsPath.toString}
           |nav:
           |- Section Group:
           |  - Title: index.md
@@ -84,13 +86,13 @@ class MkDocsTest extends CatsEffectSuite:
     val writeYmlTemplate = Stream
       .emit(ymlTemplate)
       .through(fs2.text.utf8.encode)
-      .through(Files[IO].writeAll(dir / "mkdocs.tmpl.yml"))
+      .through(Files[IO].writeAll(basePath / "mkdocs.tmpl.yml"))
       .compile
       .drain
 
-    val prog = MkDocs(basePath.toNioPath, Clock[IO])
+    val prog = MkDocs(conf, Clock[IO])
       .writeMkDocsConfig(Stream.emit(sections))
 
     writeYmlTemplate *>
       prog *>
-      assertIO(Files[IO].readUtf8(dir / "mkdocs.yml").compile.string, expected)
+      assertIO(Files[IO].readUtf8(basePath / "mkdocs.yml").compile.string, expected)

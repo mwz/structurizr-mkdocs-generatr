@@ -29,9 +29,10 @@ object Docs:
       else sections
 
     // Replace embedded image references from the docs (embed:ImageId)
-    // with the actual svg image
+    // with the actual svg image.
+    // Also exclude code blocks with markdown example of the embed syntax.
     def resolveEmbedded(md: String): String =
-      val embedPattern = """(!\[.*?\])\(embed:(\w+)\)""".r
+      val embedPattern = """(?<!```md\s|```markdown\s)(!\[.*?\])\(embed:(\w+)\)(?!\s```)""".r
       embedPattern.replaceSomeIn(
         md,
         m => (Option(m.group(2)).map(imgTabs))

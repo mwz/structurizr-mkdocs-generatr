@@ -4,7 +4,6 @@ import com.structurizr.Workspace as SWorkspace
 import com.structurizr.model.SoftwareSystem
 import munit.FunSuite
 
-import java.nio.file.Path
 import scala.collection.immutable.TreeMap
 
 case class TestSystem(name: String, group: String = "")
@@ -31,7 +30,7 @@ class SoftwareSystemsTest extends FunSuite:
         )
       )
     assertEquals(
-      SoftwareSystems(systems, null, Set(), Path.of(""), "/").allSystems(),
+      SoftwareSystems(systems, null, Set(), "/").allSystems(),
       List(
         System(List("group1"), system1),
         System(List.empty, system2),
@@ -51,7 +50,7 @@ class SoftwareSystemsTest extends FunSuite:
         )
       )
     assertEquals(
-      SoftwareSystems(systems, null, Set(), Path.of(""), "/").tree(),
+      SoftwareSystems(systems, null, Set(), "/").tree(),
       TreeMap(
         "group1" -> Group(
           "group1",
@@ -86,7 +85,7 @@ class SoftwareSystemsTest extends FunSuite:
         )
       )
     assertEquals(
-      SoftwareSystems(systems, null, Set(), Path.of(""), "/").tree(),
+      SoftwareSystems(systems, null, Set(), "/").tree(),
       TreeMap(
         "group1" -> Group(
           "group1",
@@ -121,7 +120,7 @@ class SoftwareSystemsTest extends FunSuite:
         )
       )
     assertEquals(
-      SoftwareSystems(systems, workspace.getViews(), Set(), Path.of(""), "/").sectionHierarchy(),
+      SoftwareSystems(systems, workspace.getViews(), Set(), "/").sectionHierarchy(),
       SectionGroup(
         Some("Software Systems"),
         List(

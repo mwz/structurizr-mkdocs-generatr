@@ -9,7 +9,6 @@ import com.structurizr.view.ViewSet
 import mouse.string.*
 
 import java.net.URL
-import java.nio.file.Path
 import scala.collection.immutable.TreeMap
 import scala.jdk.CollectionConverters.*
 
@@ -33,7 +32,6 @@ object SoftwareSystems:
       systems: Seq[SoftwareSystem],
       views: ViewSet,
       relationships: Set[Relationship],
-      basePath: Path,
       separator: String
   ) = new SoftwareSystems:
     given viewSet: ViewSet        = views

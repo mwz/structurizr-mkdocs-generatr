@@ -1,5 +1,7 @@
 package io.github.mwz.structurizr.mkdocs
 
+import caseapp.*
+import caseapp.catseffect.*
 import cats.effect.*
 import com.structurizr.Workspace as SWorkspace
 import fs2.Stream
@@ -7,22 +9,23 @@ import fs2.Stream
 import java.nio.file.Path
 import scala.jdk.CollectionConverters.*
 
-object Main extends IOApp.Simple:
-  // TODO: Make the base path configurable via a command line argument
-  val basePath: Path = Path.of("./mkdocs")
+import cli.CommandLineArgs
 
-  val run: IO[Unit] = for
-    workspace <- Workspace().get()
+object Main extends IOCaseApp[CommandLineArgs]:
+  def run(options: CommandLineArgs, remainingArgs: RemainingArgs): IO[ExitCode] =
+    run(Config(options)).as(ExitCode.Success)
+
+  def run(config: Config): IO[Unit] = for
+    workspace <- Workspace(config.path).get()
     docs = Docs(workspace.getDocumentation().getSections().asScala.toSeq)
     softwareSystems = SoftwareSystems(
       workspace.getModel().getSoftwareSystems().asScala.toSeq,
       workspace.getViews(),
       workspace.getModel().getRelationships().asScala.toSet,
-      basePath,
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
-    diagrams = Diagrams(workspace, basePath)
-    _ <- exec(docs, softwareSystems, diagrams, MkDocs(basePath, Clock[IO]))
+    diagrams = Diagrams(workspace, config.path)
+    _ <- exec(docs, softwareSystems, diagrams, MkDocs(config.path, Clock[IO]))
   yield ()
 
   def exec(docs: Docs, softwareSystems: SoftwareSystems, diagrams: Diagrams, mkDocs: MkDocs): IO[Unit] =
