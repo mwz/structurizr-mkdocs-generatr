@@ -272,11 +272,16 @@ object SoftwareSystems:
       val inMd  = makeMd("## Inbound", in, _.getSource())
       val outMd = makeMd("## Outbound", out, _.getDestination())
 
-      (inMd, outMd)
-        .mapN { (inMd, outMd) => s"${inMd}\n\n${outMd}" }
-        .map { md =>
-          Section(Some("Dependencies"), md, s"software-systems/${normaliseName(system.getName())}-dependencies.md")
-        }
+      val combined =
+        (inMd, outMd) match
+          case (Some(in), Some(out)) => Some(s"${in}\n\n${out}")
+          case (Some(in), None)      => Some(in)
+          case (None, Some(out))     => Some(out)
+          case _                     => None
+
+      combined.map { md =>
+        Section(Some("Dependencies"), md, s"software-systems/${normaliseName(system.getName())}-dependencies.md")
+      }
 
   def normaliseName(name: String): String =
     name
