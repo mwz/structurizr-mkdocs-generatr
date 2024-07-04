@@ -1,0 +1,30 @@
+name: Publish example site
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Scala
+        uses: japgolly/setup-everything-scala@v3.1
+        with:
+          java-version: "temurin:1.21"
+      - name: Test & run
+        run: sbt "test; run --path example"
+        env:
+          GITHUB_TOKEN: ""
+      - name: Build site
+        uses: Tiryoh/actions-mkdocs@v0
+        with:
+          mkdocs_version: "latest"
+          configfile: "example/mkdocs.yml"
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: example/site

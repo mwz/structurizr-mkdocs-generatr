@@ -2,6 +2,7 @@
 mkdocs/
 docs/
 example/docs/
+example/site/
 example/mkdocs.yml
 *.jar
 
