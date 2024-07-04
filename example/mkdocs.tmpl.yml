@@ -2,7 +2,6 @@ site_name: "Big Bank plc"
 repo_url: https://github.com/org/repo
 edit_uri: edit/main/
 plugins:
-  - techdocs-core
   - inline-select-svg
 theme:
   name: material

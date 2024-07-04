@@ -26,6 +26,7 @@ jobs:
         uses: Tiryoh/actions-mkdocs@v0
         with:
           mkdocs_version: "latest"
+          requirements: "example/requirements.txt"
           configfile: "example/mkdocs.yml"
       - uses: JamesIves/github-pages-deploy-action@v4
         with:

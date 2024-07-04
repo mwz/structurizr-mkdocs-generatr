@@ -127,13 +127,17 @@ The generator accepts the following arguments:
   `.tool-versions` files is provided, so you can used
   [asdf](https://asdf-vm.com/guide/getting-started.html) to install it.
 
+- **Graphviz** The project uses Graphviz to generate diagrams - please install
+  Graphviz on your machine. You can download it from
+  [here](https://plantuml.com/graphviz-dot).
+
 - **svg inlining** The project generates diagrams in png and svg formats. The
   svg images need to be inlined to support hyperlinks for navigation. Please use
   an svg inline plugin of your choice, I recommend using
-  [mkdocs-plugin-inline-svg](https://pypi.org/project/mkdocs-plugin-inline-ext-svg).
+  [inline-select-svg](https://pypi.org/project/mkdocs-inline-select-svg-plugin/).
 
   ```bash
-  pip install mkdocs-plugin-inline-svg
+  pip install mkdocs-inline-select-svg-plugin
   ```
 
 - **TechDocs** To generate a TechDocs site, you need to include the
