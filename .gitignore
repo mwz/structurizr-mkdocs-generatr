@@ -1,6 +1,6 @@
 .DS_Store
 mkdocs/
-docs/
+/docs/
 example/docs/
 example/site/
 example/mkdocs.yml
