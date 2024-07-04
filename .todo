@@ -21,10 +21,8 @@ Config:
   ☐ add inline-select-svg plugin to mkdocs config
   ☐ generate a basic mkdocs.tmpl.yml file if it doesn't exist
 
-Other:
-  ☐ set up an example Structurizr project with a generated MkDocs site
-
 Archive:
+  ✔ set up an example Structurizr project with a generated MkDocs site @done(24-07-04 18:17) @project(Other)
   ✔ make base dir configurable @done(24-06-28 17:34) @project(Config)
   ✔ Component view @project(Fill content) @started(24-05-21 17:35) @done(24-06-10 18:03) @lasted(2w6d28m2s) @project(Fill content)
   ✔ homepage - 1st doc section rename to index @done(24-04-19 11:38) @project(Fill content)
