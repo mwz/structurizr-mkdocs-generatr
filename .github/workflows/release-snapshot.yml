@@ -1,8 +1,9 @@
-name: release-snapshot
+name: Release Snapshot
+
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+
 jobs:
   release-snapshot:
     runs-on: ubuntu-latest
