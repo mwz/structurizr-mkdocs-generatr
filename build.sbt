@@ -1,3 +1,6 @@
+import org.scoverage.coveralls.Imports.CoverallsKeys._
+import org.scoverage.coveralls._
+
 ThisBuild / organization := "io.github.mwz"
 ThisBuild / scalaVersion := "3.4.2"
 
@@ -35,5 +38,19 @@ lazy val root = (project in file("."))
       "net.sourceforge.plantuml"    % "plantuml"           % "1.2024.5",
       "org.typelevel"              %% "toolkit-test"       % "0.1.26" % Test,
       "org.typelevel"              %% "munit-cats-effect"  % "2.0.0"  % Test
-    )
+    ),
+    coverallsService := sys.env.get("CI").map { _ =>
+      new CIService {
+        val name          = GitHubActions.name
+        val jobId         = GitHubActions.jobId
+        val pullRequest   = GitHubActions.pullRequest
+        val currentBranch = GitHubActions.currentBranch
+        // workaround for https://github.com/scoverage/sbt-coveralls/issues/288
+        override def coverallsAuth(userRepoToken: Option[String]): Option[CoverallsAuth] =
+          userRepoToken match {
+            case Some(token) => Some(CIServiceToken(token))
+            case None        => super.coverallsAuth(userRepoToken)
+          }
+      }
+    }
   )
