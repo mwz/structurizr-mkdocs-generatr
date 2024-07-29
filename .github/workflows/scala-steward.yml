@@ -19,3 +19,5 @@ jobs:
         uses: scala-steward-org/scala-steward-action@v2
         with:
           github-repository: mwz/structurizr-mkdocs-generatr
+        env:
+          GITHUB_TOKEN: ""
