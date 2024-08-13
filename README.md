@@ -1,5 +1,7 @@
 # Structurizr MkDocs Generatr
 
+[![Coverage Status](https://coveralls.io/repos/github/mwz/structurizr-mkdocs-generatr/badge.svg?branch=main)](https://coveralls.io/github/mwz/structurizr-mkdocs-generatr?branch=main)
+
 **A static [MkDocs](https://www.mkdocs.org) site generator for
 [C4 architecture model](https://c4model.com) documentation created with
 [Structurizr](https://structurizr.com) DSL.**
