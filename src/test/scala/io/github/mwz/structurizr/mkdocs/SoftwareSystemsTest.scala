@@ -1,12 +1,15 @@
 package io.github.mwz.structurizr.mkdocs
 
 import com.structurizr.Workspace as SWorkspace
+import com.structurizr.model.Container
 import com.structurizr.model.SoftwareSystem
 import munit.FunSuite
 
 import scala.collection.immutable.TreeMap
+import com.structurizr.model.Component
 
-case class TestSystem(name: String, group: String = "")
+case class TestSystem(name: String, group: String = "", containers: List[TestContainer] = List.empty)
+case class TestContainer(name: String)
 
 def createWorkspace(systems: List[TestSystem]): (SWorkspace, List[SoftwareSystem]) =
   val workspace = new SWorkspace("test", "")
@@ -14,6 +17,7 @@ def createWorkspace(systems: List[TestSystem]): (SWorkspace, List[SoftwareSystem
   val sys = systems.map { system =>
     val sys = workspace.getModel().addSoftwareSystem(system.name, "")
     sys.setGroup(system.group)
+    system.containers.foreach(container => sys.addContainer(container.name))
     sys
   }
   (workspace, sys)
@@ -136,3 +140,24 @@ class SoftwareSystemsTest extends FunSuite:
         )
       )
     )
+
+  test("test elements of a given type are members of a Software System"):
+    val (workspace, systems @ List(system1, system2, system3, system4)) =
+      createWorkspace(
+        List(
+          TestSystem("system1", "group1", List(TestContainer("container1"))),
+          TestSystem("system2"),
+          TestSystem("system3", "group2", List(TestContainer("container2"), TestContainer("container3"))),
+          TestSystem("system4", "group3")
+        )
+      )
+    val c1 = system1.getContainerWithName("container1")
+    val c2 = system3.getContainerWithName("container2")
+    val c3 = system3.getContainerWithName("container3")
+
+    assert(SoftwareSystems.isSystemMemberOfType[SoftwareSystem](using system1)(system1))
+    assert(SoftwareSystems.isSystemMemberOfType[Container](using system1)(c1))
+    assert(!SoftwareSystems.isSystemMemberOfType[Component](using system1)(c1))
+    assert(!SoftwareSystems.isSystemMemberOfType[Container](using system1)(c2))
+    assert(!SoftwareSystems.isSystemMemberOfType[SoftwareSystem](using system1)(system2))
+    assert(SoftwareSystems.isSystemMemberOfType[Container](using system3)(c3))

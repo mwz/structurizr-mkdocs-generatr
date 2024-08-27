@@ -1,16 +1,21 @@
 package io.github.mwz.structurizr.mkdocs
 
 import cats.syntax.contravariantSemigroupal.*
+import io.github.mwz.structurizr.mkdocs.markdown.imageView
+import com.structurizr.model.Container
 import com.structurizr.model.Element
 import com.structurizr.model.Relationship
 import com.structurizr.model.SoftwareSystem
+import com.structurizr.view.ImageView
 import com.structurizr.view.ModelView
 import com.structurizr.view.ViewSet
 import mouse.string.*
 
 import java.net.URL
+import scala.annotation.tailrec
 import scala.collection.immutable.TreeMap
 import scala.jdk.CollectionConverters.*
+import scala.reflect.ClassTag
 
 import markdown.imgTabs
 import markdown.escape
@@ -117,8 +122,9 @@ object SoftwareSystems:
       def md(tree: Tree, string: String, level: Int = 0): String =
         tree match
           case System(group, system) =>
-            val description = Option(system.getDescription())
-              .filter(_.trim().nonEmpty)
+            val description = system
+              .getDescription()
+              .toOption
               .fold("")(d => s"  \n${indent(level)}  `${d}`")
             val link = s"[${system.getName()}](${normaliseName(system.getName())})"
             s"\n${indent(level)}- ${link}${description}"
@@ -179,7 +185,7 @@ object SoftwareSystems:
       SectionGroup(Some("Software Systems"), tree().values.map(convert).toSeq)
 
     def about()(using system: SoftwareSystem): Section =
-      val description      = Option(system.getDescription()).filter(_.trim().nonEmpty)
+      val description      = system.getDescription().toOption
       val fileName         = normaliseName(system.getName())
       val url: Option[URL] = system.getUrl().parseURLOption
       val properties: Map[String, String] =
@@ -205,29 +211,45 @@ object SoftwareSystems:
 
     def context()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val contextViews = views.getSystemContextViews().asScala.toSeq
-      sectionFromViews(system, contextViews, "Context views")
+      sectionFromViews("Context views", contextViews)
 
     def container()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val containerViews = views.getContainerViews().asScala.toSeq
-      sectionFromViews(system, containerViews, "Container views")
+      val imgViews =
+        views
+          .getImageViews()
+          .asScala
+          .toSeq
+          .filter(i => isSystemMemberOfType[SoftwareSystem](i.getElement()))
+      sectionFromViews("Container views", containerViews, imgViews)
 
     def component()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val componentViews = views.getComponentViews().asScala.toSeq
-      sectionFromViews(system, componentViews, "Component views")
+      val imgViews =
+        views
+          .getImageViews()
+          .asScala
+          .toSeq
+          .filter(i => isSystemMemberOfType[Container](i.getElement()))
+      sectionFromViews("Component views", componentViews, imgViews)
 
     def dynamic()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val dynamicViews = views.getDynamicViews().asScala.toSeq
-      sectionFromViews(system, dynamicViews, "Dynamic views")
+      sectionFromViews("Dynamic views", dynamicViews)
 
-    // TODO: Add description if available
-    def sectionFromViews(system: SoftwareSystem, modelViews: Seq[ModelView], name: String): Option[Section] =
+    def sectionFromViews(using system: SoftwareSystem)(
+        name: String,
+        modelViews: Seq[ModelView],
+        imageViews: Seq[ImageView] = Seq.empty
+    ): Option[Section] =
       val views: Seq[ModelView] = modelViews.filter(_.getSoftwareSystemId() == system.getId())
       val baseName              = normaliseName(system.getName())
       val fileName              = s"software-systems/${baseName}-${normaliseName(name)}.md"
       val md: String = views.foldLeft("") { (s, view) =>
-        s + imgTabs(view.getKey())
+        s + imgTabs(view.getKey(), view.getTitle().toOption, view.getDescription().toOption)
       }
-      Option(md)
+      val imgMd = imageViews.foldLeft("") { _ + imageView(_) }
+      Option(md + imgMd)
         .filter(_.nonEmpty)
         .map(md => Section(Some(name), md, fileName))
 
@@ -282,6 +304,20 @@ object SoftwareSystems:
       combined.map { md =>
         Section(Some("Dependencies"), md, s"software-systems/${normaliseName(system.getName())}-dependencies.md")
       }
+
+  // Check if an Element is of a given type and a member of the given Software System.
+  @tailrec
+  def isSystemMemberOfType[T <: Element: ClassTag](using system: SoftwareSystem)(
+      element: Element
+  ): Boolean =
+    val classOfT = implicitly[ClassTag[T]].runtimeClass
+    element match
+      case sys: SoftwareSystem =>
+        classOfT == classOf[SoftwareSystem] && sys == system
+      case container: Container =>
+        classOfT == classOf[Container] && isSystemMemberOfType[SoftwareSystem](container.getSoftwareSystem())
+      // TODO: scope to implement Component check if needed
+      case _ => false
 
   def normaliseName(name: String): String =
     name

@@ -35,6 +35,6 @@ object Docs:
       val embedPattern = """(?<!```md\s|```markdown\s)(!\[.*?\])\(embed:(\w+)\)(?!\s```)""".r
       embedPattern.replaceSomeIn(
         md,
-        m => (Option(m.group(2)).map(imgTabs))
+        m => (Option(m.group(2)).map(imgTabs(_)))
       )
   }

@@ -19,10 +19,25 @@ See also: <https://www.structurizr.com/help/documentation/diagrams>
 
 ### Embedding static images
 
-Static assets can be included in the generated site, but need to be copied over
-to the `{docsDir}/img` folder. Once you've done that, you can reference them in
-your markdown files like this:
+Static assets can be included in the generated site, using the `--assets-dir`
+command-line flag.
+
+When, for example, you would like to embed a nice picture which is located in
+the `pictures` directory, you can do that as follows:
+
+```sh
+java -jar structurizr-mkdocs-generatr.jar --assets-dir pictures
+```
+
+Then, you can reference the picture in your markdown files like this:
 
 ```markdown
 ![A nice picture](../img/nice-picture.png)
 ```
+
+#### Example: Embedded picture
+
+[Sun](https://www.flickr.com/photos/schmollmolch/4937297813/), by Christian
+Scheja
+
+![A nice picture](../img/nice-picture.png)

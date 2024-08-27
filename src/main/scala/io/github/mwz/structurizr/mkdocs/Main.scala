@@ -24,15 +24,17 @@ object Main extends IOCaseApp[CommandLineArgs]:
       workspace.getModel().getRelationships().asScala.toSet,
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
-    diagrams = Diagrams(workspace, config.path)
-    _ <- exec(docs, softwareSystems, diagrams, MkDocs(config.path, Clock[IO]))
+    images   = Assets(config.assets)
+    diagrams = Diagrams(workspace, config.assets)
+    _ <- exec(docs, softwareSystems, images, diagrams, MkDocs(config.path, Clock[IO]))
   yield ()
 
-  def exec(docs: Docs, softwareSystems: SoftwareSystems, diagrams: Diagrams, mkDocs: MkDocs): IO[Unit] =
+  def exec(docs: Docs, softwareSystems: SoftwareSystems, images: Assets, diagrams: Diagrams, mkDocs: MkDocs): IO[Unit] =
     val sections: Stream[IO, SectionHierarchy] =
       Stream.emits(docs.sections()) ++
         Stream.emit(softwareSystems.summarySection()) ++
         Stream.emit(softwareSystems.sectionHierarchy())
     (mkDocs.writeSectionHierarchy(sections) &> mkDocs.writeMkDocsConfig(sections)) >>
+      images.copy() >>
       // export diagrams at the end as this mutates the elements' url property
       diagrams.exportAll()

@@ -22,7 +22,7 @@ trait Diagrams:
   def exportAll(): IO[Unit]
 
 object Diagrams:
-  def apply(workspace: SWorkspace, conf: PathConfig): Diagrams = new Diagrams:
+  def apply(workspace: SWorkspace, conf: AssetsPathConfig): Diagrams = new Diagrams:
     val plantUMLExporter = CustomC4PlantUMLExporter(workspace)
     plantUMLExporter.addSkinParam("svgDimensionStyle", "false")
     plantUMLExporter.addSkinParam("preserveAspectRatio", "meet")
@@ -47,7 +47,7 @@ object Diagrams:
 
     // TODO: Skip generating diagram if up-to-date (use puml definition to compare)
     def exportAll(): IO[Unit] =
-      val dir = conf.docsPath.fs2Path / "img"
+      val dir = conf.destination.fs2Path
       val exportDiagrams: IO[Unit] =
         Stream
           .emits[IO, Diagram](diagrams)

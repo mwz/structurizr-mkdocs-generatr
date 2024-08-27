@@ -117,6 +117,8 @@ The generator accepts the following arguments:
 - `--path` - path to the root of the project containing the Structurizr
   `workspace.dsl` and the `mkdocs.tmpl.yml` files (defaults to current working
   directory `./`)
+- `--assets-dir` - the directory where the static assets are located, relative
+  to the `path` argument (defaults to `img`)
 - `--docs-dir` - the directory where the documentation markdown files will be
   generated, relative to the `path` argument. Needs to match MkDocs' `docs_dir`
   setting (defaults to `docs`)
