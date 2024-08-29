@@ -1,5 +1,5 @@
 ThisBuild / organization := "io.github.mwz"
-ThisBuild / scalaVersion := "3.4.2"
+ThisBuild / scalaVersion := "3.4.3"
 
 // sbt github packages plugin settings
 ThisBuild / githubOwner      := "mwz"
