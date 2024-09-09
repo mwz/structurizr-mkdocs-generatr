@@ -26,8 +26,11 @@ yet. Here's a list of features that are currently supported:
   ([reference](https://docs.structurizr.com/dsl/language#component-view))
 - system dynamic views
   ([reference](https://docs.structurizr.com/dsl/language#dynamic-view))
+- system container and component image views
+  ([reference](https://docs.structurizr.com/dsl/language#image-view))
 - system dependencies view
 - svg diagrams with hyperlinks
+- automatically copy static assets to the output directory
 
 Missing features (planned for future releases):
 
@@ -36,9 +39,6 @@ Missing features (planned for future releases):
   ([reference](https://docs.structurizr.com/dsl/language#adrs))
 - system deployment views
   ([reference](https://docs.structurizr.com/dsl/language#deployment-view))
-- image views
-  ([reference](https://docs.structurizr.com/dsl/language#image-view))
-- copy static images to the output directory
 
 ## How to use
 
