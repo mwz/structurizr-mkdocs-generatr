@@ -28,12 +28,12 @@ lazy val root = (project in file("."))
       "io.circe"                   %% "circe-parser"       % "0.14.10",
       "io.circe"                   %% "circe-yaml-v12"     % "0.16.0",
       "org.typelevel"              %% "mouse"              % "1.3.2",
-      "org.typelevel"              %% "toolkit"            % "0.1.27",
+      "org.typelevel"              %% "toolkit"            % "0.1.29",
       "com.structurizr"             % "structurizr-core"   % "2.2.0",
       "com.structurizr"             % "structurizr-dsl"    % "2.2.0",
       "com.structurizr"             % "structurizr-export" % "2.2.0",
       "net.sourceforge.plantuml"    % "plantuml"           % "1.2024.6",
-      "org.typelevel"              %% "toolkit-test"       % "0.1.27" % Test,
+      "org.typelevel"              %% "toolkit-test"       % "0.1.29" % Test,
       "org.typelevel"              %% "munit-cats-effect"  % "2.0.0"  % Test
     )
   )
