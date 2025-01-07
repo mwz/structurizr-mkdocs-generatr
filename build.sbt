@@ -32,7 +32,7 @@ lazy val root = (project in file("."))
       "com.structurizr"             % "structurizr-core"   % "2.2.0",
       "com.structurizr"             % "structurizr-dsl"    % "2.2.0",
       "com.structurizr"             % "structurizr-export" % "2.2.0",
-      "net.sourceforge.plantuml"    % "plantuml"           % "1.2024.6",
+      "net.sourceforge.plantuml"    % "plantuml"           % "1.2024.8",
       "org.typelevel"              %% "toolkit-test"       % "0.1.29" % Test,
       "org.typelevel"              %% "munit-cats-effect"  % "2.0.0"  % Test
     )
