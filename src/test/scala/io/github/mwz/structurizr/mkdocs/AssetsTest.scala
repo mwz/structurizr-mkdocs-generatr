@@ -32,12 +32,15 @@ class AssetsTest extends CatsEffectSuite:
       (List(source), List(target))
     )
 
-  test("error if source directory does not exist"):
+  test("succeed if assets source directory does not exist"):
     val source = tmpSourceDir()
     val target = tmpTargetDir()
     val copy   = Assets(AssetsPathConfig((source / "does-not-exist").toNioPath, target.toNioPath)).copy()
 
-    interceptMessageIO[RuntimeException](s"Source directory ${source / "does-not-exist"} does not exist.")(copy)
+    assertIO(
+      copy *> Files[IO].walk(target).compile.toList,
+      List(target)
+    )
 
   test("copy files recursively and overwrite files"):
     val source = tmpSourceDir()

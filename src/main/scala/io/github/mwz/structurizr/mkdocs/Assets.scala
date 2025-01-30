@@ -29,4 +29,4 @@ object Assets:
         .drain
       Files[IO]
         .exists(sourceDir)
-        .ifM(copy, IO.raiseError(new RuntimeException(s"Source directory ${sourceDir} does not exist.")))
+        .ifM(copy, IO.println(s"Assets directory ${sourceDir} does not exist - no files will be copied."))
