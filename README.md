@@ -26,6 +26,8 @@ yet. Here's a list of features that are currently supported:
   ([reference](https://docs.structurizr.com/dsl/language#component-view))
 - system dynamic views
   ([reference](https://docs.structurizr.com/dsl/language#dynamic-view))
+- system deployment views
+  ([reference](https://docs.structurizr.com/dsl/language#deployment-view))
 - system container and component image views
   ([reference](https://docs.structurizr.com/dsl/language#image-view))
 - system dependencies view
@@ -37,8 +39,6 @@ Missing features (planned for future releases):
 - system and container docs
 - workspace, system and container adrs
   ([reference](https://docs.structurizr.com/dsl/language#adrs))
-- system deployment views
-  ([reference](https://docs.structurizr.com/dsl/language#deployment-view))
 
 ## How to use
 
@@ -186,7 +186,8 @@ techdocs-cli serve --no-docker -v
 To run the the project against the `example` directory execute the following:
 
 ```bash
-sbt "run --path example"
+sbt "run --path example --assets-dir pictures"
+mkdocs serve -w example -f example/mkdocs.yml
 ```
 
 Alternatively run the project using an IDE of your choice. There is a

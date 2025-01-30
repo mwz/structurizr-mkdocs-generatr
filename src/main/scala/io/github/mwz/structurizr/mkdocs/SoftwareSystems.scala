@@ -153,7 +153,6 @@ object SoftwareSystems:
     // - Container views:
     //   - Documentation
     //   - ADRs
-    // - Deployment views
     def sectionHierarchy(): SectionHierarchy =
       def convert(tree: Tree): SectionHierarchy =
         tree match
@@ -165,6 +164,7 @@ object SoftwareSystems:
                 container() ++
                 component() ++
                 dynamic() ++
+                deployment() ++
                 dependencies()
 
             val default =
@@ -236,6 +236,10 @@ object SoftwareSystems:
     def dynamic()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
       val dynamicViews = views.getDynamicViews().asScala.toSeq
       sectionFromViews("Dynamic views", dynamicViews)
+
+    def deployment()(using system: SoftwareSystem, views: ViewSet): Option[Section] =
+      val deploymentViews = views.getDeploymentViews().asScala.toSeq
+      sectionFromViews("Deployment views", deploymentViews)
 
     def sectionFromViews(using system: SoftwareSystem)(
         name: String,

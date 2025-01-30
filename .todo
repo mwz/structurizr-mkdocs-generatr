@@ -6,7 +6,6 @@ Fill content:
     ☐ docs
     ☐ ADRs
   ☐ Workspace ADRs
-  ☐ Deployment views
 
 Save files:
   ☐ remove flexmark extensions?
@@ -19,6 +18,7 @@ Config:
   ☐ generate a basic mkdocs.tmpl.yml file if it doesn't exist
 
 Archive:
+  ✔ Deployment views @done(25-01-30 11:34) @project(Fill content)
   ✔ Static image views @done(24-08-27 15:17) @project(Fill content)
   ✔ add diagram description if available @done(24-08-27 15:18) @project(Diagrams)
   ✔ copy static images to the output directory @done(24-08-27 15:18) @project(Config)

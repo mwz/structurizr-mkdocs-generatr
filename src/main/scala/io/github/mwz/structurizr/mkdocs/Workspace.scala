@@ -3,6 +3,7 @@ package io.github.mwz.structurizr.mkdocs
 import cats.effect.IO
 import com.structurizr.Workspace as SWorkspace
 import com.structurizr.dsl.StructurizrDslParser
+import com.structurizr.view.ThemeUtils
 import fs2.io.file.Files
 
 import java.io.File
@@ -20,6 +21,8 @@ object Workspace:
         IO.blocking {
           val parser = StructurizrDslParser()
           parser.parse(File(workspaceDslPath.absolute.toString))
-          parser.getWorkspace()
+          val workspace = parser.getWorkspace()
+          ThemeUtils.loadThemes(workspace)
+          workspace
         }
   }
