@@ -1,5 +1,6 @@
 # Structurizr MkDocs Generatr
 
+[![Static Badge](https://img.shields.io/badge/version-v0.1.0-blue)](https://github.com/mwz/structurizr-mkdocs-generatr/packages/2196232?version=0.1.0)
 [![Coverage Status](https://coveralls.io/repos/github/mwz/structurizr-mkdocs-generatr/badge.svg?branch=main)](https://coveralls.io/github/mwz/structurizr-mkdocs-generatr?branch=main)
 
 **A static [MkDocs](https://www.mkdocs.org) site generator for
