@@ -311,9 +311,7 @@ object SoftwareSystems:
 
   // Check if an Element is of a given type and a member of the given Software System.
   @tailrec
-  def isSystemMemberOfType[T <: Element: ClassTag](using system: SoftwareSystem)(
-      element: Element
-  ): Boolean =
+  def isSystemMemberOfType[T <: Element: ClassTag](using system: SoftwareSystem)(element: Element): Boolean =
     val classOfT = implicitly[ClassTag[T]].runtimeClass
     element match
       case sys: SoftwareSystem =>
