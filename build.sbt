@@ -15,10 +15,14 @@ lazy val root = (project in file("."))
     assembly / assemblyMergeStrategy := {
       case PathList(ps @ _*) if Assembly.isReadme(ps.last) || Assembly.isLicenseFile(ps.last) =>
         MergeStrategy.rename
+      case x
+          if x.endsWith("plugin.properties") || x.endsWith("module-info.class") ||
+            x.endsWith("plugin.xml") =>
+        MergeStrategy.discard
       case PathList("META-INF", xs @ _*) =>
         xs.map(_.toLowerCase) match {
-          case ("manifest.mf" :: Nil) | ("index.list" :: Nil) | ("dependencies" :: Nil) |
-              ("plugin.xml" :: Nil) | ("eclipse_.sf" :: Nil) | ("eclipse_.rsa" :: Nil) =>
+          case ("manifest.mf" :: Nil) | ("index.list" :: Nil) | ("dependencies" :: Nil) | ("plugin.xml" :: Nil) |
+              ("eclipse_.sf" :: Nil) | ("eclipse_.rsa" :: Nil) =>
             MergeStrategy.discard
           case ps @ (x :: xs) if ps.last.contains("module-info.class") =>
             MergeStrategy.discard
@@ -27,8 +31,6 @@ lazy val root = (project in file("."))
           case _ =>
             MergeStrategy.deduplicate
         }
-      case x if x.endsWith("plugin.properties") || x.endsWith("module-info.class") || x.endsWith("plugin.xml") =>
-        MergeStrategy.discard
       case x =>
         val oldStrategy = (ThisBuild / assemblyMergeStrategy).value
         oldStrategy(x)
@@ -44,10 +46,10 @@ lazy val root = (project in file("."))
       "io.circe"                   %% "circe-yaml-v12"     % "0.16.0",
       "org.typelevel"              %% "mouse"              % "1.3.2",
       "org.typelevel"              %% "toolkit"            % "0.1.29",
-      "com.structurizr"             % "structurizr-core"   % "2.2.0",
-      "com.structurizr"             % "structurizr-dsl"    % "2.2.0",
-      "com.structurizr"             % "structurizr-export" % "2.2.0",
-      "net.sourceforge.plantuml"    % "plantuml"           % "1.2024.8" exclude ("com.google.guava", "guava"),
+      "com.structurizr"             % "structurizr-core"   % "3.2.1",
+      "com.structurizr"             % "structurizr-dsl"    % "3.2.1" exclude ("com.google.guava", "guava"),
+      "com.structurizr"             % "structurizr-export" % "3.2.1",
+      "net.sourceforge.plantuml"    % "plantuml"           % "1.2025.0",
       "org.codehaus.groovy"         % "groovy-jsr223"      % "3.0.23" % Runtime,
       "org.typelevel"              %% "toolkit-test"       % "0.1.29" % Test,
       "org.typelevel"              %% "munit-cats-effect"  % "2.0.0"  % Test
