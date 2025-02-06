@@ -35,9 +35,7 @@ object Diagrams:
       val reader = SourceStringReader(diagram.getDefinition())
       def write(format: DiagramFormat): IO[Unit] =
         Resource
-          .make(IO(new FileOutputStream(s"${file.toString}${format.ext}"))) { os =>
-            IO.blocking(os.close())
-          }
+          .fromAutoCloseable(IO(new FileOutputStream(s"${file.toString}${format.ext}")))
           .use { os =>
             IO.blocking(reader.outputImage(os, FileFormatOption(format.fileFormat, false))).void
           }
@@ -51,7 +49,7 @@ object Diagrams:
       val exportDiagrams: IO[Unit] =
         Stream
           .emits[IO, Diagram](diagrams)
-          .mapAsync(4)(diagram => save(dir, diagram))
+          .parEvalMapUnordered(4)(diagram => save(dir, diagram))
           .compile
           .drain
       Files[IO].exists(dir).ifM(IO.unit, Files[IO].createDirectories(dir)) >>
