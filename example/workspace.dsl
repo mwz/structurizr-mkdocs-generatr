@@ -190,7 +190,18 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
 
         systemlandscape "SystemLandscape" {
             include *
-            autoLayout
+            autoLayout tb
+        }
+
+        systemlandscape "SystemLandscapeScripted" {
+            include *
+            autoLayout tb
+
+            !script groovy {
+                // Example of a groovy script
+                element = view.getSoftwareSystem();
+                view.enableAutomaticLayout(com.structurizr.view.AutomaticLayout.RankDirection.LeftRight);
+            }
         }
 
         image atm {

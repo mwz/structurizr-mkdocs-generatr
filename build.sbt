@@ -13,10 +13,25 @@ lazy val root = (project in file("."))
     assembly / mainClass       := Some("io.github.mwz.structurizr.mkdocs.Main"),
     assembly / assemblyJarName := "structurizr-mkdocs-generatr.jar",
     assembly / assemblyMergeStrategy := {
+      case PathList(ps @ _*) if Assembly.isReadme(ps.last) || Assembly.isLicenseFile(ps.last) =>
+        MergeStrategy.rename
       case PathList("META-INF", xs @ _*) =>
+        xs.map(_.toLowerCase) match {
+          case ("manifest.mf" :: Nil) | ("index.list" :: Nil) | ("dependencies" :: Nil) |
+              ("plugin.xml" :: Nil) | ("eclipse_.sf" :: Nil) | ("eclipse_.rsa" :: Nil) =>
+            MergeStrategy.discard
+          case ps @ (x :: xs) if ps.last.contains("module-info.class") =>
+            MergeStrategy.discard
+          case "services" :: xs =>
+            MergeStrategy.filterDistinctLines
+          case _ =>
+            MergeStrategy.deduplicate
+        }
+      case x if x.endsWith("plugin.properties") || x.endsWith("module-info.class") || x.endsWith("plugin.xml") =>
         MergeStrategy.discard
       case x =>
-        MergeStrategy.first
+        val oldStrategy = (ThisBuild / assemblyMergeStrategy).value
+        oldStrategy(x)
     },
     Compile / run / fork := true,
     Compile / packageBin := assembly.value,
@@ -32,7 +47,8 @@ lazy val root = (project in file("."))
       "com.structurizr"             % "structurizr-core"   % "2.2.0",
       "com.structurizr"             % "structurizr-dsl"    % "2.2.0",
       "com.structurizr"             % "structurizr-export" % "2.2.0",
-      "net.sourceforge.plantuml"    % "plantuml"           % "1.2024.8",
+      "net.sourceforge.plantuml"    % "plantuml"           % "1.2024.8" exclude ("com.google.guava", "guava"),
+      "org.codehaus.groovy"         % "groovy-jsr223"      % "3.0.23" % Runtime,
       "org.typelevel"              %% "toolkit-test"       % "0.1.29" % Test,
       "org.typelevel"              %% "munit-cats-effect"  % "2.0.0"  % Test
     )

@@ -34,12 +34,15 @@ yet. Here's a list of features that are currently supported:
 - system dependencies view
 - svg diagrams with hyperlinks
 - automatically copy static assets to the output directory
+- groovy scripting support
+  ([reference](https://docs.structurizr.com/dsl/scripts))
 
-Missing features (planned for future releases):
+Missing features:
 
 - system and container docs
 - workspace, system and container adrs
   ([reference](https://docs.structurizr.com/dsl/language#adrs))
+- support for other scripting languages (Kotlin, Ruby, JavaScript)
 
 ## How to use
 
