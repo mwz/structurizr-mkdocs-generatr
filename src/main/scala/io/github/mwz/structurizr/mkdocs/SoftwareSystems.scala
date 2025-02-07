@@ -1,6 +1,5 @@
 package io.github.mwz.structurizr.mkdocs
 
-import cats.syntax.contravariantSemigroupal.*
 import io.github.mwz.structurizr.mkdocs.markdown.imageView
 import com.structurizr.model.Container
 import com.structurizr.model.Element

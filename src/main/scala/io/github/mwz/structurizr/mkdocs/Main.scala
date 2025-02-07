@@ -3,7 +3,6 @@ package io.github.mwz.structurizr.mkdocs
 import caseapp.*
 import caseapp.catseffect.*
 import cats.effect.*
-import com.structurizr.Workspace as SWorkspace
 import fs2.Stream
 
 import java.nio.file.Path
