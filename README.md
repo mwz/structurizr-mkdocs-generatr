@@ -205,6 +205,33 @@ request.
 
 If you have any questions, please open a new discussion.
 
+## FAQ
+
+##### My png diagrams are cropped, how can I fix it?
+
+This project uses PlantUML to generate diagrams. PlantUML limits image width and
+height to 4096. There is an environment variable that you can set to override
+this limit - `PLANTUML_LIMIT_SIZE`. You have to define this variable before
+launching structurizr-mkdocs-generatr, e.g.:
+
+```bash
+set PLANTUML_LIMIT_SIZE=8192
+```
+
+or
+
+```bash
+setenv PLANTUML_LIMIT_SIZE 8192
+```
+
+Another way is using a java system property:
+
+```bash
+java -DPLANTUML_LIMIT_SIZE=8192 -jar structurizr-mkdocs-generatr.jar
+```
+
+See more details on the PlantUML [website](https://plantuml.com/faq).
+
 ## Acknowledgments
 
 This project is inspired by
