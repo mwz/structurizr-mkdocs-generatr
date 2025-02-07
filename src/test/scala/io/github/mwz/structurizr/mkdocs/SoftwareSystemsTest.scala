@@ -113,8 +113,36 @@ class SoftwareSystemsTest extends FunSuite:
       )
     )
 
+  test("create the summary view"):
+    val (workspace, systems) =
+      createWorkspace(
+        List(
+          TestSystem("system1", "group1"),
+          TestSystem("system2"),
+          TestSystem("system3", "group1/group1.1"),
+          TestSystem("system4", "group2"),
+          TestSystem("system5", "group1/group1.1/group1.2")
+        )
+      )
+    assertEquals(
+      SoftwareSystems(systems, workspace.getViews(), Set(), "/").summaryView(),
+      """# Software Systems
+        |
+        |## group1
+        |- group1.1
+        |  - group1.2
+        |    - [system5](system5)
+        |  - [system3](system3)
+        |- [system1](system1)
+        |## group2
+        |- [system4](system4)
+        |## Others
+        |- [system2](system2)
+        |""".stripMargin.stripSuffix("\n")
+    )
+
   test("create basic section hierarchy"):
-    val (workspace, systems @ List(system1, system2, system3, system4)) =
+    val (workspace, systems) =
       createWorkspace(
         List(
           TestSystem("system1", "group1"),

@@ -131,17 +131,17 @@ object SoftwareSystems:
           case Group(name, children) =>
             val prefix = level match
               case 0 => s"##"
-              case l => indent(l - 1) + "-"
-            s"\n${prefix} ${name}${children.foldLeft("") { (s, c) =>
-                s + md(c._2, "", level + 1)
+              case l => indent(l) + "-"
+            s"\n${prefix} ${name}${children.foldLeft("") { case (s, (_, children)) =>
+                s + md(children, "", level + 1)
               }}"
 
+      val fold: (String, (String, Tree)) => String =
+        case (s, (_, children)) => s + md(children, "")
+
       "# Software Systems\n" +
-        groups.foldLeft("") { case (s, (_, tree)) =>
-          s + md(tree, "")
-        } + othersGroups.foldLeft("") { case (s, (_, tree)) =>
-          s + md(tree, "")
-        }
+        groups.foldLeft("")(fold) +
+        othersGroups.foldLeft("")(fold)
 
     def summarySection(): Section =
       Section(Some("Software Systems - Summary"), summaryView(), "software-systems.md")
