@@ -4,6 +4,7 @@ ThisBuild / scalaVersion := "3.4.3"
 // sbt github packages plugin settings
 ThisBuild / githubOwner      := "mwz"
 ThisBuild / githubRepository := "structurizr-mkdocs-generatr"
+ThisBuild / versionScheme    := Some("semver-spec")
 
 lazy val root = (project in file("."))
   .enablePlugins(AssemblyPlugin)
