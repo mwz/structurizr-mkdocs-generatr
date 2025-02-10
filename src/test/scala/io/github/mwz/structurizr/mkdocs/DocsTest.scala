@@ -63,6 +63,17 @@ class DocsTest extends FunSuite:
       )
     )
 
+  test("resolve embedded images"):
+    assertEquals(
+      Docs.resolveEmbedded("![](embed:my-Diagram_2)"),
+      """my-Diagram_2
+        |=== "SVG"
+        |    <center>![my-Diagram_2SVG](../img/my-Diagram_2.svg)</center>
+        |=== "PNG"
+        |    <center>![my-Diagram_2PNG](../img/my-Diagram_2.png)</center>
+        |""".stripMargin
+    )
+
   test("resolve embedded images in markdown"):
     val ssections = testSsections(
       Seq(TestSection("# Hello\n\nContent\n![](embed:Diagram)", "index.md"))

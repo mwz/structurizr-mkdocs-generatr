@@ -7,7 +7,7 @@ trait Docs:
   def sections(): Seq[Section]
 
 object Docs:
-  def apply(ssections: Seq[SSection]) = new Docs {
+  def apply(ssections: Seq[SSection]) = new Docs:
     def sections(): Seq[Section] =
       val sections: Seq[Section] =
         ssections.zipWithIndex.map { case (section, i) =>
@@ -28,13 +28,13 @@ object Docs:
       then Seq(Section(Some("Home"), "", "index.md"))
       else sections
 
-    // Replace embedded image references from the docs (embed:ImageId)
-    // with the actual svg image.
-    // Also exclude code blocks with markdown example of the embed syntax.
-    def resolveEmbedded(md: String): String =
-      val embedPattern = """(?<!```md\s|```markdown\s)(!\[.*?\])\(embed:(\w+)\)(?!\s```)""".r
-      embedPattern.replaceSomeIn(
-        md,
-        m => (Option(m.group(2)).map(imgTabs(_)))
-      )
-  }
+  // Replace embedded image references from the docs (embed:ImageId)
+  // with the actual svg image.
+  // A-Z, a-z, 0-9, _ and - are supported in the image id.
+  // Also exclude code blocks with markdown example of the embed syntax.
+  def resolveEmbedded(md: String): String =
+    val embedPattern = """(?<!```md\s|```markdown\s)(!\[.*?\])\(embed:([\w-]+)\)(?!\s```)""".r
+    embedPattern.replaceSomeIn(
+      md,
+      m => (Option(m.group(2)).map(imgTabs(_)))
+    )
