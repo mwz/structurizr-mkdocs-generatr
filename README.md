@@ -1,6 +1,6 @@
 # Structurizr MkDocs Generatr
 
-[![Static Badge](https://img.shields.io/badge/version-v0.1.0-blue)](https://github.com/mwz/structurizr-mkdocs-generatr/packages/2196232?version=0.1.0)
+[![Static Badge](https://img.shields.io/badge/version-v0.2.0-blue)](https://github.com/mwz/structurizr-mkdocs-generatr/packages/2196232?version=0.2.0)
 [![Coverage Status](https://coveralls.io/repos/github/mwz/structurizr-mkdocs-generatr/badge.svg?branch=main)](https://coveralls.io/github/mwz/structurizr-mkdocs-generatr?branch=main)
 
 **A static [MkDocs](https://www.mkdocs.org) site generator for
@@ -94,9 +94,9 @@ Missing features:
 
      ```bash
      curl -H "Authorization: token $GITHUB_TOKEN" -L -O \
-     https://maven.pkg.github.com/mwz/structurizr-mkdocs-generatr/io/github/mwz/structurizr-mkdocs-generatr/0.1.0/structurizr-mkdocs-generatr-0.1.0.jar
+     https://maven.pkg.github.com/mwz/structurizr-mkdocs-generatr/io/github/mwz/structurizr-mkdocs-generatr/0.2.0/structurizr-mkdocs-generatr-0.2.0.jar
 
-     java -jar structurizr-mkdocs-generatr-0.1.0.jar
+     java -jar structurizr-mkdocs-generatr-0.2.0.jar
      ```
 
    - or use [Coursier](https://get-coursier.io) to run it (since the artifact is
