@@ -40,8 +40,8 @@ lazy val root = (project in file("."))
     Compile / packageBin := assembly.value,
     javacOptions ++= Seq("-source", "21", "-target", "21"),
     libraryDependencies ++= Seq(
-      "com.github.alexarchambault" %% "case-app"           % "2.1.0-M29",
-      "com.github.alexarchambault" %% "case-app-cats"      % "2.1.0-M29",
+      "com.github.alexarchambault" %% "case-app"           % "2.1.0-M30",
+      "com.github.alexarchambault" %% "case-app-cats"      % "2.1.0-M30",
       "io.circe"                   %% "circe-core"         % "0.14.10",
       "io.circe"                   %% "circe-parser"       % "0.14.10",
       "io.circe"                   %% "circe-yaml-v12"     % "0.16.0",
