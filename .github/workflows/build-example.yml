@@ -1,7 +1,9 @@
-name: Publish example site
+name: Build example site
 
 on:
   push:
+    branches: ["main"]
+  pull_request:
     branches: ["main"]
   workflow_dispatch:
 
@@ -29,6 +31,8 @@ jobs:
           mkdocs_version: "latest"
           requirements: "example/requirements.txt"
           configfile: "example/mkdocs.yml"
-      - uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy example to GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: example/site
