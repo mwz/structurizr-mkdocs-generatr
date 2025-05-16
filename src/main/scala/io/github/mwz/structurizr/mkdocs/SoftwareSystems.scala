@@ -56,17 +56,17 @@ object SoftwareSystems:
 
     // pretty print tree with indentation
     def prettyPrint(): String =
-      def prettyPrint(tree: Tree, string: String, indent: String = ""): String =
+      def prettyPrint(tree: Tree, indent: String = ""): String =
         tree match {
           case System(group, system) =>
             s"\n${indent}- ${system.getName()}"
           case Group(name, children) =>
             s"\n${indent}- ${name}${children.foldLeft("") { (s, c) =>
-                s + prettyPrint(c._2, "", indent + "  ")
+                s + prettyPrint(c._2, indent + "  ")
               }}"
         }
       tree().foldLeft("") { case (s, (_, tree)) =>
-        s + prettyPrint(tree, "")
+        s + prettyPrint(tree)
       }
 
     // Populate the tree recursively
@@ -118,7 +118,7 @@ object SoftwareSystems:
         if (hasGroups) "  " * math.max(0, level - 1)
         else "  " * level
 
-      def md(tree: Tree, string: String, level: Int = 0): String =
+      def md(tree: Tree, level: Int = 0): String =
         tree match
           case System(group, system) =>
             val description = system
@@ -132,11 +132,11 @@ object SoftwareSystems:
               case 0 => s"##"
               case l => indent(l) + "-"
             s"\n${prefix} ${name}${children.foldLeft("") { case (s, (_, children)) =>
-                s + md(children, "", level + 1)
+                s + md(children, level + 1)
               }}"
 
       val fold: (String, (String, Tree)) => String =
-        case (s, (_, children)) => s + md(children, "")
+        case (s, (_, children)) => s + md(children)
 
       "# Software Systems\n" +
         groups.foldLeft("")(fold) +
