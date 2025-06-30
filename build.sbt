@@ -44,7 +44,7 @@ lazy val root = (project in file("."))
       "com.github.alexarchambault" %% "case-app-cats"      % "2.1.0-M30",
       "io.circe"                   %% "circe-core"         % "0.14.13",
       "io.circe"                   %% "circe-parser"       % "0.14.13",
-      "io.circe"                   %% "circe-yaml-v12"     % "0.16.0",
+      "io.circe"                   %% "circe-yaml-v12"     % "0.16.1",
       "org.typelevel"              %% "mouse"              % "1.3.2",
       "org.typelevel"              %% "toolkit"            % "0.1.29",
       "com.structurizr"             % "structurizr-core"   % "4.0.0",
