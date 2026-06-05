@@ -1,1 +1,4 @@
+mkdocs==1.6.1
+mkdocs-glightbox==0.5.2
 mkdocs-inline-select-svg-plugin==0.1.0
+mkdocs-material==9.7.6

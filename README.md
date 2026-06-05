@@ -58,6 +58,7 @@ Missing features:
    edit_uri: edit/main/
    plugins:
      - inline-select-svg
+     - glightbox
    theme:
      name: material
      features:
@@ -145,6 +146,27 @@ The generator accepts the following arguments:
 
   ```bash
   pip install mkdocs-inline-select-svg-plugin
+  ```
+
+  mkdocs.tmpl.yml:
+
+  ```yaml
+  plugins:
+    - inline-select-svg
+  ```
+
+- **MkDocs GLightbox** (optional) plugin to support image lightbox with
+  GLightbox - makes the experience of viewing images in mkdocs a bit nicer
+
+  ```bash
+  pip install mkdocs-glightbox
+  ```
+
+  mkdocs.tmpl.yml:
+
+  ```yaml
+  plugins:
+    - glightbox
   ```
 
 - **TechDocs** To generate a TechDocs site, you need to include the

@@ -3,6 +3,7 @@ repo_url: https://github.com/mwz/structurizr-mkdocs-generatr
 edit_uri: edit/main/
 plugins:
   - inline-select-svg
+  - glightbox
 theme:
   name: material
   features:
