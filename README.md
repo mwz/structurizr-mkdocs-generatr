@@ -83,7 +83,6 @@ Missing features:
 2. Run the generator in the directory where the Structurizr `workspace.dsl` and
    `mkdocs.tmpl.yml` files are located. It will create `docs` directory with all
    the static content and `mkdocs.yml` config.
-
    - download the jar from Github Releases and run it:
 
      ```bash

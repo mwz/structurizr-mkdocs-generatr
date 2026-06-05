@@ -53,5 +53,5 @@ object markdown:
       .fold("")(s => s"<center>${s}</center>\n\n")
     val heading = view.getTitle().toOption.getOrElse(view.getKey())
     s"""<center>${heading}</center>
-        |<center>![${view.getKey()}IMG](${view.getContent()})</center>
+        |<center><img src="${view.getContent()}" alt="${view.getKey()}IMG"></center>
         |${description}""".stripMargin

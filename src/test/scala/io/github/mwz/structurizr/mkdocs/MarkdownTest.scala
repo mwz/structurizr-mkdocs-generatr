@@ -45,7 +45,7 @@ class MarkdownTest extends FunSuite:
     imgView.setContent(IMAGE)
     val md = markdown.imageView(imgView)
     val expected = s"""<center>Image 1</center>
-      |<center>![imgIMG](${IMAGE})</center>
+      |<center><img src="${IMAGE}" alt="imgIMG"></center>
       |<center>Description</center>
       |
       |""".stripMargin
