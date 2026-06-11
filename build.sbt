@@ -1,5 +1,6 @@
-ThisBuild / organization := "io.github.mwz"
-ThisBuild / scalaVersion := "3.7.2"
+ThisBuild / organization      := "io.github.mwz"
+ThisBuild / scalaVersion      := "3.7.2"
+ThisBuild / semanticdbEnabled := true
 
 // sbt github packages plugin settings
 ThisBuild / githubOwner      := "mwz"
