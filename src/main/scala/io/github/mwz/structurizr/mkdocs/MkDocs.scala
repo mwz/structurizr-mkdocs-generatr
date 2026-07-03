@@ -15,7 +15,7 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-trait SectionHierarchy
+sealed trait SectionHierarchy
 case class SectionGroup(title: Option[String], sections: Seq[SectionHierarchy]) extends SectionHierarchy
 case class Section(title: Option[String], md: String, filename: String)         extends SectionHierarchy
 
@@ -39,7 +39,7 @@ object MkDocs:
   def apply(conf: PathConfig, clock: Clock[IO]) = new MkDocs:
     def flatten(sections: Stream[IO, SectionHierarchy]): Stream[IO, Section] =
       sections.flatMap {
-        case SectionGroup(title, sections) =>
+        case SectionGroup(_, sections) =>
           Stream.emits(sections).covary[IO].through(flatten)
         case s: Section =>
           Stream.emit(s)

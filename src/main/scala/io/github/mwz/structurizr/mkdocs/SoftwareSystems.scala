@@ -19,7 +19,7 @@ import scala.reflect.ClassTag
 import markdown.imgTabs
 import markdown.escape
 
-trait Tree
+sealed trait Tree
 case class System(groups: List[String], system: SoftwareSystem) extends Tree
 case class Group(name: String, children: TreeMap[String, Tree]) extends Tree
 
@@ -58,7 +58,7 @@ object SoftwareSystems:
     def prettyPrint(): String =
       def prettyPrint(tree: Tree, indent: String = ""): String =
         tree match {
-          case System(group, system) =>
+          case System(_, system) =>
             s"\n${indent}- ${system.getName()}"
           case Group(name, children) =>
             s"\n${indent}- ${name}${children.foldLeft("") { (s, c) =>
@@ -120,7 +120,7 @@ object SoftwareSystems:
 
       def md(tree: Tree, level: Int = 0): String =
         tree match
-          case System(group, system) =>
+          case System(_, system) =>
             val description = system
               .getDescription()
               .toOption
@@ -155,7 +155,7 @@ object SoftwareSystems:
     def sectionHierarchy(): SectionHierarchy =
       def convert(tree: Tree): SectionHierarchy =
         tree match
-          case System(group, system @ given SoftwareSystem) =>
+          case System(_, system @ given SoftwareSystem) =>
             val name = system.getName()
             val sections: Seq[Section] =
               Seq.empty ++

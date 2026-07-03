@@ -24,7 +24,7 @@ def createWorkspace(systems: List[TestSystem]): (SWorkspace, List[SoftwareSystem
 
 class SoftwareSystemsTest extends FunSuite:
   test("return systems with groups"):
-    val (workspace, systems @ List(system1, system2, system3, system4)) =
+    val (_, systems @ List(system1, system2, system3, system4)) =
       createWorkspace(
         List(
           TestSystem("system1", "group1"),
@@ -44,7 +44,7 @@ class SoftwareSystemsTest extends FunSuite:
     )
 
   test("create simple system tree"):
-    val (workspace, systems @ List(system1, system2, system3, system4)) =
+    val (_, systems @ List(system1, system2, system3, system4)) =
       createWorkspace(
         List(
           TestSystem("system1", "group1"),
@@ -79,7 +79,7 @@ class SoftwareSystemsTest extends FunSuite:
     )
 
   test("create nested system tree"):
-    val (workspace, systems @ List(system1, system2, system3, system4)) =
+    val (_, systems @ List(system1, system2, system3, system4)) =
       createWorkspace(
         List(
           TestSystem("system1", "group1"),
@@ -196,7 +196,7 @@ class SoftwareSystemsTest extends FunSuite:
     )
 
   test("test elements of a given type are members of a Software System"):
-    val (workspace, systems @ List(system1, system2, system3, system4)) =
+    val (_, List(system1, system2, system3, _)) =
       createWorkspace(
         List(
           TestSystem("system1", "group1", List(TestContainer("container1"))),
