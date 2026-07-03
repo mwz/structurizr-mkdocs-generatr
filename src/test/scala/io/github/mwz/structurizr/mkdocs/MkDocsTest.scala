@@ -12,7 +12,7 @@ import java.time.ZoneOffset
 import scala.concurrent.duration.*
 
 class MkDocsTest extends CatsEffectSuite:
-  val fixedTime     = LocalDateTime.of(2024, 6, 13, 12, 0, 0)
+  val fixedTime = LocalDateTime.of(2024, 6, 13, 12, 0, 0)
   val fixedDuration = fixedTime.toEpochSecond(ZoneOffset.UTC).seconds
   val contentSuffix =
     """|
@@ -27,8 +27,8 @@ class MkDocsTest extends CatsEffectSuite:
 
   test("write section hierarchy"):
     val basePath = tmpDir()
-    val docsDir  = basePath / "mkdocs"
-    val conf     = PathConfig(basePath.toNioPath, docsDir.toNioPath)
+    val docsDir = basePath / "mkdocs"
+    val conf = PathConfig(basePath.toNioPath, docsDir.toNioPath)
 
     val sections = SectionGroup(
       Some("Section Group"),
@@ -45,8 +45,8 @@ class MkDocsTest extends CatsEffectSuite:
 
   test("write MkDocs config"):
     val basePath = tmpDir()
-    val docsDir  = basePath / "mkdocs"
-    val conf     = PathConfig(basePath.toNioPath, docsDir.toNioPath)
+    val docsDir = basePath / "mkdocs"
+    val conf = PathConfig(basePath.toNioPath, docsDir.toNioPath)
 
     val ymlTemplate =
       """site_name: Test

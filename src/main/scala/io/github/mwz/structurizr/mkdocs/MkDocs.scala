@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 
 sealed trait SectionHierarchy
 case class SectionGroup(title: Option[String], sections: Seq[SectionHierarchy]) extends SectionHierarchy
-case class Section(title: Option[String], md: String, filename: String)         extends SectionHierarchy
+case class Section(title: Option[String], md: String, filename: String) extends SectionHierarchy
 
 trait MkDocs:
   def writeSections(sections: Stream[IO, Section]): IO[Unit]
@@ -25,7 +25,7 @@ trait MkDocs:
   def writeMkDocsConfig(sections: Stream[IO, SectionHierarchy]): IO[Unit]
 
 object MkDocs:
-  val printer   = Printer.builder.withPreserveOrder(true).build()
+  val printer = Printer.builder.withPreserveOrder(true).build()
   val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy @ HH:mm")
 
   // Custom encoder for SectionHierarchy
@@ -97,17 +97,18 @@ object MkDocs:
       // populate the nav section
       for
         sectionsJson <- sectionsJson
-        json <- template(conf.basePath.fs2Path)
-          .flatMap(s => IO.fromEither(parser.parse(s)))
-          .flatTap(s => IO.println(s))
-          .map(json =>
-            json.hcursor
-              .withFocus(_.mapObject(_.add("docs_dir", conf.basePath.relativize(conf.docsPath).toString.asJson)))
-              .withFocus(_.mapObject(_.add("nav", Json.fromValues(sectionsJson.asArray.getOrElse(Vector.empty)))))
-              .top
-              .getOrElse(json)
-          )
-          .flatTap(s => IO.println(s))
+        json         <-
+          template(conf.basePath.fs2Path)
+            .flatMap(s => IO.fromEither(parser.parse(s)))
+            .flatTap(s => IO.println(s))
+            .map(json =>
+              json.hcursor
+                .withFocus(_.mapObject(_.add("docs_dir", conf.basePath.relativize(conf.docsPath).toString.asJson)))
+                .withFocus(_.mapObject(_.add("nav", Json.fromValues(sectionsJson.asArray.getOrElse(Vector.empty)))))
+                .top
+                .getOrElse(json)
+            )
+            .flatTap(s => IO.println(s))
         _ <- Stream(printer.pretty(json))
           .through(Files[IO].writeUtf8(conf.basePath.fs2Path / "mkdocs.yml", Flags.Write))
           .compile

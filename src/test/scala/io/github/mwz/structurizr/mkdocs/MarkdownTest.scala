@@ -8,9 +8,9 @@ class MarkdownTest extends FunSuite:
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACKADAAQAAAABAAAACAAAAACVhHtSAAAAvUlEQVQYGWNgAIL/DQxMIBoZ/P/PwAjmwyT//zfm+v/cKvH/C5uo//9DmUGSIEVgVf9f6HH//8F2iJGXzQgozMDw7e9OBpmTnoyMjP8hRv/liGBkZDH68vzPj49Pfv9i+MvszvDMwg9kClTBv/9v3/1jYGD8wwiy+c1HkPAvoFEwBbKsy3lYfxz58/M/O9Pfv2wCzJ82MUqf3wRSwAh2CCPQPf8dWBjuPA9g+Pf/D6P6rQ0gSQyfgARhACYJAFJ6Ton8Xte2AAAAAElFTkSuQmCC"
 
   test("escape should not change the string if no escapable characters are present"):
-    val input          = "This is a test"
+    val input = "This is a test"
     val expectedOutput = "This is a test"
-    val actualOutput   = markdown.escape(input)
+    val actualOutput = markdown.escape(input)
     assertEquals(actualOutput, expectedOutput)
 
   test("escape should escape multiple characters in a string"):
@@ -38,7 +38,7 @@ class MarkdownTest extends FunSuite:
 
   test("generate an embedded image"):
     val workspace = new SWorkspace("Name", "Test Workspace")
-    val imgView   = workspace.getViews().createImageView("img")
+    val imgView = workspace.getViews().createImageView("img")
     imgView.setTitle("Image 1")
     imgView.setDescription("Description")
     imgView.setContentType("image/png")

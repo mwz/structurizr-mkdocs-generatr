@@ -34,7 +34,7 @@ object PostProcess:
     private def copyExtraCss(json: Json): IO[Unit] =
       val cssFiles = json.hcursor.downField("extra_css").as[List[String]].getOrElse(Nil)
       cssFiles.traverse_ { entry =>
-        val src  = conf.basePath.fs2Path / FS2Path(entry)
+        val src = conf.basePath.fs2Path / FS2Path(entry)
         val dest = conf.docsPath.fs2Path / FS2Path(entry)
         Files[IO]
           .exists(src)

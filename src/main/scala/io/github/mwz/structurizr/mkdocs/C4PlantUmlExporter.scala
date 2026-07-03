@@ -100,7 +100,7 @@ object CustomC4PlantUMLExporter:
       url.fold(super.writeElement(view, container, writer))(writeWithUrl(view, container, writer, _))
 
     def writeWithUrl(view: ModelView, element: Element, writer: IndentingWriter, url: String): Unit =
-      val elementUrl   = element.getUrl()
+      val elementUrl = element.getUrl()
       val urlWithSlash = if (url.endsWith("/")) url else url + "/"
       element.setUrl(urlWithSlash)
       val iw = new IndentingWriter()

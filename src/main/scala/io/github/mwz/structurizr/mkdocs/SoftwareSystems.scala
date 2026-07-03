@@ -38,7 +38,7 @@ object SoftwareSystems:
       relationships: Set[Relationship],
       separator: String
   ) = new SoftwareSystems:
-    given viewSet: ViewSet        = views
+    given viewSet: ViewSet = views
     given rels: Set[Relationship] = relationships
 
     def allSystems(): Seq[System] =
@@ -109,7 +109,7 @@ object SoftwareSystems:
     // A summary view of all software systems
     def summaryView(): String =
       val (groups, others) = tree().partition((_, t) => t.isInstanceOf[Group])
-      val hasGroups        = groups.nonEmpty
+      val hasGroups = groups.nonEmpty
       val othersGroups =
         if (!hasGroups) others
         else TreeMap(("Others" -> Group("Others", others)))
@@ -184,8 +184,8 @@ object SoftwareSystems:
       SectionGroup(Some("Software Systems"), tree().values.map(convert).toSeq)
 
     def about()(using system: SoftwareSystem): Section =
-      val description      = system.getDescription().toOption
-      val fileName         = normaliseName(system.getName())
+      val description = system.getDescription().toOption
+      val fileName = normaliseName(system.getName())
       val url: Option[URL] = system.getUrl().parseURLOption
       val properties: Map[String, String] =
         system
@@ -246,8 +246,8 @@ object SoftwareSystems:
         imageViews: Seq[ImageView] = Seq.empty
     ): Option[Section] =
       val views: Seq[ModelView] = modelViews.filter(_.getSoftwareSystemId() == system.getId())
-      val baseName              = normaliseName(system.getName())
-      val fileName              = s"software-systems/${baseName}-${normaliseName(name)}.md"
+      val baseName = normaliseName(system.getName())
+      val fileName = s"software-systems/${baseName}-${normaliseName(name)}.md"
       val md: String = views.foldLeft("") { (s, view) =>
         s + imgTabs(view.getKey(), view.getTitle().toOption, view.getDescription().toOption)
       }
@@ -287,14 +287,14 @@ object SoftwareSystems:
         else
           val md = relationships.foldLeft(heading + "\n" + header) { (s, r) =>
             val system = getSystem(r)
-            val link   = s"../${normaliseName(system.getName())}"
-            val desc   = Option(r.getDescription()).map(escape).getOrElse("")
-            val tech   = Option(r.getTechnology()).map(escape).getOrElse("")
+            val link = s"../${normaliseName(system.getName())}"
+            val desc = Option(r.getDescription()).map(escape).getOrElse("")
+            val tech = Option(r.getTechnology()).map(escape).getOrElse("")
             s + s"\n| [${escape(system.getName())}](${link}) | ${desc} | ${tech} |"
           }
           Some(md)
 
-      val inMd  = makeMd("## Inbound", in, _.getSource())
+      val inMd = makeMd("## Inbound", in, _.getSource())
       val outMd = makeMd("## Outbound", out, _.getDestination())
 
       val combined =

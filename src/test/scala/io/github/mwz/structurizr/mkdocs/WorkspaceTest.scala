@@ -11,7 +11,7 @@ class WorkspaceTest extends CatsEffectSuite:
     interceptIO[Exception](Workspace(config).get())
 
   test("read the example workspace"):
-    val conf      = PathConfig(Path.of("example"), Path.of("example/workspace-docs"))
+    val conf = PathConfig(Path.of("example"), Path.of("example/workspace-docs"))
     val workspace = Workspace(conf).get()
 
     val expectedSystems = Set(

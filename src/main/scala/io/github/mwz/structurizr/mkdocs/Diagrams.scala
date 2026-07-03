@@ -31,7 +31,7 @@ object Diagrams:
       plantUMLExporter.`export`(workspace).asScala.toSeq
 
     def save(path: FS2Path, diagram: Diagram): IO[Unit] =
-      val file   = path / FS2Path(s"${diagram.getKey()}")
+      val file = path / FS2Path(s"${diagram.getKey()}")
       val reader = SourceStringReader(diagram.getDefinition())
       def write(format: DiagramFormat): IO[Unit] =
         Resource

@@ -34,10 +34,10 @@ object markdown:
 
   // generate content tabs with images
   def imgTabs(id: String, title: Option[String] = None, description: Option[String] = None): String =
-    val svg     = s"../img/${id}.svg"
-    val png     = s"../img/${id}.png"
+    val svg = s"../img/${id}.svg"
+    val png = s"../img/${id}.png"
     val heading = title.getOrElse(id)
-    val desc    = description.fold("")(s => s"<center>$s</center>\n")
+    val desc = description.fold("")(s => s"<center>$s</center>\n")
     s"""${heading}
         |=== "SVG"
         |    <center>![${id}SVG](${svg})</center>
