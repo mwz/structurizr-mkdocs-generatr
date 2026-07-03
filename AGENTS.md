@@ -138,3 +138,17 @@ sandbox `$TMPDIR`), `sbt.global.base` (`~/.sbt/1.0/staging`), and `sbt.ivy.home`
 **Offline mode needs the caches pre-populated.** If a required artifact isn't
 already in `~/.ivy2` / `~/Library/Caches/Coursier`, the build fails rather than
 fetching it — do a single online warm-up run first, e.g. `sbt update`.
+
+**`run` forks a JVM** (`Compile / run / fork := true` in build.sbt), and the
+forked process does _not_ inherit the launcher's `-Djava.io.tmpdir`. It falls
+back to the system default (`/var/folders/...`), which the sandbox blocks — so
+Structurizr's image-view cache write fails during DSL parsing with
+`Can't create cache file!`. Pass tmpdir into the forked run's `javaOptions`:
+
+```bash
+sbt --batch -Dsbt.offline=true -Dsbt.boot.directory=project/boot/ \
+    -Djava.io.tmpdir=$TMPDIR -Dsbt.global.base=project/.sbtboot/global \
+    -Dsbt.ivy.home=project/.sbtboot/ivy \
+    "set Compile / run / javaOptions += \"-Djava.io.tmpdir=$TMPDIR\"" \
+    "run --path example --assets-dir pictures"
+```

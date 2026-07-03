@@ -8,6 +8,8 @@ theme:
   name: material
   features:
     - content.tabs.link
+extra_css:
+  - css/extra.css
 markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:

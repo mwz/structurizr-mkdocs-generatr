@@ -1,0 +1,9 @@
+g.link:hover {
+  > path,polygon {
+    stroke-width: 7 !important;
+    stroke: red !important;
+  }
+  > text {
+    fill: red !important;
+  }
+}

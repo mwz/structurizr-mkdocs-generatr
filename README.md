@@ -11,6 +11,9 @@ It can be used to generate a standalone [MkDocs](https://www.mkdocs.org) site as
 well as a [TechDocs](https://backstage.io/docs/features/techdocs) site for
 Backstage.
 
+See the demo of a standalone MkDocs site
+[here](https://mwz.github.io/structurizr-mkdocs-generatr).
+
 ## Features
 
 This project is in development and not all Structurizr features are supported
@@ -34,6 +37,8 @@ yet. Here's a list of features that are currently supported:
 - system dependencies view
 - svg diagrams with hyperlinks
 - automatically copy static assets to the output directory
+- extra CSS support (MkDocs only,
+  [reference](https://www.mkdocs.org/user-guide/configuration/#extra_css))
 - groovy scripting support
   ([reference](https://docs.structurizr.com/dsl/scripts))
 
@@ -126,6 +131,32 @@ The generator accepts the following arguments:
 - `--docs-dir` - the directory where the documentation markdown files will be
   generated, relative to the `path` argument. Needs to match MkDocs' `docs_dir`
   setting (defaults to `docs`)
+
+### Extra CSS
+
+You can add custom styles by declaring an `extra_css` list in your
+`mkdocs.tmpl.yml` template:
+
+```yaml
+extra_css:
+  - css/extra.css
+```
+
+The setting is carried over to the generated `mkdocs.yml`, and each referenced
+file is copied into the docs directory, preserving any nested folder structure.
+Paths are resolved relative to the `mkdocs.tmpl.yml` file (e.g. `css/extra.css`
+→ `<path>/css/extra.css`), and MkDocs in turn resolves them relative to
+`docs_dir`, so the same relative path keeps working after the copy. If a
+referenced file doesn't exist, the setting is still written to `mkdocs.yml` but
+a warning is printed and nothing is copied.
+
+See the example [extra.css](example/css/extra.css) file which add highlighting
+of relationship arrows on mouse-over - see the
+[website](https://mwz.github.io/structurizr-mkdocs-generatr/software-systems/internet-banking-system-container-views)
+for a demo.
+
+> **Note:** this only works when serving/building with MkDocs. It is not
+> supported for Backstage TechDocs.
 
 ## Requirements
 
