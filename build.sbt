@@ -46,7 +46,7 @@ lazy val root = (project in file("."))
       "io.circe"                   %% "circe-core"         % "0.14.14",
       "io.circe"                   %% "circe-parser"       % "0.14.14",
       "io.circe"                   %% "circe-yaml-v12"     % "0.16.1",
-      "org.typelevel"              %% "mouse"              % "1.3.2",
+      "org.typelevel"              %% "mouse"              % "1.4.0",
       "org.typelevel"              %% "toolkit"            % "0.1.29",
       "com.structurizr"             % "structurizr-core"   % "4.1.0",
       "com.structurizr"             % "structurizr-dsl"    % "4.1.0" exclude ("com.google.guava", "guava"),
