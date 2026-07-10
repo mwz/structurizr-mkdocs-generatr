@@ -1,6 +1,7 @@
 package io.github.mwz.structurizr.mkdocs
 
 import cats.effect.IO
+import cats.syntax.foldable.*
 import fs2.io.file.CopyFlag.ReplaceExisting
 import fs2.io.file.CopyFlags
 import fs2.io.file.Files
@@ -21,7 +22,9 @@ object Assets:
             .isDirectory(sourcePath)
             .ifM(
               Files[IO].createDirectories(targetPath),
-              IO.println("Copying " + sourcePath + " to " + targetPath) *>
+              // Ensure the target parent exists before the file is copied.
+              targetPath.parent.traverse_(Files[IO].createDirectories) *>
+                IO.println("Copying " + sourcePath + " to " + targetPath) *>
                 Files[IO].copy(sourcePath, targetPath, CopyFlags(ReplaceExisting))
             )
         }
