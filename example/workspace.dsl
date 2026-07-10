@@ -218,7 +218,7 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
                 mainframe
                 email
             }
-            autoLayout
+            autoLayout tb
             title "System Context of Internet Banking System"
             description "Describes the overall context"
         }
@@ -233,7 +233,7 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
                 apiApplication
                 database
             }
-            autoLayout
+            autoLayout tb
         }
 
         component apiApplication "Components" {
@@ -244,7 +244,7 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
                 accountsSummaryController mainframeBankingSystemFacade
                 resetPasswordController emailComponent
             }
-            autoLayout
+            autoLayout tb
         }
 
         image database {
@@ -333,6 +333,14 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
             }
             element "Failover" {
                 opacity 25
+            }
+            relationship "Relationship" {
+                style solid
+            }
+            // Shrinks the view description that renders as a subtitle under the diagram
+            // title (Structurizr 6.x renders view.description as a second title line).
+            element "Diagram:Description" {
+                fontSize 12
             }
         }
     }
