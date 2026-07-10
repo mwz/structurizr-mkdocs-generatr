@@ -1,19 +1,19 @@
-ThisBuild / organization      := "io.github.mwz"
-ThisBuild / scalaVersion      := "3.7.4"
+ThisBuild / organization := "io.github.mwz"
+ThisBuild / scalaVersion := "3.7.4"
 ThisBuild / semanticdbEnabled := true
 
 // sbt github packages plugin settings
-ThisBuild / githubOwner      := "mwz"
+ThisBuild / githubOwner := "mwz"
 ThisBuild / githubRepository := "structurizr-mkdocs-generatr"
-ThisBuild / versionScheme    := Some("semver-spec")
+ThisBuild / versionScheme := Some("semver-spec")
 
 lazy val root = (project in file("."))
   .enablePlugins(AssemblyPlugin)
   .settings(
-    name                             := "structurizr-mkdocs-generatr",
-    crossPaths                       := false,
-    assembly / mainClass             := Some("io.github.mwz.structurizr.mkdocs.Main"),
-    assembly / assemblyJarName       := "structurizr-mkdocs-generatr.jar",
+    name := "structurizr-mkdocs-generatr",
+    crossPaths := false,
+    assembly / mainClass := Some("io.github.mwz.structurizr.mkdocs.Main"),
+    assembly / assemblyJarName := "structurizr-mkdocs-generatr.jar",
     assembly / assemblyMergeStrategy := {
       case PathList(ps @ _*) if Assembly.isReadme(ps.last) || Assembly.isLicenseFile(ps.last) =>
         MergeStrategy.rename
@@ -47,13 +47,13 @@ lazy val root = (project in file("."))
       "io.circe"                   %% "circe-parser"       % "0.14.16",
       "io.circe"                   %% "circe-yaml-v12"     % "0.16.1",
       "org.typelevel"              %% "mouse"              % "1.4.0",
-      "org.typelevel"              %% "toolkit"            % "0.1.30",
+      "org.typelevel"              %% "toolkit"            % "0.2.0",
       "com.structurizr"             % "structurizr-core"   % "6.2.2",
       "com.structurizr"             % "structurizr-dsl"    % "6.2.2" exclude ("com.google.guava", "guava"),
       "com.structurizr"             % "structurizr-export" % "6.2.2",
       "net.sourceforge.plantuml"    % "plantuml"           % "1.2025.10" exclude ("com.google.guava", "guava"),
       "org.codehaus.groovy"         % "groovy-jsr223"      % "3.0.25" % Runtime,
-      "org.typelevel"              %% "toolkit-test"       % "0.1.30" % Test,
+      "org.typelevel"              %% "toolkit-test"       % "0.2.0"  % Test,
       "org.typelevel"              %% "munit-cats-effect"  % "2.2.0"  % Test
     )
   )
