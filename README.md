@@ -150,10 +150,14 @@ Paths are resolved relative to the `mkdocs.tmpl.yml` file (e.g. `css/extra.css`
 referenced file doesn't exist, the setting is still written to `mkdocs.yml` but
 a warning is printed and nothing is copied.
 
-See the example [extra.css](example/css/extra.css) file which add highlighting
-of relationship arrows on mouse-over - see the
-[website](https://mwz.github.io/structurizr-mkdocs-generatr/software-systems/internet-banking-system-container-views)
-for a demo.
+See the example [extra.css](example/css/extra.css) file which adds the following
+MkDocs customisations:
+
+- highlights the relationship arrows on mouse-over - see the
+  [website](https://mwz.github.io/structurizr-mkdocs-generatr/software-systems/internet-banking-system-container-views)
+  for a demo
+- maximises the content space by hiding the right-hand on-page Table of Contents
+  and widening the overall layout
 
 > **Note:** this only works when serving/building with MkDocs. It is not
 > supported for Backstage TechDocs.
