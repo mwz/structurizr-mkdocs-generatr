@@ -10,8 +10,9 @@ import io.circe.Json
 import io.circe.yaml.v12.parser
 
 /**
- * Post-processing actions performed after the mkdocs.yml config has been written. These are driven by the content of
- * the generated config, so further config-based actions can be chained onto `run` in the future.
+ * Post-processing actions performed after the mkdocs.yml config has been written. These are driven
+ * by the content of the generated config, so further config-based actions can be chained onto `run`
+ * in the future.
  */
 trait PostProcess:
   def run(): IO[Unit]

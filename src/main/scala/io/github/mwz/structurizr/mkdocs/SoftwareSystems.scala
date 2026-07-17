@@ -26,6 +26,7 @@ case class Group(name: String, children: TreeMap[String, Tree]) extends Tree
 trait SoftwareSystems:
   def allSystems(): Seq[System]
   def tree(): TreeMap[String, Tree]
+  def nameClashes(): Set[String]
   def prettyPrint(): String
   def summaryView(): String
   def summarySection(): Section
@@ -49,10 +50,23 @@ object SoftwareSystems:
         }
       }
 
-    def tree(): TreeMap[String, Tree] =
-      allSystems().foldLeft(TreeMap.empty[String, Tree]) { (tree, system) =>
-        populateTree(tree, system.groups, None, system)
-      }
+    // The (immutable) input to the tree build: each system paired with its group
+    // path. Memoised and shared by the tree and clash computations below.
+    private lazy val systemEntries: List[(List[String], System)] =
+      allSystems().map(sys => (sys.groups, sys)).toList
+
+    // Memoised: tree() is consumed once by the summary view and once by the
+    // section hierarchy, so build it a single time per instance.
+    private lazy val treeMemo: TreeMap[String, Tree] = buildTree(systemEntries)
+
+    def tree(): TreeMap[String, Tree] = treeMemo
+
+    // Names that are both a software system and a group at the same level.
+    // On such a clash buildTree keeps the group and drops the software system;
+    // nameClashes surfaces those drops so the caller can warn (never fatal).
+    private lazy val nameClashesMemo: Set[String] = clashingNames(systemEntries)
+
+    def nameClashes(): Set[String] = nameClashesMemo
 
     // pretty print tree with indentation
     def prettyPrint(): String =
@@ -69,42 +83,42 @@ object SoftwareSystems:
         s + prettyPrint(tree)
       }
 
-    // Populate the tree recursively
-    // TODO: Optimise this
-    // TODO: Stack safety
-    private def populateTree(
-        tree: TreeMap[String, Tree],
-        groups: List[String],
-        parentGroup: Option[Group],
-        system: System
-    ): TreeMap[String, Tree] =
-      parentGroup match
-        // initial case
-        case None =>
-          groups match
-            case Nil =>
-              tree + (system.system.getName() -> system)
-            case head :: next =>
-              tree.getOrElse(head, Group(head, TreeMap.empty)) match
-                case group: Group =>
-                  val children = populateTree(group.children, next, Some(group), system)
-                  tree + (group.name -> Group(group.name, children))
-                case _ =>
-                  // Name collision
-                  tree
-        // recursive call
-        case Some(parentGroup) =>
-          groups match
-            case Nil =>
-              parentGroup.children + (system.system.getName() -> system)
-            case head :: next =>
-              parentGroup.children.getOrElse(head, Group(head, TreeMap.empty)) match
-                case group: Group =>
-                  val children = populateTree(group.children + (head -> group), next, Some(group), system)
-                  parentGroup.children + (group.name -> Group(group.name, children))
-                case _ =>
-                  // Name collision
-                  tree
+    /**
+     * Build the group tree by recursively grouping systems on the head of their remaining group
+     * path. Systems whose remaining path is empty become leaf `System` nodes (retaining their full
+     * original `groups`); the rest are grouped under a `Group` and recursed into.
+     *
+     * Collision rule: if a group name and a system name coincide at the same level, the group wins
+     * and the software system is dropped.
+     *
+     * Recursion depth == group-nesting depth (typically 1–3), never the number of systems — those
+     * are folded on the heap via partition/groupBy/map. `convert`, `summaryView`'s `md`, and the
+     * Circe SectionHierarchy encoder in MkDocs recurse to the same bounded depth, so a trampoline
+     * here would add no real protection.
+     */
+    private def buildTree(entries: List[(List[String], System)]): TreeMap[String, Tree] =
+      val (leaves, nested) = entries.partition((path, _) => path.isEmpty)
+      val leafMap: TreeMap[String, Tree] =
+        TreeMap.from(leaves.map((_, sys) => sys.system.getName() -> sys))
+      val groupMap: TreeMap[String, Tree] =
+        TreeMap.from(nested.groupBy((path, _) => path.head).map { (name, members) =>
+          name -> Group(name, buildTree(members.map((path, sys) => (path.tail, sys))))
+        })
+      leafMap ++ groupMap
+
+    /**
+     * Names that are both a software system and a group at the same level — the collisions
+     * buildTree resolves by dropping the software system. Kept structurally parallel to buildTree's
+     * partition/groupBy so the reported names match exactly what buildTree omits.
+     */
+    private def clashingNames(entries: List[(List[String], System)]): Set[String] =
+      val (leaves, nested) = entries.partition((path, _) => path.isEmpty)
+      val leafNames = leaves.map((_, sys) => sys.system.getName()).toSet
+      val groupNames = nested.map((path, _) => path.head).toSet
+      val deeper = nested.groupBy((path, _) => path.head).values.flatMap { members =>
+        clashingNames(members.map((path, sys) => (path.tail, sys)))
+      }
+      (leafNames intersect groupNames) ++ deeper
 
     // A summary view of all software systems
     def summaryView(): String =

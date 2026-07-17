@@ -113,6 +113,33 @@ class SoftwareSystemsTest extends FunSuite:
       )
     )
 
+  test("group wins when a group name clashes with a system name"):
+    // When an ungrouped system and a group share a name at the same level, they
+    // collide on the same TreeMap key. buildTree resolves this deterministically:
+    // the group wins (right operand of `++`), so the colliding ungrouped system
+    // is dropped.
+    val (_, systems @ List(_, child)) =
+      createWorkspace(
+        List(
+          TestSystem("clash"),
+          TestSystem("child", "clash")
+        )
+      )
+    val softwareSystems = SoftwareSystems(systems, null, Set(), "/")
+    assertEquals(
+      softwareSystems.tree(),
+      TreeMap(
+        "clash" -> Group(
+          "clash",
+          TreeMap(
+            "child" -> System(List("clash"), child)
+          )
+        )
+      )
+    )
+    // the dropped software system is surfaced for logging
+    assertEquals(softwareSystems.nameClashes(), Set("clash"))
+
   test("pretty print"):
     val (workspace, systems) =
       createWorkspace(

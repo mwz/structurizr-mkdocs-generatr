@@ -41,7 +41,16 @@ object Main extends IOCaseApp[CommandLineArgs]:
       Stream.emits(docs.sections()) ++
         Stream.emit(softwareSystems.summarySection()) ++
         Stream.emit(softwareSystems.sectionHierarchy())
-    (mkDocs.writeSectionHierarchy(sections) &> mkDocs.writeMkDocsConfig(sections)) >>
+    // Warn when a software system is dropped because its name clashes
+    // with a group of the same name at the same level.
+    val warnNameClashes: IO[Unit] =
+      softwareSystems.nameClashes().toList.sorted.foldLeft(IO.unit) { (log, name) =>
+        log >> IO.println(
+          s"Warning: software system '$name' has the same name as a group and is omitted from the navigation."
+        )
+      }
+    warnNameClashes >>
+      (mkDocs.writeSectionHierarchy(sections) &> mkDocs.writeMkDocsConfig(sections)) >>
       // post-process the written config (e.g. copy extra_css files)
       postProcess.run() >>
       images.copy() >>
