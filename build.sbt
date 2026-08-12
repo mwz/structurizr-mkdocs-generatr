@@ -1,3 +1,5 @@
+import java.time.Year
+
 ThisBuild / organization := "io.github.mwz"
 ThisBuild / scalaVersion := "3.7.4"
 ThisBuild / semanticdbEnabled := true
@@ -7,8 +9,29 @@ ThisBuild / githubOwner := "mwz"
 ThisBuild / githubRepository := "structurizr-mkdocs-generatr"
 ThisBuild / versionScheme := Some("semver-spec")
 
+// Open-source / POM metadata
+ThisBuild / organizationName := "Michael Wizner"
+ThisBuild / startYear := Some(2024)
+ThisBuild / homepage := Some(url("https://github.com/mwz/structurizr-mkdocs-generatr"))
+ThisBuild / licenses := Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
+ThisBuild / description :=
+  "Static MkDocs site generator for C4 architecture model documentation created with Structurizr DSL"
+ThisBuild / scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/mwz/structurizr-mkdocs-generatr"),
+    "scm:git:https://github.com/mwz/structurizr-mkdocs-generatr.git",
+    "scm:git:git@github.com:mwz/structurizr-mkdocs-generatr.git"
+  )
+)
+ThisBuild / developers := List(
+  Developer("mwz", "Michael Wizner", "mwz@users.noreply.github.com", url("https://github.com/mwz"))
+)
+ThisBuild / headerLicense := Some(
+  HeaderLicense.ALv2(s"${startYear.value.get}-${Year.now}", "Michael Wizner and contributors")
+)
+
 lazy val root = (project in file("."))
-  .enablePlugins(AssemblyPlugin)
+  .enablePlugins(AssemblyPlugin, HeaderPlugin)
   .settings(
     name := "structurizr-mkdocs-generatr",
     crossPaths := false,
@@ -51,7 +74,7 @@ lazy val root = (project in file("."))
       "com.structurizr"             % "structurizr-core"   % "6.2.2",
       "com.structurizr"             % "structurizr-dsl"    % "6.2.2" exclude ("com.google.guava", "guava"),
       "com.structurizr"             % "structurizr-export" % "6.2.2",
-      "net.sourceforge.plantuml"    % "plantuml"           % "1.2026.6" exclude ("com.google.guava", "guava"),
+      "net.sourceforge.plantuml"    % "plantuml-mit"       % "1.2026.6" exclude ("com.google.guava", "guava"),
       "org.codehaus.groovy"         % "groovy-jsr223"      % "3.0.25" % Runtime,
       "org.typelevel"              %% "toolkit-test"       % "0.2.0"  % Test,
       "org.typelevel"              %% "munit-cats-effect"  % "2.2.0"  % Test

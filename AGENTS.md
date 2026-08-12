@@ -25,11 +25,14 @@ sbt "run --path example --assets-dir pictures"
 mkdocs serve -w example -f example/mkdocs.yml
 ```
 
-`GITHUB_TOKEN` (or `github.token` git config) is required by sbt to resolve
-dependencies from GitHub Packages — see
-[githubTokenSource.sbt](githubTokenSource.sbt). CI sets it to empty for read
-access. `PLANTUML_LIMIT_SIZE` env/system-property raises PlantUML's 4096px
-diagram size cap.
+All dependencies resolve from Maven Central, so `sbt` compile / test /
+`assembly` work with **no credentials** — CI runs them with `GITHUB_TOKEN=""`. A
+`GITHUB_TOKEN` (or `github.token` git config) is only needed to **publish** to
+GitHub Packages (`sbt publish`) or to download the published jar from GitHub
+Packages — see [githubTokenSource.sbt](githubTokenSource.sbt).
+
+`PLANTUML_LIMIT_SIZE` env/system-property raises PlantUML's 4096px diagram size
+cap.
 
 ## Verification
 
