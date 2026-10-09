@@ -89,13 +89,21 @@ Missing features:
 2. Run the generator in the directory where the Structurizr `workspace.dsl` and
    `mkdocs.tmpl.yml` files are located. It will create `docs` directory with all
    the static content and `mkdocs.yml` config.
-   - download the jar from Github Releases and run it:
+   - download the jar from
+     [GitHub Releases](https://github.com/mwz/structurizr-mkdocs-generatr/releases)
+     (no token required) and run it:
 
      ```bash
+     curl -L -O https://github.com/mwz/structurizr-mkdocs-generatr/releases/latest/download/structurizr-mkdocs-generatr.jar
+
      java -jar structurizr-mkdocs-generatr.jar
      ```
 
-   - or download the jar from GitHub Packages and run it:
+   - or download the jar from GitHub Packages and run it. GitHub Packages
+     requires authentication even for public packages, so `$GITHUB_TOKEN` must
+     be a
+     [personal access token (classic)](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages)
+     with the `read:packages` scope:
 
      ```bash
      curl -H "Authorization: token $GITHUB_TOKEN" -L -O \
@@ -106,7 +114,7 @@ Missing features:
 
    - or use [Coursier](https://get-coursier.io) to run it (since the artifact is
      published to GitHub Packages, you'll need additional Coursier configuration
-     to make it work)
+     with a `read:packages` token to make it work)
 
 3. Preview the generated site:
    - MkDocs ([installation](https://www.mkdocs.org/getting-started))

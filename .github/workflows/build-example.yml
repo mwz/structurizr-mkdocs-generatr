@@ -20,19 +20,19 @@ jobs:
         with:
           java-version: "temurin:1.21"
       - name: Setup Graphviz
-        uses: ts-graphviz/setup-graphviz@v2
+        uses: ts-graphviz/setup-graphviz@b1de5da23ed0a6d14e0aeee8ed52fdd87af2363c # v2.0.2
       - name: Test & run
         run: sbt "test; run --path example --assets-dir pictures"
         env:
           GITHUB_TOKEN: ""
       - name: Build site
-        uses: Tiryoh/actions-mkdocs@v0
+        uses: Tiryoh/actions-mkdocs@14d3fd544b7a2bcffcdd86b05d558f20c244c9fc # v0.24.0
         with:
           mkdocs_version: "latest"
           requirements: "example/requirements.txt"
           configfile: "example/mkdocs.yml"
       - name: Deploy example to GitHub Pages
         if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@fa24774553152dd7873cd16ebd8d959b010c5445 # v4.9.0
         with:
           folder: example/site

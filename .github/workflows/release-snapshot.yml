@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: read
+  packages: write # publish snapshots to GitHub Packages
+
 jobs:
   release-snapshot:
     runs-on: ubuntu-latest

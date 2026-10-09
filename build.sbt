@@ -1,3 +1,5 @@
+import sbtlicensereport.license.DepModuleInfo
+
 ThisBuild / organization := "io.github.mwz"
 ThisBuild / scalaVersion := "3.9.0"
 ThisBuild / semanticdbEnabled := true
@@ -29,6 +31,15 @@ ThisBuild / headerEndYear := Some(2026)
 ThisBuild / headerLicense := Some(
   HeaderLicense.ALv2(s"${startYear.value.get}-${headerEndYear.value.get}", "Michael Wizner and contributors")
 )
+
+// Dependency license check (`sbt licenseCheck`) over the scopes bundled into the fat jar
+ThisBuild / licenseConfigurations := Set("compile", "runtime")
+ThisBuild / licenseCheckExclusions := {
+  // Dual-licensed CDDL 1.1 / GPLv2 with Classpath Exception, used under CDDL 1.1.
+  // Pulled in transitively by structurizr-dsl -> structurizr-client.
+  case DepModuleInfo("javax.activation", "javax.activation-api", _) => true
+  case DepModuleInfo("javax.xml.bind", "jaxb-api", _)               => true
+}
 
 lazy val root = (project in file("."))
   .enablePlugins(AssemblyPlugin, HeaderPlugin)
