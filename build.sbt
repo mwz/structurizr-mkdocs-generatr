@@ -1,5 +1,3 @@
-import java.time.Year
-
 ThisBuild / organization := "io.github.mwz"
 ThisBuild / scalaVersion := "3.9.0"
 ThisBuild / semanticdbEnabled := true
@@ -26,8 +24,10 @@ ThisBuild / scmInfo := Some(
 ThisBuild / developers := List(
   Developer("mwz", "Michael Wizner", "mwz@users.noreply.github.com", url("https://github.com/mwz"))
 )
+// Fixed end year keeps headerCheckAll stable; bump it (and NOTICE) yearly, then run `sbt headerCreateAll`
+ThisBuild / headerEndYear := Some(2026)
 ThisBuild / headerLicense := Some(
-  HeaderLicense.ALv2(s"${startYear.value.get}-${Year.now}", "Michael Wizner and contributors")
+  HeaderLicense.ALv2(s"${startYear.value.get}-${headerEndYear.value.get}", "Michael Wizner and contributors")
 )
 
 lazy val root = (project in file("."))
