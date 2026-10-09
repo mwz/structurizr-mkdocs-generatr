@@ -77,6 +77,6 @@ lazy val root = (project in file("."))
       "net.sourceforge.plantuml"    % "plantuml-mit"       % "1.2026.6" exclude ("com.google.guava", "guava"),
       "org.codehaus.groovy"         % "groovy-jsr223"      % "3.0.25" % Runtime,
       "org.typelevel"              %% "toolkit-test"       % "0.2.0"  % Test,
-      "org.typelevel"              %% "munit-cats-effect"  % "2.2.0"  % Test
+      "org.typelevel"              %% "munit-cats-effect"  % "2.2.1"  % Test
     )
   )
