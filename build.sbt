@@ -74,7 +74,7 @@ lazy val root = (project in file("."))
       "com.structurizr"             % "structurizr-core"   % "6.2.2",
       "com.structurizr"             % "structurizr-dsl"    % "6.2.2" exclude ("com.google.guava", "guava"),
       "com.structurizr"             % "structurizr-export" % "6.2.2",
-      "net.sourceforge.plantuml"    % "plantuml-mit"       % "1.2026.6" exclude ("com.google.guava", "guava"),
+      "net.sourceforge.plantuml"    % "plantuml-mit"       % "1.2026.8" exclude ("com.google.guava", "guava"),
       "org.codehaus.groovy"         % "groovy-jsr223"      % "3.0.25" % Runtime,
       "org.typelevel"              %% "toolkit-test"       % "0.2.0"  % Test,
       "org.typelevel"              %% "munit-cats-effect"  % "2.2.1"  % Test
