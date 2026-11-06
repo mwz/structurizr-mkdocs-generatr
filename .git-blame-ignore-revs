@@ -1,5 +1,2 @@
-# Scala Steward: Reformat with scalafmt 3.9.10
-a20cfb50a62196b7ce1c0609dd80f4eae5c4c5b7
-
-# Scala Steward: Reformat with scalafmt 3.11.2
-b5bace68f6be5d6c30d2c7e07a5585ab66c58ee1
+# Update scalafmt-core to 3.9.10 (#150) - reformat with scalafmt 3.9.10
+7afb26e6c65a57d246dfebb8a9af01c5c73b8e7b

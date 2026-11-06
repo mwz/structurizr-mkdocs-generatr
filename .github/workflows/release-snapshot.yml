@@ -6,7 +6,6 @@ on:
 
 permissions:
   contents: read
-  packages: write # publish snapshots to GitHub Packages
 
 jobs:
   release-snapshot:
@@ -22,10 +21,13 @@ jobs:
         with:
           java-version: "temurin:1.21"
       - name: Test
-        run: sbt coverage test coverageReport
-        env:
-          GITHUB_TOKEN: ""
+        run: sbt test
+      # Publishes a -SNAPSHOT to the Central Portal snapshots repository
+      # (snapshots must be enabled for the io.github.mwz namespace)
       - name: Release snapshot
-        run: sbt publish
+        run: sbt ci-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

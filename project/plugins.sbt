@@ -1,7 +1,6 @@
 addSbtPlugin("ch.epfl.scala"  % "sbt-scalafix"        % "0.14.9")
-addSbtPlugin("com.codecommit" % "sbt-github-packages" % "0.5.3")
 addSbtPlugin("com.eed3si9n"   % "sbt-assembly"        % "2.5.0")
-addSbtPlugin("com.github.sbt" % "sbt-dynver"          % "5.1.1")
+addSbtPlugin("com.github.sbt" % "sbt-ci-release"      % "1.12.1")
 addSbtPlugin("com.github.sbt" % "sbt-header"          % "5.11.0")
 addSbtPlugin("com.github.sbt" % "sbt-license-report"  % "1.10.0")
 addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.13.0")

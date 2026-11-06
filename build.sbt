@@ -4,9 +4,6 @@ ThisBuild / organization := "io.github.mwz"
 ThisBuild / scalaVersion := "3.9.0"
 ThisBuild / semanticdbEnabled := true
 
-// sbt github packages plugin settings
-ThisBuild / githubOwner := "mwz"
-ThisBuild / githubRepository := "structurizr-mkdocs-generatr"
 ThisBuild / versionScheme := Some("semver-spec")
 
 // Open-source / POM metadata

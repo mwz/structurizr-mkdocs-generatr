@@ -26,10 +26,10 @@ mkdocs serve -w example -f example/mkdocs.yml
 ```
 
 All dependencies resolve from Maven Central, so `sbt` compile / test /
-`assembly` work with **no credentials** — CI runs them with `GITHUB_TOKEN=""`. A
-`GITHUB_TOKEN` (or `github.token` git config) is only needed to **publish** to
-GitHub Packages (`sbt publish`) or to download the published jar from GitHub
-Packages — see [githubTokenSource.sbt](githubTokenSource.sbt).
+`assembly` work with **no credentials**. Releases are published to Maven Central
+by CI with [sbt-ci-release](https://github.com/sbt/sbt-ci-release): a `v*` tag
+publishes a release (and a GitHub Release with the fat jar), a push to `main`
+publishes a `-SNAPSHOT`.
 
 `PLANTUML_LIMIT_SIZE` env/system-property raises PlantUML's 4096px diagram size
 cap.
