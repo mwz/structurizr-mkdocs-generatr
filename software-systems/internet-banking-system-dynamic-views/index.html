@@ -1,0 +1,1220 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../internet-banking-system-component-views/">
+      
+      
+        <link rel="next" href="../internet-banking-system-deployment-views/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Dynamic views - Big Bank plc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Big Bank plc" class="md-header__button md-logo" aria-label="Big Bank plc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Big Bank plc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dynamic views
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mwz/structurizr-mkdocs-generatr" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Big Bank plc" class="md-nav__button md-logo" aria-label="Big Bank plc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Big Bank plc
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mwz/structurizr-mkdocs-generatr" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Bank plc architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/01-embedding-diagrams-and-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embedding diagrams and images
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Systems - Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1">
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acquirer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Acquirer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acquirer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acquirer-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Bank plc
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Big Bank plc
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ATM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atm-container-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atm-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E-mail System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    E-mail System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../e-mail-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../e-mail-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3" id="__nav_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Internet Banking System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Internet Banking System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-context-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-container-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-component-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dynamic views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-deployment-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_4" id="__nav_4_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mainframe Banking System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mainframe Banking System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mainframe-banking-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mainframe-banking-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Dynamic views</h1>
+
+<p>SignIn</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">SVG</label><label for="__tabbed_1_2">PNG</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p></p><center><svg contentstyletype="text/css" data-diagram-type="DESCRIPTION" preserveAspectRatio="meet" version="1.1" viewBox="0 0 1184 720" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify"><!--?plantuml 1.2026.8?--><defs></defs><g font-family="sans-serif" lengthAdjust="spacing"><g class="title" data-source-line="1"><text fill="#444" font-size="24" font-weight="700" textLength="778.219" x="199.821" y="32.277">Dynamic View: Internet Banking System - API Application</text><text fill="#444" font-size="12" font-weight="700" textLength="500.045" x="338.908" y="49.076">Summarises how the sign in feature works in the single-page application.</text></g><!--cluster InternetBankingSystem_boundary--><g class="cluster" data-qualified-name="InternetBankingSystem_boundary" data-source-line="1666" id="ent0001"><rect fill="none" height="435" style="stroke:#444;stroke-width:1;stroke-dasharray:7,7;" width="1163.86" x="7" y="69.906"></rect><text fill="#444" font-size="16" font-weight="700" textLength="224.766" x="476.547" y="86.758">Internet Banking System</text><text fill="#444" font-size="12" font-weight="700" textLength="59.455" x="559.202" y="101.67">[system]</text></g><!--cluster InternetBankingSystem.APIApplication_boundary--><g class="cluster" data-qualified-name="InternetBankingSystem_boundary.InternetBankingSystem.APIApplication_boundary" data-source-line="1666" id="ent0002"><rect fill="#FFF" height="200" style="stroke:#2E6295;stroke-width:1;" width="694.82" x="452.04" y="128.906"></rect><text fill="#2E6295" font-size="16" font-weight="700" textLength="137.688" x="730.606" y="145.758">API Application</text><text fill="#2E6295" font-size="12" font-weight="700" textLength="75.416" x="761.742" y="160.67">[container]</text></g><!--entity InternetBankingSystem.Database--><g class="entity" data-qualified-name="InternetBankingSystem_boundary.InternetBankingSystem.Database" data-source-line="75" id="ent0005"><path d="M461.2,355.366 C461.2,345.366 565.327,345.366 565.327,345.366 C565.327,345.366 669.455,345.366 669.455,355.366 L669.455,478.444 C669.455,488.444 565.327,488.444 565.327,488.444 C565.327,488.444 461.2,488.444 461.2,478.444 L461.2,355.366" fill="#438DD5" style="stroke:#2E6295;stroke-width:0.5;"></path><path d="M461.2,355.366 C461.2,365.366 565.327,365.366 565.327,365.366 C565.327,365.366 669.455,365.366 669.455,355.366" fill="none" style="stroke:#2E6295;stroke-width:0.5;"></path><text fill="#FFF" font-size="16" font-weight="700" textLength="85.148" x="522.753" y="384.218">Database</text><text fill="#FFF" font-size="12" font-style="italic" textLength="43.729" x="484.556" y="399.13">[Oracle</text><text fill="#FFF" font-size="12" font-style="italic" x="528.284" y="399.13">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="57.258" x="532.099" y="399.13">Database</text><text fill="#FFF" font-size="12" font-style="italic" x="589.357" y="399.13">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="52.928" x="593.171" y="399.13">Schema]</text><text fill="#FFF" font-size="14" x="563.102" y="414.955">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.604" x="482.766" y="431.252">Stores</text><text fill="#FFF" font-size="14" x="527.371" y="431.252">&nbsp;</text><text fill="#FFF" font-size="14" textLength="30.536" x="531.821" y="431.252">user</text><text fill="#FFF" font-size="14" x="562.357" y="431.252">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.081" x="566.807" y="431.252">registration</text><text fill="#FFF" font-size="14" textLength="85.497" x="494.794" y="447.549">information,</text><text fill="#FFF" font-size="14" x="580.291" y="447.549">&nbsp;</text><text fill="#FFF" font-size="14" textLength="51.119" x="584.742" y="447.549">hashed</text><text fill="#FFF" font-size="14" textLength="101.773" x="471.2" y="463.846">authentication</text><text fill="#FFF" font-size="14" x="572.973" y="463.846">&nbsp;</text><text fill="#FFF" font-size="14" textLength="82.031" x="577.424" y="463.846">credentials,</text><text fill="#FFF" font-size="14" textLength="47.175" x="507.622" y="480.143">access</text><text fill="#FFF" font-size="14" x="554.797" y="480.143">&nbsp;</text><text fill="#FFF" font-size="14" textLength="33.086" x="559.247" y="480.143">logs,</text><text fill="#FFF" font-size="14" x="592.333" y="480.143">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.25" x="596.783" y="480.143">etc.</text></g><!--entity InternetBankingSystem.SinglePageApplication--><g class="entity" data-qualified-name="InternetBankingSystem_boundary.InternetBankingSystem.SinglePageApplication" data-source-line="71" id="ent0006"><rect fill="#438DD5" height="152.703" style="stroke:#2E6295;stroke-width:0.5;" width="206.197" x="23" y="170.556"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="107.656" x="72.271" y="195.408">Single-Page</text><text fill="#FFF" font-size="16" font-weight="700" textLength="102.055" x="75.071" y="214.033">Application</text><text fill="#FFF" font-size="12" font-style="italic" textLength="64.834" x="52.909" y="228.945">[JavaScript</text><text fill="#FFF" font-size="12" font-style="italic" x="117.743" y="228.945">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="22.576" x="121.558" y="228.945">and</text><text fill="#FFF" font-size="12" font-style="italic" x="144.134" y="228.945">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="51.34" x="147.948" y="228.945">Angular]</text><text fill="#FFF" font-size="14" x="123.874" y="244.77">&nbsp;</text><text fill="#FFF" font-size="14" textLength="59.732" x="33" y="261.067">Provides</text><text fill="#FFF" font-size="14" x="92.732" y="261.067">&nbsp;</text><text fill="#FFF" font-size="14" textLength="16.358" x="97.183" y="261.067">all</text><text fill="#FFF" font-size="14" x="113.541" y="261.067">&nbsp;</text><text fill="#FFF" font-size="14" textLength="13.494" x="117.991" y="261.067">of</text><text fill="#FFF" font-size="14" x="131.485" y="261.067">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="135.936" y="261.067">the</text><text fill="#FFF" font-size="14" x="158.911" y="261.067">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.836" x="163.361" y="261.067">Internet</text><text fill="#FFF" font-size="14" textLength="56.096" x="42.912" y="277.364">banking</text><text fill="#FFF" font-size="14" x="99.008" y="277.364">&nbsp;</text><text fill="#FFF" font-size="14" textLength="87.322" x="103.458" y="277.364">functionality</text><text fill="#FFF" font-size="14" x="190.78" y="277.364">&nbsp;</text><text fill="#FFF" font-size="14" textLength="14.055" x="195.23" y="277.364">to</text><text fill="#FFF" font-size="14" textLength="73.22" x="41.651" y="293.661">customers</text><text fill="#FFF" font-size="14" x="114.871" y="293.661">&nbsp;</text><text fill="#FFF" font-size="14" textLength="20.754" x="119.321" y="293.661">via</text><text fill="#FFF" font-size="14" x="140.075" y="293.661">&nbsp;</text><text fill="#FFF" font-size="14" textLength="32.621" x="144.525" y="293.661">their</text><text fill="#FFF" font-size="14" x="177.146" y="293.661">&nbsp;</text><text fill="#FFF" font-size="14" textLength="28.95" x="181.596" y="293.661">web</text><text fill="#FFF" font-size="14" textLength="60.771" x="95.713" y="309.958">browser.</text></g><!--entity InternetBankingSystem.APIApplication.SignInController--><g class="entity" data-qualified-name="InternetBankingSystem_boundary.InternetBankingSystem.APIApplication_boundary.InternetBankingSystem.APIApplication.SignInController" data-source-line="78" id="ent0003"><rect fill="#85BBF0" height="117.781" style="stroke:#5D82A8;stroke-width:0.5;" width="194.563" x="468.04" y="187.016"></rect><text fill="#000" font-size="16" font-weight="700" textLength="39.852" x="485.97" y="211.868">Sign</text><text fill="#000" font-size="16" font-weight="700" x="525.821" y="211.868">&nbsp;</text><text fill="#000" font-size="16" font-weight="700" textLength="17.344" x="531.392" y="211.868">In</text><text fill="#000" font-size="16" font-weight="700" x="548.735" y="211.868">&nbsp;</text><text fill="#000" font-size="16" font-weight="700" textLength="90.367" x="554.306" y="211.868">Controller</text><text fill="#000" font-size="12" font-style="italic" textLength="43.406" x="479.101" y="226.78">[Spring</text><text fill="#000" font-size="12" font-style="italic" x="522.507" y="226.78">&nbsp;</text><text fill="#000" font-size="12" font-style="italic" textLength="26.941" x="526.321" y="226.78">MVC</text><text fill="#000" font-size="12" font-style="italic" x="553.263" y="226.78">&nbsp;</text><text fill="#000" font-size="12" font-style="italic" textLength="26.678" x="557.077" y="226.78">Rest</text><text fill="#000" font-size="12" font-style="italic" x="583.755" y="226.78">&nbsp;</text><text fill="#000" font-size="12" font-style="italic" textLength="63.973" x="587.569" y="226.78">Controller]</text><text fill="#000" font-size="14" x="563.096" y="242.605">&nbsp;</text><text fill="#000" font-size="14" textLength="44.666" x="478.04" y="258.902">Allows</text><text fill="#000" font-size="14" x="522.706" y="258.902">&nbsp;</text><text fill="#000" font-size="14" textLength="37.83" x="527.156" y="258.902">users</text><text fill="#000" font-size="14" x="564.986" y="258.902">&nbsp;</text><text fill="#000" font-size="14" textLength="14.055" x="569.436" y="258.902">to</text><text fill="#000" font-size="14" x="583.491" y="258.902">&nbsp;</text><text fill="#000" font-size="14" textLength="28.943" x="587.941" y="258.902">sign</text><text fill="#000" font-size="14" x="616.885" y="258.902">&nbsp;</text><text fill="#000" font-size="14" textLength="12.763" x="621.335" y="258.902">in</text><text fill="#000" font-size="14" x="634.098" y="258.902">&nbsp;</text><text fill="#000" font-size="14" textLength="14.055" x="638.548" y="258.902">to</text><text fill="#000" font-size="14" textLength="22.976" x="493.059" y="275.199">the</text><text fill="#000" font-size="14" x="516.034" y="275.199">&nbsp;</text><text fill="#000" font-size="14" textLength="55.836" x="520.484" y="275.199">Internet</text><text fill="#000" font-size="14" x="576.32" y="275.199">&nbsp;</text><text fill="#000" font-size="14" textLength="56.813" x="580.77" y="275.199">Banking</text><text fill="#000" font-size="14" textLength="56.656" x="536.993" y="291.496">System.</text></g><!--entity InternetBankingSystem.APIApplication.SecurityComponent--><g class="entity" data-qualified-name="InternetBankingSystem_boundary.InternetBankingSystem.APIApplication_boundary.InternetBankingSystem.APIApplication.SecurityComponent" data-source-line="78" id="ent0004"><rect fill="#85BBF0" height="117.781" style="stroke:#5D82A8;stroke-width:0.5;" width="203.406" x="927.45" y="195.016"></rect><text fill="#000" font-size="16" font-weight="700" textLength="74.703" x="937.45" y="219.868">Security</text><text fill="#000" font-size="16" font-weight="700" x="1012.153" y="219.868">&nbsp;</text><text fill="#000" font-size="16" font-weight="700" textLength="103.133" x="1017.723" y="219.868">Component</text><text fill="#000" font-size="12" font-style="italic" textLength="43.406" x="987.915" y="234.78">[Spring</text><text fill="#000" font-size="12" font-style="italic" x="1031.321" y="234.78">&nbsp;</text><text fill="#000" font-size="12" font-style="italic" textLength="35.256" x="1035.136" y="234.78">Bean]</text><text fill="#000" font-size="14" x="1026.928" y="250.605">&nbsp;</text><text fill="#000" font-size="14" textLength="59.732" x="953.401" y="266.902">Provides</text><text fill="#000" font-size="14" x="1013.133" y="266.902">&nbsp;</text><text fill="#000" font-size="14" textLength="87.322" x="1017.583" y="266.902">functionality</text><text fill="#000" font-size="14" textLength="49.827" x="956.634" y="283.199">related</text><text fill="#000" font-size="14" x="1006.461" y="283.199">&nbsp;</text><text fill="#000" font-size="14" textLength="14.055" x="1010.911" y="283.199">to</text><text fill="#000" font-size="14" x="1024.966" y="283.199">&nbsp;</text><text fill="#000" font-size="14" textLength="50.593" x="1029.416" y="283.199">signing</text><text fill="#000" font-size="14" x="1080.009" y="283.199">&nbsp;</text><text fill="#000" font-size="14" textLength="17.213" x="1084.459" y="283.199">in,</text><text fill="#000" font-size="14" textLength="64.559" x="940.071" y="299.496">changing</text><text fill="#000" font-size="14" x="1004.629" y="299.496">&nbsp;</text><text fill="#000" font-size="14" textLength="78.456" x="1009.079" y="299.496">passwords,</text><text fill="#000" font-size="14" x="1087.535" y="299.496">&nbsp;</text><text fill="#000" font-size="14" textLength="26.25" x="1091.986" y="299.496">etc.</text></g><!--link InternetBankingSystem.SinglePageApplication to InternetBankingSystem.APIApplication.SignInController--><g class="link" data-entity-1="ent0006" data-entity-2="ent0003" data-link-type="dependency" data-source-line="1779" id="lnk7"><path d="M229.65,278.546 C239.56,280.726 249.52,282.576 259.2,283.906 C334.93,294.316 355.49,294.496 431.2,283.906 C443.1,282.236 447.647,281.629 459.787,278.739" fill="none" id="InternetBankingSystem.SinglePageApplication-to-InternetBankingSystem.APIApplication.SignInController" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="467.57,276.886,459.093,275.82,460.482,281.657,467.57,276.886" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="13.148" x="260.2" y="267.045">1:</text><text fill="#444" font-size="12" font-weight="700" x="273.348" y="267.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="55.271" x="277.526" y="267.045">Submits</text><text fill="#444" font-size="12" font-weight="700" x="332.798" y="267.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="75.645" x="336.975" y="267.045">credentials</text><text fill="#444" font-size="12" font-weight="700" x="412.62" y="267.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="416.798" y="267.045">to</text><text fill="#444" font-size="12" font-style="italic" textLength="81.521" x="304.728" y="281.014">[JSON/HTTPS]</text></g><!--link InternetBankingSystem.APIApplication.SignInController to InternetBankingSystem.SinglePageApplication--><g class="link" data-entity-1="ent0003" data-entity-2="ent0006" data-link-type="dependency" data-source-line="1779" id="lnk12"><path d="M467.7,246.126 C397.11,246.286 309.54,246.487 237.61,246.657" fill="none" id="InternetBankingSystem.APIApplication.SignInController-to-InternetBankingSystem.SinglePageApplication" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="229.61,246.676,237.617,249.657,237.603,243.657,229.61,246.676" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="13.148" x="287.759" y="215.365">6:</text><text fill="#444" font-size="12" font-weight="700" x="300.907" y="215.365">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="41.057" x="305.085" y="215.365">Sends</text><text fill="#444" font-size="12" font-weight="700" x="346.141" y="215.365">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="31.781" x="350.319" y="215.365">back</text><text fill="#444" font-size="12" font-weight="700" x="382.1" y="215.365">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="16.641" x="386.278" y="215.365">an</text><text fill="#444" font-size="12" font-weight="700" textLength="99.299" x="265.2" y="229.334">authentication</text><text fill="#444" font-size="12" font-weight="700" x="364.499" y="229.334">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="38.643" x="368.677" y="229.334">token</text><text fill="#444" font-size="12" font-weight="700" x="407.319" y="229.334">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="411.497" y="229.334">to</text><text fill="#444" font-size="12" font-style="italic" textLength="81.521" x="304.578" y="243.302">[JSON/HTTPS]</text></g><!--link InternetBankingSystem.APIApplication.SignInController to InternetBankingSystem.APIApplication.SecurityComponent--><g class="link" data-entity-1="ent0003" data-entity-2="ent0004" data-link-type="dependency" data-source-line="1779" id="lnk8"><path d="M662.82,274.366 C675.06,277.056 687.48,279.356 699.45,280.906 C786.73,292.186 809.91,289.856 897.45,280.906 C907.13,279.916 909.266,279.822 919.256,278.182" fill="none" id="InternetBankingSystem.APIApplication.SignInController-to-InternetBankingSystem.APIApplication.SecurityComponent" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="927.15,276.886,918.77,275.222,919.742,281.143,927.15,276.886" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="13.148" x="718.45" y="264.045">2:</text><text fill="#444" font-size="12" font-weight="700" x="731.598" y="264.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="63.316" x="735.776" y="264.045">Validates</text><text fill="#444" font-size="12" font-weight="700" x="799.093" y="264.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="75.645" x="803.27" y="264.045">credentials</text><text fill="#444" font-size="12" font-weight="700" textLength="36.932" x="780.217" y="278.014">using</text></g><!--link InternetBankingSystem.APIApplication.SecurityComponent to InternetBankingSystem.APIApplication.SignInController--><g class="link" data-entity-1="ent0004" data-entity-2="ent0003" data-link-type="dependency" data-source-line="1779" id="lnk11"><path d="M927.2,248.866 C917.15,248.486 907.1,248.156 897.45,247.906 C818.58,245.856 737.1,245.431 671.06,245.471" fill="none" id="InternetBankingSystem.APIApplication.SecurityComponent-to-InternetBankingSystem.APIApplication.SignInController" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="663.06,245.476,671.06,248.476,671.06,242.476,663.06,245.476" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="13.148" x="700.45" y="228.645">5:</text><text fill="#444" font-size="12" font-weight="700" x="713.598" y="228.645">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="53.262" x="717.776" y="228.645">Returns</text><text fill="#444" font-size="12" font-weight="700" x="771.038" y="228.645">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="28.336" x="775.216" y="228.645">true</text><text fill="#444" font-size="12" font-weight="700" x="803.552" y="228.645">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="9.334" x="807.729" y="228.645">if</text><text fill="#444" font-size="12" font-weight="700" x="817.063" y="228.645">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="22.418" x="821.241" y="228.645">the</text><text fill="#444" font-size="12" font-weight="700" x="843.659" y="228.645">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="49.055" x="847.837" y="228.645">hashed</text><text fill="#444" font-size="12" font-weight="700" textLength="64.811" x="735.539" y="242.614">password</text><text fill="#444" font-size="12" font-weight="700" x="800.349" y="242.614">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="57.275" x="804.527" y="242.614">matches</text></g><!--link InternetBankingSystem.APIApplication.SecurityComponent to InternetBankingSystem.Database--><g class="link" data-entity-1="ent0004" data-entity-2="ent0005" data-link-type="dependency" data-source-line="1779" id="lnk9"><path d="M947.68,313.146 C931.61,323.146 914.43,332.626 897.45,339.906 C824.36,371.256 744.352,389.567 677.502,401.177" fill="none" id="InternetBankingSystem.APIApplication.SecurityComponent-to-InternetBankingSystem.Database" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="669.62,402.546,678.015,404.133,676.989,398.222,669.62,402.546" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="13.148" x="702.95" y="309.045">3:</text><text fill="#444" font-size="12" font-weight="700" x="716.098" y="309.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="40.383" x="720.276" y="309.045">select</text><text fill="#444" font-size="12" font-weight="700" x="760.659" y="309.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" x="764.837" y="309.045">*</text><text fill="#444" font-size="12" font-weight="700" x="771.112" y="309.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="31.887" x="775.29" y="309.045">from</text><text fill="#444" font-size="12" font-weight="700" x="807.177" y="309.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="36.885" x="811.354" y="309.045">users</text><text fill="#444" font-size="12" font-weight="700" x="848.239" y="309.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="41.824" x="852.417" y="309.045">where</text><text fill="#444" font-size="12" font-weight="700" textLength="67.025" x="752.397" y="323.014">username</text><text fill="#444" font-size="12" font-weight="700" x="819.423" y="323.014">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" x="823.6" y="323.014">=</text><text fill="#444" font-size="12" font-weight="700" x="833.655" y="323.014">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" x="837.833" y="323.014">?</text><text fill="#444" font-size="12" font-style="italic" textLength="38.754" x="779.219" y="336.982">[JDBC]</text></g><!--link InternetBankingSystem.Database to InternetBankingSystem.APIApplication.SecurityComponent--><g class="link" data-entity-1="ent0005" data-entity-2="ent0004" data-link-type="dependency" data-source-line="1779" id="lnk10"><path d="M669.63,447.366 C737.92,461.576 827.41,468.486 897.45,432.906 C946.51,407.986 977.904,362.182 999.274,320.302" fill="none" id="InternetBankingSystem.Database-to-InternetBankingSystem.APIApplication.SecurityComponent" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="1002.91,313.176,996.602,318.939,1001.946,321.666,1002.91,313.176" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="13.148" x="719.95" y="416.045">4:</text><text fill="#444" font-size="12" font-weight="700" x="733.098" y="416.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="53.262" x="737.276" y="416.045">Returns</text><text fill="#444" font-size="12" font-weight="700" x="790.538" y="416.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="29.742" x="794.716" y="416.045">user</text><text fill="#444" font-size="12" font-weight="700" x="824.458" y="416.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="30.521" x="828.636" y="416.045">data</text><text fill="#444" font-size="12" font-weight="700" x="859.157" y="416.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="863.335" y="416.045">to</text><text fill="#444" font-size="12" font-style="italic" textLength="38.754" x="779.256" y="430.014">[JDBC]</text></g><g class="legend" data-source-line="1576"><rect fill="none" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="531.906"></rect><text fill="#000" font-size="14" font-weight="700" textLength="57.921" x="934.173" y="544.901">Legend</text><text fill="#FFF" font-size="14" x="996.968" y="544.901">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="548.203"></rect><text fill="#3C7FC0" font-size="14" x="938.624" y="561.198">▯</text><text fill="#FFF" font-size="14" x="946.328" y="561.198">&nbsp;</text><text fill="#FFF" font-size="14" textLength="66.336" x="955.228" y="561.198">container</text><text fill="#FFF" font-size="14" x="1026.014" y="561.198">&nbsp;</text><rect fill="#85BBF0" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="564.5"></rect><text fill="#78A8D8" font-size="14" x="938.624" y="577.495">▯</text><text fill="#FFF" font-size="14" x="946.328" y="577.495">&nbsp;</text><text fill="#000" font-size="14" textLength="79.201" x="955.228" y="577.495">component</text><text fill="#FFF" font-size="14" x="1038.88" y="577.495">&nbsp;</text><rect fill="none" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="580.797"></rect><text fill="#444" font-size="14" x="938.624" y="593.792">▯</text><text fill="#FFF" font-size="14" x="946.328" y="593.792">&nbsp;</text><text fill="#444" font-size="14" textLength="121.769" x="955.228" y="593.792">system boundary</text><text fill="#FFF" font-size="14" x="1081.447" y="593.792">&nbsp;</text><rect fill="none" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="597.094"></rect><text fill="#444" font-size="14" x="938.624" y="610.089">▯</text><text fill="#FFF" font-size="14" x="946.328" y="610.089">&nbsp;</text><text fill="#444" font-size="14" textLength="137.491" x="955.228" y="610.089">container boundary</text><text fill="#FFF" font-size="14" x="1097.17" y="610.089">&nbsp;</text><rect fill="#85BBF0" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="613.391"></rect><text fill="#5D82A8" font-size="14" x="938.624" y="626.386">▯</text><text fill="#FFF" font-size="14" x="946.328" y="626.386">&nbsp;</text><text fill="#000" font-size="14" textLength="81.279" x="955.228" y="626.386">Component</text><text fill="#000" font-size="10" textLength="31.035" x="1040.958" y="627.329">(solid)</text><text fill="#FFF" font-size="14" x="1071.993" y="626.386">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="629.688"></rect><text fill="#2E6295" font-size="14" x="938.624" y="642.683">▯</text><text fill="#FFF" font-size="14" x="946.328" y="642.683">&nbsp;</text><text fill="#FFF" font-size="14" textLength="139.665" x="955.228" y="642.683">Container,Database</text><text fill="#FFF" font-size="10" textLength="31.035" x="1099.343" y="643.626">(solid)</text><text fill="#FFF" font-size="14" x="1130.379" y="642.683">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="645.984"></rect><text fill="#2E6295" font-size="14" x="938.624" y="658.979">▯</text><text fill="#FFF" font-size="14" x="946.328" y="658.979">&nbsp;</text><text fill="#FFF" font-size="14" textLength="165.696" x="955.228" y="658.979">Container,Web Browser</text><text fill="#FFF" font-size="10" textLength="31.035" x="1125.375" y="659.923">(solid)</text><text fill="#FFF" font-size="14" x="1156.41" y="658.979">&nbsp;</text><text fill="#444" font-size="14" x="938.624" y="675.276">─</text><text fill="#FFF" font-size="14" x="947.052" y="675.276">&nbsp;</text><text fill="#444" font-size="14" textLength="86.57" x="955.953" y="675.276">Relationship</text><text fill="#FFF" font-size="14" x="1046.973" y="675.276">&nbsp;</text><rect fill="#FFF" height="16.297" style="stroke:none;" width="226.687" x="934.173" y="678.578"></rect><text fill="#2E6295" font-size="14" x="938.624" y="691.573">▯</text><text fill="#FFF" font-size="14" x="946.328" y="691.573">&nbsp;</text><text fill="#2E6295" font-size="14" textLength="139.569" x="955.228" y="691.573">Container boundary</text><text fill="#2E6295" font-size="10" textLength="31.035" x="1099.248" y="692.517">(solid)</text><text fill="#FFF" font-size="14" x="1130.283" y="691.573">&nbsp;</text><line style="stroke:none;" x1="934.173" x2="1160.86" y1="531.906" y2="531.906"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="548.203" y2="548.203"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="564.5" y2="564.5"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="580.797" y2="580.797"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="597.094" y2="597.094"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="613.391" y2="613.391"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="629.688" y2="629.688"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="645.984" y2="645.984"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="662.281" y2="662.281"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="678.578" y2="678.578"></line><line style="stroke:none;" x1="934.173" x2="1160.86" y1="694.875" y2="694.875"></line><line style="stroke:none;" x1="934.173" x2="934.173" y1="531.906" y2="694.875"></line><line style="stroke:none;" x1="1160.86" x2="1160.86" y1="531.906" y2="694.875"></line></g></g></svg></center><p></p>
+</div>
+<div class="tabbed-block">
+<p></p><center><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../img/SignIn.png" data-desc-position="bottom"><img alt="SignInPNG" src="../../img/SignIn.png"></a></center><p></p>
+</div>
+</div>
+</div>
+<p></p><center>Summarises how the sign in feature works in the single-page application.</center><p></p>
+<div style="font-size: small; font-style: italic;">
+11/11/2026 @ 01:07
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

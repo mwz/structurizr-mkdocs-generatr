@@ -1,0 +1,1430 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../../software-systems/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Embedding diagrams and images - Big Bank plc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#embedding-diagrams-and-images" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Big Bank plc" class="md-header__button md-logo" aria-label="Big Bank plc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Big Bank plc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Embedding diagrams and images
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mwz/structurizr-mkdocs-generatr" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Big Bank plc" class="md-nav__button md-logo" aria-label="Big Bank plc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Big Bank plc
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mwz/structurizr-mkdocs-generatr" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Bank plc architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embedding diagrams and images
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embedding diagrams and images
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#embedding-diagrams-and-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding diagrams and images
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Embedding diagrams and images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#embedding-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding diagrams
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Embedding diagrams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-embedded-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Embedded diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embedding-static-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding static images
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Embedding static images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-embedded-picture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Embedded picture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Systems - Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1">
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acquirer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Acquirer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/acquirer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/acquirer-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Bank plc
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Big Bank plc
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ATM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/atm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/atm-container-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/atm-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E-mail System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    E-mail System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/e-mail-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/e-mail-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3" id="__nav_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Internet Banking System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Internet Banking System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/internet-banking-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/internet-banking-system-context-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/internet-banking-system-container-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/internet-banking-system-component-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/internet-banking-system-dynamic-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dynamic views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/internet-banking-system-deployment-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/internet-banking-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_4" id="__nav_4_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mainframe Banking System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mainframe Banking System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/mainframe-banking-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software-systems/mainframe-banking-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#embedding-diagrams-and-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding diagrams and images
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Embedding diagrams and images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#embedding-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding diagrams
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Embedding diagrams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-embedded-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Embedded diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embedding-static-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding static images
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Embedding static images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-embedded-picture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Embedded picture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Embedding diagrams and images</h1>
+
+<h2 id="embedding-diagrams-and-images">Embedding diagrams and images</h2>
+<p>This page showcases the ability to embed diagrams and static images in
+documentation.</p>
+<h3 id="embedding-diagrams">Embedding diagrams</h3>
+<p>Diagrams can be embedded using the <code>embed:</code> syntax:</p>
+<div class="highlight"><pre><span></span><code>![<span class="nt">System Landscape Diagram</span>](<span class="na">embed:SystemLandscape</span>)
+</code></pre></div>
+<p>See also: <a href="https://www.structurizr.com/help/documentation/diagrams">https://www.structurizr.com/help/documentation/diagrams</a></p>
+<h4 id="example-embedded-diagram">Example: Embedded diagram</h4>
+<p>SystemLandscape</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">SVG</label><label for="__tabbed_1_2">PNG</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p></p><center><svg contentstyletype="text/css" data-diagram-type="DESCRIPTION" preserveAspectRatio="meet" version="1.1" viewBox="0 0 1553 1010" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify"><!--?plantuml 1.2026.8?--><defs></defs><g font-family="sans-serif" lengthAdjust="spacing"><g class="title" data-source-line="1"><text fill="#444" font-size="24" font-weight="700" textLength="325.852" x="610.48" y="32.277">System Landscape View</text></g><!--cluster group_1--><g class="cluster" data-qualified-name="group_1" data-source-line="1666" id="ent0001"><rect fill="none" height="472.86" rx="2.5" ry="2.5" style="stroke:#CCC;stroke-width:1;stroke-dasharray:7,7;" width="1123" x="7" y="305.068"></rect><text fill="#CCC" font-size="16" font-weight="700" textLength="111.719" x="512.641" y="321.919">Big Bank plc</text></g><!--entity CustomerServiceStaff--><g class="entity" data-qualified-name="group_1.CustomerServiceStaff" data-source-line="178" id="ent0002"><rect fill="#08427B" height="178.13" style="stroke:#052E56;stroke-width:0.5;" width="245.388" x="23.31" y="342.068"></rect><image height="52" width="52" x="120.158" xlink:href="data:image/png;base64,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" y="352.068"></image><text fill="#FFF" font-size="16" font-weight="700" textLength="86.711" x="66.605" y="418.611">Customer</text><text fill="#FFF" font-size="16" font-weight="700" x="153.316" y="418.611">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="66.516" x="158.887" y="418.611">Service</text><text fill="#FFF" font-size="16" font-weight="700" textLength="43.891" x="124.059" y="437.236">Staff</text><text fill="#FFF" font-size="14" x="143.779" y="454.005">&nbsp;</text><text fill="#FFF" font-size="14" textLength="68.004" x="66.868" y="470.302">Customer</text><text fill="#FFF" font-size="14" x="134.872" y="470.302">&nbsp;</text><text fill="#FFF" font-size="14" textLength="50.148" x="139.322" y="470.302">service</text><text fill="#FFF" font-size="14" x="189.47" y="470.302">&nbsp;</text><text fill="#FFF" font-size="14" textLength="31.22" x="193.92" y="470.302">staff</text><text fill="#FFF" font-size="14" textLength="42.465" x="89.385" y="486.599">within</text><text fill="#FFF" font-size="14" x="131.85" y="486.599">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="136.3" y="486.599">the</text><text fill="#FFF" font-size="14" x="159.276" y="486.599">&nbsp;</text><text fill="#FFF" font-size="14" textLength="38.896" x="163.726" y="486.599">bank.</text><text fill="#FFF" font-size="14" textLength="59.459" x="37.76" y="504.896">Location</text><text fill="#FFF" font-size="14" font-weight="700" textLength="147.28" x="106.543" y="504.896">Customer Services</text><line style="stroke:#FFF;stroke-width:0.5;" x1="33.31" x2="258.698" y1="491.9" y2="491.9"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="33.31" x2="258.698" y1="508.197" y2="508.197"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="33.31" x2="33.31" y1="491.9" y2="508.197"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="101.669" x2="101.669" y1="491.9" y2="508.197"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="258.698" x2="258.698" y1="491.9" y2="508.197"></line></g><!--entity BackOfficeStaff--><g class="entity" data-qualified-name="group_1.BackOfficeStaff" data-source-line="178" id="ent0003"><rect fill="#08427B" height="159.505" style="stroke:#052E56;stroke-width:0.5;" width="231.996" x="499" y="351.378"></rect><image height="52" width="52" x="589.152" xlink:href="data:image/png;base64,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" y="361.378"></image><text fill="#FFF" font-size="16" font-weight="700" textLength="43.117" x="539.252" y="427.921">Back</text><text fill="#FFF" font-size="16" font-weight="700" x="582.369" y="427.921">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="53.344" x="587.939" y="427.921">Office</text><text fill="#FFF" font-size="16" font-weight="700" x="641.283" y="427.921">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="43.891" x="646.854" y="427.921">Staff</text><text fill="#FFF" font-size="14" x="612.773" y="444.69">&nbsp;</text><text fill="#FFF" font-size="14" textLength="102.689" x="519.158" y="460.987">Administration</text><text fill="#FFF" font-size="14" x="621.848" y="460.987">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.339" x="626.298" y="460.987">and</text><text fill="#FFF" font-size="14" x="652.637" y="460.987">&nbsp;</text><text fill="#FFF" font-size="14" textLength="53.751" x="657.087" y="460.987">support</text><text fill="#FFF" font-size="14" textLength="31.22" x="540.544" y="477.284">staff</text><text fill="#FFF" font-size="14" x="571.764" y="477.284">&nbsp;</text><text fill="#FFF" font-size="14" textLength="42.465" x="576.214" y="477.284">within</text><text fill="#FFF" font-size="14" x="618.679" y="477.284">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="623.129" y="477.284">the</text><text fill="#FFF" font-size="14" x="646.105" y="477.284">&nbsp;</text><text fill="#FFF" font-size="14" textLength="38.896" x="650.555" y="477.284">bank.</text><text fill="#FFF" font-size="14" textLength="59.459" x="513.45" y="495.581">Location</text><text fill="#FFF" font-size="14" font-weight="700" textLength="133.889" x="582.233" y="495.581">Internal Services</text><line style="stroke:#FFF;stroke-width:0.5;" x1="509" x2="720.996" y1="482.585" y2="482.585"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="509" x2="720.996" y1="498.882" y2="498.882"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="509" x2="509" y1="482.585" y2="498.882"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="577.359" x2="577.359" y1="482.585" y2="498.882"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="720.996" x2="720.996" y1="482.585" y2="498.882"></line></g><!--entity MainframeBankingSystem--><g class="entity" data-qualified-name="group_1.MainframeBankingSystem" data-source-line="197" id="ent0004"><a href="../../software-systems/mainframe-banking-system/" target="_top" title="../../software-systems/mainframe-banking-system/" xlink:actuate="onRequest" xlink:href="../../software-systems/mainframe-banking-system/" xlink:show="new" xlink:title="../../software-systems/mainframe-banking-system/" xlink:type="simple"><rect fill="#999" height="138.734" style="stroke:#6B6B6B;stroke-width:0.5;" width="206.437" x="511.78" y="623.198"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="96.766" x="527.155" y="648.049">Mainframe</text><text fill="#FFF" font-size="16" font-weight="700" x="623.92" y="648.049">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="73.352" x="629.49" y="648.049">Banking</text><text fill="#FFF" font-size="16" font-weight="700" textLength="66.648" x="581.674" y="666.674">System</text><text fill="#FFF" font-size="14" x="612.773" y="683.443">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.604" x="542.066" y="699.739">Stores</text><text fill="#FFF" font-size="14" x="586.67" y="699.739">&nbsp;</text><text fill="#FFF" font-size="14" textLength="16.358" x="591.12" y="699.739">all</text><text fill="#FFF" font-size="14" x="607.479" y="699.739">&nbsp;</text><text fill="#FFF" font-size="14" textLength="13.494" x="611.929" y="699.739">of</text><text fill="#FFF" font-size="14" x="625.423" y="699.739">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="629.873" y="699.739">the</text><text fill="#FFF" font-size="14" x="652.849" y="699.739">&nbsp;</text><text fill="#FFF" font-size="14" textLength="30.632" x="657.299" y="699.739">core</text><text fill="#FFF" font-size="14" textLength="56.096" x="521.78" y="716.036">banking</text><text fill="#FFF" font-size="14" x="577.876" y="716.036">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.047" x="582.326" y="716.036">information</text><text fill="#FFF" font-size="14" x="663.373" y="716.036">&nbsp;</text><text fill="#FFF" font-size="14" textLength="40.394" x="667.823" y="716.036">about</text><text fill="#FFF" font-size="14" textLength="77.67" x="540.179" y="732.333">customers,</text><text fill="#FFF" font-size="14" x="617.849" y="732.333">&nbsp;</text><text fill="#FFF" font-size="14" textLength="67.519" x="622.299" y="732.333">accounts,</text><text fill="#FFF" font-size="14" textLength="90.829" x="554.234" y="748.63">transactions,</text><text fill="#FFF" font-size="14" x="645.063" y="748.63">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.25" x="649.513" y="748.63">etc.</text></a></g><!--entity EmailSystem--><g class="entity" data-qualified-name="group_1.EmailSystem" data-source-line="197" id="ent0005"><a href="../../software-systems/e-mail-system/" target="_top" title="../../software-systems/e-mail-system/" xlink:actuate="onRequest" xlink:href="../../software-systems/e-mail-system/" xlink:show="new" xlink:title="../../software-systems/e-mail-system/" xlink:type="simple"><rect fill="#999" height="87.516" style="stroke:#6B6B6B;stroke-width:0.5;" width="196.278" x="898.86" y="648.808"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="56.008" x="932.886" y="673.659">E-mail</text><text fill="#FFF" font-size="16" font-weight="700" x="988.894" y="673.659">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="66.648" x="994.464" y="673.659">System</text><text fill="#FFF" font-size="14" x="994.774" y="690.428">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.038" x="920.416" y="706.724">The</text><text fill="#FFF" font-size="14" x="946.454" y="706.724">&nbsp;</text><text fill="#FFF" font-size="14" textLength="53.963" x="950.904" y="706.724">internal</text><text fill="#FFF" font-size="14" x="1004.867" y="706.724">&nbsp;</text><text fill="#FFF" font-size="14" textLength="64.265" x="1009.318" y="706.724">Microsoft</text><text fill="#FFF" font-size="14" textLength="68.653" x="908.86" y="723.021">Exchange</text><text fill="#FFF" font-size="14" x="977.513" y="723.021">&nbsp;</text><text fill="#FFF" font-size="14" textLength="43.661" x="981.964" y="723.021">e-mail</text><text fill="#FFF" font-size="14" x="1025.625" y="723.021">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.063" x="1030.075" y="723.021">system.</text></a></g><!--entity ATM--><g class="entity" data-qualified-name="group_1.ATM" data-source-line="197" id="ent0006"><a href="../../software-systems/atm/" target="_top" title="../../software-systems/atm/" xlink:actuate="onRequest" xlink:href="../../software-systems/atm/" xlink:show="new" xlink:title="../../software-systems/atm/" xlink:type="simple"><rect fill="#999" height="87.516" style="stroke:#6B6B6B;stroke-width:0.5;" width="160.841" x="303.58" y="387.368"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="39.219" x="364.391" y="412.219">ATM</text><text fill="#FFF" font-size="14" x="381.775" y="428.988">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.666" x="313.58" y="445.284">Allows</text><text fill="#FFF" font-size="14" x="358.246" y="445.284">&nbsp;</text><text fill="#FFF" font-size="14" textLength="73.22" x="362.696" y="445.284">customers</text><text fill="#FFF" font-size="14" x="435.916" y="445.284">&nbsp;</text><text fill="#FFF" font-size="14" textLength="14.055" x="440.366" y="445.284">to</text><text fill="#FFF" font-size="14" textLength="64.374" x="331.142" y="461.581">withdraw</text><text fill="#FFF" font-size="14" x="395.516" y="461.581">&nbsp;</text><text fill="#FFF" font-size="14" textLength="36.894" x="399.966" y="461.581">cash.</text></a></g><!--entity InternetBankingSystem--><g class="entity" data-qualified-name="group_1.InternetBankingSystem" data-source-line="197" id="ent0007"><a href="../../software-systems/internet-banking-system-context-views/" target="_top" title="../../software-systems/internet-banking-system-context-views/" xlink:actuate="onRequest" xlink:href="../../software-systems/internet-banking-system-context-views/" xlink:show="new" xlink:title="../../software-systems/internet-banking-system-context-views/" xlink:type="simple"><rect fill="#1168BD" height="175.328" style="stroke:#0B4884;stroke-width:0.5;" width="347.913" x="766.04" y="343.468"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="73.625" x="863.723" y="368.319">Internet</text><text fill="#FFF" font-size="16" font-weight="700" x="937.348" y="368.319">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="73.352" x="942.918" y="368.319">Banking</text><text fill="#FFF" font-size="16" font-weight="700" textLength="66.648" x="906.672" y="386.944">System</text><text fill="#FFF" font-size="14" x="937.771" y="403.713">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.666" x="851.232" y="420.009">Allows</text><text fill="#FFF" font-size="14" x="895.898" y="420.009">&nbsp;</text><text fill="#FFF" font-size="14" textLength="73.22" x="900.348" y="420.009">customers</text><text fill="#FFF" font-size="14" x="973.568" y="420.009">&nbsp;</text><text fill="#FFF" font-size="14" textLength="14.055" x="978.018" y="420.009">to</text><text fill="#FFF" font-size="14" x="992.073" y="420.009">&nbsp;</text><text fill="#FFF" font-size="14" textLength="32.238" x="996.523" y="420.009">view</text><text fill="#FFF" font-size="14" textLength="81.047" x="858.516" y="436.306">information</text><text fill="#FFF" font-size="14" x="939.562" y="436.306">&nbsp;</text><text fill="#FFF" font-size="14" textLength="40.394" x="944.013" y="436.306">about</text><text fill="#FFF" font-size="14" x="984.406" y="436.306">&nbsp;</text><text fill="#FFF" font-size="14" textLength="32.621" x="988.856" y="436.306">their</text><text fill="#FFF" font-size="14" textLength="34.446" x="849.701" y="452.603">bank</text><text fill="#FFF" font-size="14" x="884.147" y="452.603">&nbsp;</text><text fill="#FFF" font-size="14" textLength="67.519" x="888.597" y="452.603">accounts,</text><text fill="#FFF" font-size="14" x="956.116" y="452.603">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.339" x="960.566" y="452.603">and</text><text fill="#FFF" font-size="14" x="986.905" y="452.603">&nbsp;</text><text fill="#FFF" font-size="14" textLength="38.938" x="991.355" y="452.603">make</text><text fill="#FFF" font-size="14" textLength="74.108" x="902.942" y="468.9">payments.</text><text fill="#FFF" font-size="14" textLength="138.079" x="780.49" y="487.197">Development Team</text><text fill="#FFF" font-size="14" font-weight="700" textLength="171.186" x="927.894" y="487.197">Dev/Internet Services</text><text fill="#FFF" font-size="14" textLength="45.712" x="780.49" y="503.494">Owner</text><text fill="#FFF" font-size="14" font-weight="700" textLength="147.28" x="927.894" y="503.494">Customer Services</text><line style="stroke:#FFF;stroke-width:0.5;" x1="776.04" x2="1103.953" y1="474.202" y2="474.202"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="776.04" x2="1103.953" y1="490.499" y2="490.499"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="776.04" x2="1103.953" y1="506.796" y2="506.796"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="776.04" x2="776.04" y1="474.202" y2="506.796"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="923.019" x2="923.019" y1="474.202" y2="506.796"></line><line style="stroke:#FFF;stroke-width:0.5;" x1="1103.953" x2="1103.953" y1="474.202" y2="506.796"></line></a></g><!--entity PersonalBankingCustomer--><g class="entity" data-qualified-name="PersonalBankingCustomer" data-source-line="178" id="ent0008"><rect fill="#686868" height="174.13" style="stroke:#484848;stroke-width:0.5;" width="188.67" x="636.67" y="55.938"></rect><image height="52" width="52" x="705.159" xlink:href="data:image/png;base64,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" y="65.938"></image><text fill="#FFF" font-size="16" font-weight="700" textLength="78.656" x="652.216" y="132.481">Personal</text><text fill="#FFF" font-size="16" font-weight="700" x="730.872" y="132.481">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="73.352" x="736.442" y="132.481">Banking</text><text fill="#FFF" font-size="16" font-weight="700" textLength="86.711" x="687.649" y="151.106">Customer</text><text fill="#FFF" font-size="14" x="728.78" y="167.875">&nbsp;</text><text fill="#FFF" font-size="14" x="646.67" y="184.172">A</text><text fill="#FFF" font-size="14" x="656.247" y="184.172">&nbsp;</text><text fill="#FFF" font-size="14" textLength="65.926" x="660.697" y="184.172">customer</text><text fill="#FFF" font-size="14" x="726.623" y="184.172">&nbsp;</text><text fill="#FFF" font-size="14" textLength="13.494" x="731.073" y="184.172">of</text><text fill="#FFF" font-size="14" x="744.567" y="184.172">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="749.018" y="184.172">the</text><text fill="#FFF" font-size="14" x="771.993" y="184.172">&nbsp;</text><text fill="#FFF" font-size="14" textLength="38.896" x="776.443" y="184.172">bank,</text><text fill="#FFF" font-size="14" textLength="29.702" x="664.252" y="200.469">with</text><text fill="#FFF" font-size="14" x="693.954" y="200.469">&nbsp;</text><text fill="#FFF" font-size="14" textLength="60.457" x="698.404" y="200.469">personal</text><text fill="#FFF" font-size="14" x="758.861" y="200.469">&nbsp;</text><text fill="#FFF" font-size="14" textLength="34.446" x="763.312" y="200.469">bank</text><text fill="#FFF" font-size="14" textLength="67.519" x="697.246" y="216.766">accounts.</text></g><!--entity Acquirer--><g class="entity" data-qualified-name="Acquirer" data-source-line="197" id="ent0009"><a href="../../software-systems/acquirer/" target="_top" title="../../software-systems/acquirer/" xlink:actuate="onRequest" xlink:href="../../software-systems/acquirer/" xlink:show="new" xlink:title="../../software-systems/acquirer/" xlink:type="simple"><rect fill="#686868" height="87.516" style="stroke:#484848;stroke-width:0.5;" width="209.786" x="1149.11" y="387.368"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="76.828" x="1215.589" y="412.219">Acquirer</text><text fill="#FFF" font-size="14" x="1251.778" y="428.988">&nbsp;</text><text fill="#FFF" font-size="14" textLength="71.463" x="1159.11" y="445.284">Facilitates</text><text fill="#FFF" font-size="14" x="1230.573" y="445.284">&nbsp;</text><text fill="#FFF" font-size="14" textLength="23.044" x="1235.023" y="445.284">PIN</text><text fill="#FFF" font-size="14" x="1258.067" y="445.284">&nbsp;</text><text fill="#FFF" font-size="14" textLength="86.379" x="1262.517" y="445.284">transactions</text><text fill="#FFF" font-size="14" textLength="19.25" x="1202.522" y="461.581">for</text><text fill="#FFF" font-size="14" x="1221.772" y="461.581">&nbsp;</text><text fill="#FFF" font-size="14" textLength="79.263" x="1226.222" y="461.581">merchants.</text></a></g><!--link PersonalBankingCustomer to InternetBankingSystem--><g class="link" data-entity-1="ent0008" data-entity-2="ent0007" data-link-type="dependency" data-source-line="1779" id="lnk10"><path d="M793.99,230.237 C820.07,265.938 845.55,300.828 871.7,336.618" fill="none" id="PersonalBankingCustomer-to-InternetBankingSystem" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="876.42,343.078,874.123,334.848,869.278,338.388,876.42,343.078" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="39.768" x="836.5" y="272.206">Views</text><text fill="#444" font-size="12" font-weight="700" x="876.268" y="272.206">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="53.391" x="880.445" y="272.206">account</text><text fill="#444" font-size="12" font-weight="700" x="933.836" y="272.206">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="64.395" x="938.014" y="272.206">balances,</text><text fill="#444" font-size="12" font-weight="700" x="1002.408" y="272.206">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="25.23" x="1006.586" y="272.206">and</text><text fill="#444" font-size="12" font-weight="700" textLength="43.863" x="856.296" y="286.175">makes</text><text fill="#444" font-size="12" font-weight="700" x="900.159" y="286.175">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="66.574" x="904.337" y="286.175">payments</text><text fill="#444" font-size="12" font-weight="700" x="970.911" y="286.175">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="36.932" x="975.089" y="286.175">using</text></g><!--link InternetBankingSystem to MainframeBankingSystem--><g class="link" data-entity-1="ent0007" data-entity-2="ent0004" data-link-type="dependency" data-source-line="1779" id="lnk11"><path d="M813.47,519.257 C799.65,529.458 785.91,539.908 773,550.198 C744.5,572.898 720.34,593.807 694.16,617.517" fill="none" id="InternetBankingSystem-to-MainframeBankingSystem" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="688.23,622.888,696.173,619.741,692.146,615.294,688.23,622.888" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="30.867" x="780.378" y="562.336">Gets</text><text fill="#444" font-size="12" font-weight="700" x="811.245" y="562.336">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="53.391" x="815.423" y="562.336">account</text><text fill="#444" font-size="12" font-weight="700" x="868.813" y="562.336">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="79.277" x="872.991" y="562.336">information</text><text fill="#444" font-size="12" font-weight="700" textLength="36.445" x="774" y="576.305">from,</text><text fill="#444" font-size="12" font-weight="700" x="810.445" y="576.305">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="25.23" x="814.623" y="576.305">and</text><text fill="#444" font-size="12" font-weight="700" x="839.854" y="576.305">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="43.863" x="844.031" y="576.305">makes</text><text fill="#444" font-size="12" font-weight="700" x="887.895" y="576.305">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="66.574" x="892.072" y="576.305">payments</text><text fill="#444" font-size="12" font-weight="700" textLength="36.932" x="847.857" y="590.274">using</text></g><!--link InternetBankingSystem to EmailSystem--><g class="link" data-entity-1="ent0007" data-entity-2="ent0005" data-link-type="dependency" data-source-line="1779" id="lnk12"><path d="M959.14,519.238 C968.68,562.658 978.085,605.444 985.785,640.524" fill="none" id="InternetBankingSystem-to-EmailSystem" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="987.5,648.338,988.715,639.88,982.855,641.167,987.5,648.338" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="41.057" x="976.28" y="576.336">Sends</text><text fill="#444" font-size="12" font-weight="700" x="1017.337" y="576.336">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="41.947" x="1021.514" y="576.336">e-mail</text><text fill="#444" font-size="12" font-weight="700" x="1063.462" y="576.336">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="36.932" x="1067.639" y="576.336">using</text></g><!--link EmailSystem to PersonalBankingCustomer--><g class="link" data-entity-1="ent0005" data-entity-2="ent0008" data-link-type="dependency" data-source-line="1779" id="lnk13"><path d="M1095.53,678.488 C1163.99,665.608 1254.66,640.648 1322,593.198 C1431.36,516.128 1458.96,402.018 1376,297.068 C1308.42,211.568 995.829,169.615 833.549,153.145" fill="none" id="EmailSystem-to-PersonalBankingCustomer" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="825.59,152.337,833.246,156.13,833.852,150.161,825.59,152.337" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="41.057" x="1425.33" y="435.766">Sends</text><text fill="#444" font-size="12" font-weight="700" x="1466.387" y="435.766">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="49.09" x="1470.564" y="435.766">e-mails</text><text fill="#444" font-size="12" font-weight="700" x="1519.654" y="435.766">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="1523.832" y="435.766">to</text></g><!--link PersonalBankingCustomer to CustomerServiceStaff--><g class="link" data-entity-1="ent0008" data-entity-2="ent0002" data-link-type="dependency" data-source-line="1779" id="lnk14"><path d="M636.56,161.028 C541.58,181.538 394.12,222.868 286,297.068 C266.92,310.158 253.877,320.474 236.347,336.424" fill="none" id="PersonalBankingCustomer-to-CustomerServiceStaff" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="230.43,341.808,238.366,338.643,234.328,334.205,230.43,341.808" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="31.553" x="341.36" y="272.206">Asks</text><text fill="#444" font-size="12" font-weight="700" x="372.913" y="272.206">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="66.193" x="377.09" y="272.206">questions</text><text fill="#444" font-size="12" font-weight="700" x="443.284" y="272.206">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="447.462" y="272.206">to</text><text fill="#444" font-size="12" font-style="italic" textLength="72.346" x="365.228" y="286.175">[Telephone]</text></g><!--link CustomerServiceStaff to MainframeBankingSystem--><g class="link" data-entity-1="ent0002" data-entity-2="ent0004" data-link-type="dependency" data-source-line="1779" id="lnk15"><path d="M268.96,510.248 C274.7,513.648 280.4,516.978 286,520.198 C360.3,562.818 439.058,603.802 504.448,636.812" fill="none" id="CustomerServiceStaff-to-MainframeBankingSystem" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="511.59,640.418,505.8,634.134,503.096,639.49,511.59,640.418" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="32.168" x="412.21" y="576.336">Uses</text></g><!--link PersonalBankingCustomer to ATM--><g class="link" data-entity-1="ent0008" data-entity-2="ent0006" data-link-type="dependency" data-source-line="1779" id="lnk16"><path d="M636.41,190.798 C587.22,217.828 527.94,254.818 482,297.068 C453.39,323.378 431.945,352.394 414.015,380.204" fill="none" id="PersonalBankingCustomer-to-ATM" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="409.68,386.928,416.536,381.829,411.494,378.578,409.68,386.928" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="72.463" x="525.98" y="279.206">Withdraws</text><text fill="#444" font-size="12" font-weight="700" x="598.443" y="279.206">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="30.896" x="602.621" y="279.206">cash</text><text fill="#444" font-size="12" font-weight="700" x="633.517" y="279.206">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="36.932" x="637.695" y="279.206">using</text></g><!--link ATM to MainframeBankingSystem--><g class="link" data-entity-1="ent0006" data-entity-2="ent0004" data-link-type="dependency" data-source-line="1779" id="lnk17"><path d="M422.4,475.258 C458.2,515.458 506.85,570.103 548.56,616.943" fill="none" id="ATM-to-MainframeBankingSystem" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="553.88,622.918,550.8,614.948,546.319,618.938,553.88,622.918" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="32.168" x="527.98" y="576.336">Uses</text></g><!--link BackOfficeStaff to MainframeBankingSystem--><g class="link" data-entity-1="ent0003" data-entity-2="ent0004" data-link-type="dependency" data-source-line="1779" id="lnk18"><path d="M615,511.378 C615,546.988 615,580.618 615,614.888" fill="none" id="BackOfficeStaff-to-MainframeBankingSystem" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="615,622.888,618,614.888,612,614.888,615,622.888" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="32.168" x="616" y="576.336">Uses</text></g><!--link Acquirer to MainframeBankingSystem--><g class="link" data-entity-1="ent0009" data-entity-2="ent0004" data-link-type="dependency" data-source-line="1779" id="lnk19"><path d="M1228.97,475.258 C1204.53,513.098 1163.66,566.168 1113,593.198 C1021.27,642.138 983.1,603.548 881,623.198 C826.92,633.598 775.212,646.435 726.272,659.695" fill="none" id="Acquirer-to-MainframeBankingSystem" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="718.55,661.788,727.056,662.591,725.487,656.8,718.55,661.788" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="55.963" x="1169.37" y="569.336">Peforms</text><text fill="#444" font-size="12" font-weight="700" x="1225.333" y="569.336">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="54.627" x="1229.511" y="569.336">clearing</text><text fill="#444" font-size="12" font-weight="700" x="1284.138" y="569.336">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="25.23" x="1288.315" y="569.336">and</text><text fill="#444" font-size="12" font-weight="700" textLength="73.928" x="1204.494" y="583.305">settlement</text></g><g class="legend" data-source-line="1576"><rect fill="none" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="804.928"></rect><text fill="#000" font-size="14" font-weight="700" textLength="57.921" x="1218.316" y="817.923">Legend</text><text fill="#FFF" font-size="14" x="1281.111" y="817.923">&nbsp;</text><rect fill="#08427B" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="821.224"></rect><text fill="#073B6F" font-size="14" x="1222.767" y="834.219">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="834.219">&nbsp;</text><image height="13" width="13" x="1234.921" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAyUlEQVR4XmPgcKpmQMeywW0hfhULovk96hXQ5UAYQ+DTt5//kUHX0gPv0NWgcAwSJmSj6IACvJqaF+ytR9cAAirhXeY4NenF96egawABvDaB8PM3n1A01Mzeid9PMCzp1+ziWTw3mse1lh9dDkWTVECL+xdoyB26cP9/w9zd9568+gDm33v69j+3Sy0PiiaQichOwgVQNF2++xxdHivwKpm3Ba4JXRIXmLbu2Am4pqv3XqLLYwVB1YtWogQEn3udED7M61YnCFMLAFS9bYWccBSaAAAAAElFTkSuQmCC" y="824.598"></image><text fill="#FFF" font-size="14" textLength="47.988" x="1256.744" y="834.219">person</text><text fill="#FFF" font-size="14" x="1309.183" y="834.219">&nbsp;</text><rect fill="#1168BD" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="837.521"></rect><text fill="#3C7FC0" font-size="14" x="1222.767" y="850.516">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="850.516">&nbsp;</text><text fill="#FFF" font-size="14" textLength="50.613" x="1239.371" y="850.516">system</text><text fill="#FFF" font-size="14" x="1294.434" y="850.516">&nbsp;</text><rect fill="none" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="853.818"></rect><text fill="#444" font-size="14" x="1222.767" y="866.813">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="866.813">&nbsp;</text><text fill="#444" font-size="14" textLength="66.705" x="1239.371" y="866.813">boundary</text><text fill="#FFF" font-size="14" x="1310.526" y="866.813">&nbsp;</text><rect fill="#686868" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="870.115"></rect><text fill="#484848" font-size="14" x="1222.767" y="883.11">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="883.11">&nbsp;</text><text fill="#FFF" font-size="14" textLength="238.362" x="1239.371" y="883.11">Software System,External System</text><text fill="#FFF" font-size="10" textLength="31.035" x="1482.184" y="884.053">(solid)</text><text fill="#FFF" font-size="14" x="1513.219" y="883.11">&nbsp;</text><rect fill="#1168BD" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="886.412"></rect><text fill="#0B4884" font-size="14" x="1222.767" y="899.407">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="899.407">&nbsp;</text><text fill="#FFF" font-size="14" textLength="118.925" x="1239.371" y="899.407">Software System</text><text fill="#FFF" font-size="10" textLength="31.035" x="1362.746" y="900.35">(solid)</text><text fill="#FFF" font-size="14" x="1393.781" y="899.407">&nbsp;</text><rect fill="#08427B" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="902.709"></rect><text fill="#052E56" font-size="14" x="1222.767" y="915.704">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="915.704">&nbsp;</text><text fill="#FFF" font-size="14" textLength="124.421" x="1239.371" y="915.704">Person,Bank Staff</text><text fill="#FFF" font-size="10" textLength="31.035" x="1368.242" y="916.647">(solid)</text><text fill="#FFF" font-size="14" x="1399.277" y="915.704">&nbsp;</text><rect fill="#999" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="919.006"></rect><text fill="#6B6B6B" font-size="14" x="1222.767" y="932.001">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="932.001">&nbsp;</text><text fill="#FFF" font-size="14" textLength="235.484" x="1239.371" y="932.001">Software System,Existing System</text><text fill="#FFF" font-size="10" textLength="31.035" x="1479.306" y="932.944">(solid)</text><text fill="#FFF" font-size="14" x="1510.341" y="932.001">&nbsp;</text><rect fill="#686868" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="935.303"></rect><text fill="#484848" font-size="14" x="1222.767" y="948.298">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="948.298">&nbsp;</text><text fill="#FFF" font-size="14" textLength="119.998" x="1239.371" y="948.298">Person,Customer</text><text fill="#FFF" font-size="10" textLength="31.035" x="1363.819" y="949.241">(solid)</text><text fill="#FFF" font-size="14" x="1394.854" y="948.298">&nbsp;</text><text fill="#444" font-size="14" x="1222.767" y="964.594">─</text><text fill="#FFF" font-size="14" x="1231.195" y="964.594">&nbsp;</text><text fill="#444" font-size="14" textLength="86.57" x="1240.096" y="964.594">Relationship</text><text fill="#FFF" font-size="14" x="1331.116" y="964.594">&nbsp;</text><rect fill="#66622E" height="16.297" style="stroke:none;" width="311.496" x="1218.316" y="967.896"></rect><text fill="#CCC" font-size="14" x="1222.767" y="980.891">▯</text><text fill="#FFF" font-size="14" x="1230.471" y="980.891">&nbsp;</text><text fill="#CCC" font-size="14" textLength="158.074" x="1239.371" y="980.891">Big Bank plc boundary</text><text fill="#CCC" font-size="10" textLength="123.467" x="1401.895" y="981.835">(last back color, dashed)</text><text fill="#FFF" font-size="14" x="1525.362" y="980.891">&nbsp;</text><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="804.928" y2="804.928"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="821.224" y2="821.224"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="837.521" y2="837.521"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="853.818" y2="853.818"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="870.115" y2="870.115"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="886.412" y2="886.412"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="902.709" y2="902.709"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="919.006" y2="919.006"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="935.303" y2="935.303"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="951.599" y2="951.599"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="967.896" y2="967.896"></line><line style="stroke:none;" x1="1218.316" x2="1529.812" y1="984.193" y2="984.193"></line><line style="stroke:none;" x1="1218.316" x2="1218.316" y1="804.928" y2="984.193"></line><line style="stroke:none;" x1="1529.812" x2="1529.812" y1="804.928" y2="984.193"></line></g></g></svg></center><p></p>
+</div>
+<div class="tabbed-block">
+<p></p><center><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../img/SystemLandscape.png" data-desc-position="bottom"><img alt="SystemLandscapePNG" src="../../img/SystemLandscape.png"></a></center><p></p>
+</div>
+</div>
+</div>
+<h3 id="embedding-static-images">Embedding static images</h3>
+<p>Static assets can be included in the generated site, using the <code>--assets-dir</code>
+command-line flag.</p>
+<p>When, for example, you would like to embed a nice picture which is located in
+the <code>pictures</code> directory, you can do that as follows:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-jar<span class="w"> </span>structurizr-mkdocs-generatr.jar<span class="w"> </span>--assets-dir<span class="w"> </span>pictures
+</code></pre></div>
+<p>Then, you can reference the picture in your markdown files like this:</p>
+<div class="highlight"><pre><span></span><code>![<span class="nt">A nice picture</span>](<span class="na">../img/nice-picture.png</span>)
+</code></pre></div>
+<h4 id="example-embedded-picture">Example: Embedded picture</h4>
+<p><a href="https://www.flickr.com/photos/schmollmolch/4937297813/">Sun</a>, by Christian
+Scheja</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../img/nice-picture.png" data-desc-position="bottom"><img alt="A nice picture" src="../../img/nice-picture.png"></a></p>
+<div style="font-size: small; font-style: italic;">
+11/11/2026 @ 01:07
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

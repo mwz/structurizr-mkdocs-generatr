@@ -1,0 +1,26 @@
+g.link:hover {
+  > path,polygon {
+    stroke-width: 7 !important;
+    stroke: red !important;
+  }
+  > text {
+    fill: red !important;
+  }
+}
+
+/* Hide the right-hand on-page Table of Contents entirely. */
+.md-sidebar--secondary {
+  display: none !important;
+}
+
+/* Reclaim the gutter Material reserves for the (now-hidden) TOC. */
+.md-sidebar--secondary ~ .md-content > .md-content__inner {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Widen the layout but keep a cap on very wide monitors, leaving some
+   breathing room. Material's default is 61rem; raise it to 80rem. */
+.md-grid {
+  max-width: 80rem;
+}

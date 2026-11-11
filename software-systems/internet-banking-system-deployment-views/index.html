@@ -1,0 +1,1230 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../internet-banking-system-dynamic-views/">
+      
+      
+        <link rel="next" href="../internet-banking-system-dependencies/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Deployment views - Big Bank plc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Big Bank plc" class="md-header__button md-logo" aria-label="Big Bank plc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Big Bank plc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deployment views
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mwz/structurizr-mkdocs-generatr" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Big Bank plc" class="md-nav__button md-logo" aria-label="Big Bank plc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Big Bank plc
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mwz/structurizr-mkdocs-generatr" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Bank plc architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docs/01-embedding-diagrams-and-images/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embedding diagrams and images
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Systems - Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1">
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acquirer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Acquirer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acquirer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acquirer-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Bank plc
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Big Bank plc
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_1" id="__nav_4_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ATM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atm-container-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../atm-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    E-mail System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    E-mail System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../e-mail-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../e-mail-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3" id="__nav_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Internet Banking System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Internet Banking System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-context-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Context views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-container-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Container views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-component-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Component views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-dynamic-views/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dynamic views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment views
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internet-banking-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_4" id="__nav_4_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mainframe Banking System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mainframe Banking System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mainframe-banking-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mainframe-banking-system-dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Deployment views</h1>
+
+<p>DevelopmentDeployment</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">SVG</label><label for="__tabbed_1_2">PNG</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p></p><center><svg contentstyletype="text/css" data-diagram-type="DESCRIPTION" preserveAspectRatio="meet" version="1.1" viewBox="0 0 1431 1073" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify"><!--?plantuml 1.2026.8?--><defs></defs><g font-family="sans-serif" lengthAdjust="spacing"><g class="title" data-source-line="1"><text fill="#444" font-size="24" font-weight="700" textLength="798.82" x="312.69" y="32.277">Deployment View: Internet Banking System - Development</text></g><!--cluster Development.DeveloperLaptop--><g class="cluster" data-qualified-name="Development.DeveloperLaptop" data-source-line="115" id="ent0001"><rect fill="#FFF" height="504" style="stroke:#444;stroke-width:1;" width="1410.2" x="7" y="55.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="160.195" x="632.002" y="72.789">Developer Laptop</text><text fill="#444" font-size="12" textLength="241.758" x="591.221" y="87.701">[Microsoft Windows 10 or Apple macOS]</text></g><!--cluster Development.DeveloperLaptop.WebBrowser--><g class="cluster" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.WebBrowser" data-source-line="115" id="ent0002"><rect fill="#FFF" height="219" style="stroke:#444;stroke-width:1;" width="238.2" x="31" y="254.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="119.648" x="90.276" y="271.789">Web Browser</text><text fill="#444" font-size="12" textLength="201.908" x="49.146" y="286.701">[Chrome, Firefox, Safari, or Edge]</text></g><!--cluster Development.DeveloperLaptop.DockerContainerWebServer--><g class="cluster" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.DockerContainerWebServer" data-source-line="115" id="ent0004"><rect fill="#FFF" height="421" style="stroke:#444;stroke-width:1;" width="295" x="505.2" y="114.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="279.641" x="512.88" y="131.789">Docker Container - Web Server</text><text fill="#444" font-size="12" textLength="51.809" x="626.796" y="146.701">[Docker]</text></g><!--cluster Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat--><g class="cluster" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.DockerContainerWebServer.Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat" data-source-line="115" id="ent0005"><rect fill="#FFF" height="338" style="stroke:#444;stroke-width:1;" width="237.49" x="533.45" y="173.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="138.438" x="582.976" y="190.789">Apache Tomcat</text><text fill="#444" font-size="12" textLength="125.326" x="589.532" y="205.701">[Apache Tomcat 8.x]</text></g><!--cluster Development.DeveloperLaptop.DockerContainerDatabaseServer--><g class="cluster" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.DockerContainerDatabaseServer" data-source-line="115" id="ent0008"><rect fill="#FFF" height="294" style="stroke:#444;stroke-width:1;" width="340" x="1053.2" y="241.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="324.836" x="1060.782" y="258.789">Docker Container - Database Server</text><text fill="#444" font-size="12" textLength="51.809" x="1197.296" y="273.701">[Docker]</text></g><!--cluster Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer--><g class="cluster" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.DockerContainerDatabaseServer.Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer" data-source-line="115" id="ent0009"><rect fill="#FFF" height="211" style="stroke:#444;stroke-width:1;" width="240.25" x="1102.57" y="300.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="150.156" x="1147.617" y="317.789">Database Server</text><text fill="#444" font-size="12" textLength="74.092" x="1185.649" y="332.701">[Oracle 12c]</text></g><!--cluster Development.BigBankplc--><g class="cluster" data-qualified-name="Development.BigBankplc" data-source-line="115" id="ent0011"><rect fill="#FFF" height="274" style="stroke:#444;stroke-width:1;" width="286.44" x="1079.48" y="583.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="111.719" x="1166.841" y="600.789">Big Bank plc</text><text fill="#444" font-size="12" textLength="157.131" x="1144.135" y="615.701">[Big Bank plc data center]</text></g><!--cluster Development.BigBankplc.bigbankdev001--><g class="cluster" data-qualified-name="Development.BigBankplc.Development.BigBankplc.bigbankdev001" data-source-line="115" id="ent0012"><rect fill="#FFF" height="191" style="stroke:#444;stroke-width:1;" width="238.44" x="1103.48" y="642.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="145.445" x="1149.977" y="659.789">bigbank-dev001</text></g><!--entity Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1--><g class="entity" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.WebBrowser.Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1" data-source-line="71" id="ent0003"><rect fill="#438DD5" height="152.703" style="stroke:#2E6295;stroke-width:0.5;" width="206.197" x="47" y="305.588"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="107.656" x="96.271" y="330.439">Single-Page</text><text fill="#FFF" font-size="16" font-weight="700" textLength="102.055" x="99.071" y="349.064">Application</text><text fill="#FFF" font-size="12" font-style="italic" textLength="64.834" x="76.909" y="363.976">[JavaScript</text><text fill="#FFF" font-size="12" font-style="italic" x="141.743" y="363.976">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="22.576" x="145.558" y="363.976">and</text><text fill="#FFF" font-size="12" font-style="italic" x="168.134" y="363.976">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="51.34" x="171.948" y="363.976">Angular]</text><text fill="#FFF" font-size="14" x="147.874" y="379.801">&nbsp;</text><text fill="#FFF" font-size="14" textLength="59.732" x="57" y="396.098">Provides</text><text fill="#FFF" font-size="14" x="116.732" y="396.098">&nbsp;</text><text fill="#FFF" font-size="14" textLength="16.358" x="121.183" y="396.098">all</text><text fill="#FFF" font-size="14" x="137.541" y="396.098">&nbsp;</text><text fill="#FFF" font-size="14" textLength="13.494" x="141.991" y="396.098">of</text><text fill="#FFF" font-size="14" x="155.485" y="396.098">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="159.936" y="396.098">the</text><text fill="#FFF" font-size="14" x="182.911" y="396.098">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.836" x="187.361" y="396.098">Internet</text><text fill="#FFF" font-size="14" textLength="56.096" x="66.912" y="412.395">banking</text><text fill="#FFF" font-size="14" x="123.008" y="412.395">&nbsp;</text><text fill="#FFF" font-size="14" textLength="87.322" x="127.458" y="412.395">functionality</text><text fill="#FFF" font-size="14" x="214.78" y="412.395">&nbsp;</text><text fill="#FFF" font-size="14" textLength="14.055" x="219.23" y="412.395">to</text><text fill="#FFF" font-size="14" textLength="73.22" x="65.651" y="428.692">customers</text><text fill="#FFF" font-size="14" x="138.871" y="428.692">&nbsp;</text><text fill="#FFF" font-size="14" textLength="20.754" x="143.321" y="428.692">via</text><text fill="#FFF" font-size="14" x="164.075" y="428.692">&nbsp;</text><text fill="#FFF" font-size="14" textLength="32.621" x="168.525" y="428.692">their</text><text fill="#FFF" font-size="14" x="201.146" y="428.692">&nbsp;</text><text fill="#FFF" font-size="14" textLength="28.95" x="205.596" y="428.692">web</text><text fill="#FFF" font-size="14" textLength="60.771" x="119.713" y="444.989">browser.</text></g><!--entity Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1--><g class="entity" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.DockerContainerWebServer.Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1" data-source-line="71" id="ent0006"><rect fill="#438DD5" height="117.781" style="stroke:#2E6295;stroke-width:0.5;" width="205.486" x="549.45" y="225.048"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="39.953" x="578.404" y="249.899">Web</text><text fill="#FFF" font-size="16" font-weight="700" x="618.357" y="249.899">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="102.055" x="623.928" y="249.899">Application</text><text fill="#FFF" font-size="12" font-style="italic" textLength="30.029" x="584.995" y="264.811">[Java</text><text fill="#FFF" font-size="12" font-style="italic" x="615.024" y="264.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="22.576" x="618.839" y="264.811">and</text><text fill="#FFF" font-size="12" font-style="italic" x="641.415" y="264.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="38.725" x="645.229" y="264.811">Spring</text><text fill="#FFF" font-size="12" font-style="italic" x="683.954" y="264.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="31.623" x="687.768" y="264.811">MVC]</text><text fill="#FFF" font-size="14" x="649.968" y="280.636">&nbsp;</text><text fill="#FFF" font-size="14" textLength="57.121" x="559.45" y="296.933">Delivers</text><text fill="#FFF" font-size="14" x="616.571" y="296.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="621.021" y="296.933">the</text><text fill="#FFF" font-size="14" x="643.997" y="296.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="38.438" x="648.447" y="296.933">static</text><text fill="#FFF" font-size="14" x="686.886" y="296.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="53.601" x="691.336" y="296.933">content</text><text fill="#FFF" font-size="14" textLength="26.339" x="564.895" y="313.23">and</text><text fill="#FFF" font-size="14" x="591.234" y="313.23">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="595.684" y="313.23">the</text><text fill="#FFF" font-size="14" x="618.659" y="313.23">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.836" x="623.11" y="313.23">Internet</text><text fill="#FFF" font-size="14" x="678.946" y="313.23">&nbsp;</text><text fill="#FFF" font-size="14" textLength="56.096" x="683.396" y="313.23">banking</text><text fill="#FFF" font-size="14" textLength="41.446" x="568.699" y="329.527">single</text><text fill="#FFF" font-size="14" x="610.145" y="329.527">&nbsp;</text><text fill="#FFF" font-size="14" textLength="34.966" x="614.596" y="329.527">page</text><text fill="#FFF" font-size="14" x="649.561" y="329.527">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.676" x="654.012" y="329.527">application.</text></g><!--entity Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1--><g class="entity" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.DockerContainerWebServer.Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1" data-source-line="71" id="ent0007"><rect fill="#438DD5" height="117.781" style="stroke:#2E6295;stroke-width:0.5;" width="200.564" x="551.92" y="378.048"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="30.063" x="583.358" y="402.899">API</text><text fill="#FFF" font-size="16" font-weight="700" x="613.421" y="402.899">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="102.055" x="618.991" y="402.899">Application</text><text fill="#FFF" font-size="12" font-style="italic" textLength="30.029" x="585.004" y="417.811">[Java</text><text fill="#FFF" font-size="12" font-style="italic" x="615.033" y="417.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="22.576" x="618.848" y="417.811">and</text><text fill="#FFF" font-size="12" font-style="italic" x="641.424" y="417.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="38.725" x="645.238" y="417.811">Spring</text><text fill="#FFF" font-size="12" font-style="italic" x="683.963" y="417.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="31.623" x="687.777" y="417.811">MVC]</text><text fill="#FFF" font-size="14" x="649.977" y="433.636">&nbsp;</text><text fill="#FFF" font-size="14" textLength="59.732" x="561.92" y="449.933">Provides</text><text fill="#FFF" font-size="14" x="621.652" y="449.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.836" x="626.103" y="449.933">Internet</text><text fill="#FFF" font-size="14" x="681.939" y="449.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="56.096" x="686.389" y="449.933">banking</text><text fill="#FFF" font-size="14" textLength="87.322" x="589.424" y="466.23">functionality</text><text fill="#FFF" font-size="14" x="676.747" y="466.23">&nbsp;</text><text fill="#FFF" font-size="14" textLength="20.754" x="681.197" y="466.23">via</text><text fill="#FFF" font-size="14" x="701.951" y="466.23">&nbsp;</text><text fill="#FFF" font-size="14" x="706.401" y="466.23">a</text><text fill="#FFF" font-size="14" textLength="84.185" x="594.586" y="482.527">JSON/HTTPS</text><text fill="#FFF" font-size="14" x="678.77" y="482.527">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.599" x="683.22" y="482.527">API.</text></g><!--entity Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer.Database_1--><g class="entity" data-qualified-name="Development.DeveloperLaptop.Development.DeveloperLaptop.DockerContainerDatabaseServer.Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer.Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer.Database_1" data-source-line="75" id="ent0010"><path d="M1118.57,362.398 C1118.57,352.398 1222.697,352.398 1222.697,352.398 C1222.697,352.398 1326.825,352.398 1326.825,362.398 L1326.825,485.476 C1326.825,495.476 1222.697,495.476 1222.697,495.476 C1222.697,495.476 1118.57,495.476 1118.57,485.476 L1118.57,362.398" fill="#438DD5" style="stroke:#2E6295;stroke-width:0.5;"></path><path d="M1118.57,362.398 C1118.57,372.398 1222.697,372.398 1222.697,372.398 C1222.697,372.398 1326.825,372.398 1326.825,362.398" fill="none" style="stroke:#2E6295;stroke-width:0.5;"></path><text fill="#FFF" font-size="16" font-weight="700" textLength="85.148" x="1180.123" y="391.249">Database</text><text fill="#FFF" font-size="12" font-style="italic" textLength="43.729" x="1141.926" y="406.161">[Oracle</text><text fill="#FFF" font-size="12" font-style="italic" x="1185.654" y="406.161">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="57.258" x="1189.469" y="406.161">Database</text><text fill="#FFF" font-size="12" font-style="italic" x="1246.727" y="406.161">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="52.928" x="1250.541" y="406.161">Schema]</text><text fill="#FFF" font-size="14" x="1220.472" y="421.986">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.604" x="1140.136" y="438.283">Stores</text><text fill="#FFF" font-size="14" x="1184.741" y="438.283">&nbsp;</text><text fill="#FFF" font-size="14" textLength="30.536" x="1189.191" y="438.283">user</text><text fill="#FFF" font-size="14" x="1219.727" y="438.283">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.081" x="1224.177" y="438.283">registration</text><text fill="#FFF" font-size="14" textLength="85.497" x="1152.164" y="454.58">information,</text><text fill="#FFF" font-size="14" x="1237.661" y="454.58">&nbsp;</text><text fill="#FFF" font-size="14" textLength="51.119" x="1242.112" y="454.58">hashed</text><text fill="#FFF" font-size="14" textLength="101.773" x="1128.57" y="470.877">authentication</text><text fill="#FFF" font-size="14" x="1230.343" y="470.877">&nbsp;</text><text fill="#FFF" font-size="14" textLength="82.031" x="1234.794" y="470.877">credentials,</text><text fill="#FFF" font-size="14" textLength="47.175" x="1164.992" y="487.174">access</text><text fill="#FFF" font-size="14" x="1212.167" y="487.174">&nbsp;</text><text fill="#FFF" font-size="14" textLength="33.086" x="1216.617" y="487.174">logs,</text><text fill="#FFF" font-size="14" x="1249.703" y="487.174">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.25" x="1254.153" y="487.174">etc.</text></g><!--entity Development.BigBankplc.bigbankdev001.MainframeBankingSystem_1--><g class="entity" data-qualified-name="Development.BigBankplc.Development.BigBankplc.bigbankdev001.Development.BigBankplc.bigbankdev001.MainframeBankingSystem_1" data-source-line="197" id="ent0013"><rect fill="#999" height="138.734" style="stroke:#6B6B6B;stroke-width:0.5;" width="206.437" x="1119.48" y="679.568"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="96.766" x="1134.855" y="704.419">Mainframe</text><text fill="#FFF" font-size="16" font-weight="700" x="1231.62" y="704.419">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="73.352" x="1237.19" y="704.419">Banking</text><text fill="#FFF" font-size="16" font-weight="700" textLength="66.648" x="1189.374" y="723.044">System</text><text fill="#FFF" font-size="14" x="1220.473" y="739.813">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.604" x="1149.766" y="756.109">Stores</text><text fill="#FFF" font-size="14" x="1194.37" y="756.109">&nbsp;</text><text fill="#FFF" font-size="14" textLength="16.358" x="1198.82" y="756.109">all</text><text fill="#FFF" font-size="14" x="1215.179" y="756.109">&nbsp;</text><text fill="#FFF" font-size="14" textLength="13.494" x="1219.629" y="756.109">of</text><text fill="#FFF" font-size="14" x="1233.123" y="756.109">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="1237.573" y="756.109">the</text><text fill="#FFF" font-size="14" x="1260.549" y="756.109">&nbsp;</text><text fill="#FFF" font-size="14" textLength="30.632" x="1264.999" y="756.109">core</text><text fill="#FFF" font-size="14" textLength="56.096" x="1129.48" y="772.406">banking</text><text fill="#FFF" font-size="14" x="1185.576" y="772.406">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.047" x="1190.026" y="772.406">information</text><text fill="#FFF" font-size="14" x="1271.073" y="772.406">&nbsp;</text><text fill="#FFF" font-size="14" textLength="40.394" x="1275.523" y="772.406">about</text><text fill="#FFF" font-size="14" textLength="77.67" x="1147.879" y="788.703">customers,</text><text fill="#FFF" font-size="14" x="1225.549" y="788.703">&nbsp;</text><text fill="#FFF" font-size="14" textLength="67.519" x="1229.999" y="788.703">accounts,</text><text fill="#FFF" font-size="14" textLength="90.829" x="1161.934" y="805">transactions,</text><text fill="#FFF" font-size="14" x="1252.763" y="805">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.25" x="1257.213" y="805">etc.</text></g><!--link Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1 to Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1--><g class="link" data-entity-1="ent0006" data-entity-2="ent0003" data-link-type="dependency" data-source-line="1779" id="lnk14"><path d="M549.35,303.898 C463.07,320.808 347.801,343.389 261.361,360.329" fill="none" id="Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1-to-Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="253.51,361.867,261.938,363.273,260.784,357.385,253.51,361.867" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="55.348" x="286.2" y="304.416">Delivers</text><text fill="#444" font-size="12" font-weight="700" x="341.548" y="304.416">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="345.725" y="304.416">to</text><text fill="#444" font-size="12" font-weight="700" x="359.706" y="304.416">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="22.418" x="363.884" y="304.416">the</text><text fill="#444" font-size="12" font-weight="700" x="386.302" y="304.416">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="74.156" x="390.479" y="304.416">customer's</text><text fill="#444" font-size="12" font-weight="700" textLength="27.814" x="331.903" y="318.385">web</text><text fill="#444" font-size="12" font-weight="700" x="359.718" y="318.385">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="55.037" x="363.895" y="318.385">browser</text></g><!--link Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1 to Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1--><g class="link" data-entity-1="ent0003" data-entity-2="ent0007" data-link-type="dependency" data-source-line="1779" id="lnk15"><path d="M253.51,393.198 C340.67,402.788 457.158,415.593 543.528,425.093" fill="none" id="Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1-to-Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="551.48,425.968,543.856,422.111,543.2,428.075,551.48,425.968" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="43.301" x="314.2" y="379.826">Makes</text><text fill="#444" font-size="12" font-weight="700" x="357.501" y="379.826">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="22.547" x="361.679" y="379.826">API</text><text fill="#444" font-size="12" font-weight="700" x="384.225" y="379.826">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="30.58" x="388.403" y="379.826">calls</text><text fill="#444" font-size="12" font-weight="700" x="418.983" y="379.826">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="423.161" y="379.826">to</text><text fill="#444" font-size="12" font-style="italic" textLength="81.521" x="334.91" y="393.795">[JSON/HTTPS]</text></g><!--link Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1 to Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer.Database_1--><g class="link" data-entity-1="ent0007" data-entity-2="ent0010" data-link-type="dependency" data-source-line="1779" id="lnk16"><path d="M752.87,434.658 C855.41,432.318 1006.412,428.861 1110.292,426.481" fill="none" id="Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1-to-Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer.Database_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="1118.29,426.298,1110.223,423.482,1110.361,429.48,1118.29,426.298" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="41.209" x="841.2" y="412.026">Reads</text><text fill="#444" font-size="12" font-weight="700" x="882.409" y="412.026">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="31.887" x="886.587" y="412.026">from</text><text fill="#444" font-size="12" font-weight="700" x="918.473" y="412.026">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="25.23" x="922.651" y="412.026">and</text><text fill="#444" font-size="12" font-weight="700" x="947.882" y="412.026">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="42.135" x="952.059" y="412.026">writes</text><text fill="#444" font-size="12" font-weight="700" x="994.194" y="412.026">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="998.372" y="412.026">to</text><text fill="#444" font-size="12" font-style="italic" textLength="38.754" x="907.399" y="425.995">[JDBC]</text></g><!--link Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1 to Development.BigBankplc.bigbankdev001.MainframeBankingSystem_1--><g class="link" data-entity-1="ent0007" data-entity-2="ent0013" data-link-type="dependency" data-source-line="1779" id="lnk17"><path d="M752.87,491.638 C855.73,548.088 1008.387,631.869 1112.247,688.869" fill="none" id="Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1-to-Development.BigBankplc.bigbankdev001.MainframeBankingSystem_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="1119.26,692.718,1113.69,686.239,1110.803,691.498,1119.26,692.718" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="43.301" x="865.7" y="529.896">Makes</text><text fill="#444" font-size="12" font-weight="700" x="909.001" y="529.896">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="22.547" x="913.179" y="529.896">API</text><text fill="#444" font-size="12" font-weight="700" x="935.725" y="529.896">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="30.58" x="939.903" y="529.896">calls</text><text fill="#444" font-size="12" font-weight="700" x="970.483" y="529.896">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="974.661" y="529.896">to</text><text fill="#444" font-size="12" font-style="italic" textLength="77.203" x="888.569" y="543.865">[XML/HTTPS]</text></g><g class="legend" data-source-line="1576"><rect fill="none" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="884.938"></rect><text fill="#000" font-size="14" font-weight="700" textLength="57.921" x="1110.725" y="897.933">Legend</text><text fill="#FFF" font-size="14" x="1173.52" y="897.933">&nbsp;</text><rect fill="#1168BD" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="901.234"></rect><text fill="#3C7FC0" font-size="14" x="1115.176" y="914.229">▯</text><text fill="#FFF" font-size="14" x="1122.88" y="914.229">&nbsp;</text><text fill="#FFF" font-size="14" textLength="50.613" x="1131.78" y="914.229">system</text><text fill="#FFF" font-size="14" x="1186.844" y="914.229">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="917.531"></rect><text fill="#3C7FC0" font-size="14" x="1115.176" y="930.526">▯</text><text fill="#FFF" font-size="14" x="1122.88" y="930.526">&nbsp;</text><text fill="#FFF" font-size="14" textLength="66.336" x="1131.78" y="930.526">container</text><text fill="#FFF" font-size="14" x="1202.566" y="930.526">&nbsp;</text><rect fill="#FFF" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="933.828"></rect><text fill="#A2A2A2" font-size="14" x="1115.176" y="946.823">▯</text><text fill="#FFF" font-size="14" x="1122.88" y="946.823">&nbsp;</text><text fill="#000" font-size="14" textLength="34.938" x="1131.78" y="946.823">node</text><text fill="#FFF" font-size="14" x="1171.169" y="946.823">&nbsp;</text><rect fill="#999" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="950.125"></rect><text fill="#6B6B6B" font-size="14" x="1115.176" y="963.12">▯</text><text fill="#FFF" font-size="14" x="1122.88" y="963.12">&nbsp;</text><text fill="#FFF" font-size="14" textLength="235.484" x="1131.78" y="963.12">Software System,Existing System</text><text fill="#FFF" font-size="10" textLength="31.035" x="1371.715" y="964.063">(solid)</text><text fill="#FFF" font-size="14" x="1402.75" y="963.12">&nbsp;</text><rect fill="#FFF" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="966.422"></rect><text fill="#444" font-size="14" x="1115.176" y="979.417">▯</text><text fill="#FFF" font-size="14" x="1122.88" y="979.417">&nbsp;</text><text fill="#444" font-size="14" textLength="57.962" x="1131.78" y="979.417">Element</text><text fill="#444" font-size="10" textLength="31.035" x="1194.192" y="980.36">(solid)</text><text fill="#FFF" font-size="14" x="1225.227" y="979.417">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="982.719"></rect><text fill="#2E6295" font-size="14" x="1115.176" y="995.714">▯</text><text fill="#FFF" font-size="14" x="1122.88" y="995.714">&nbsp;</text><text fill="#FFF" font-size="14" textLength="139.665" x="1131.78" y="995.714">Container,Database</text><text fill="#FFF" font-size="10" textLength="31.035" x="1275.895" y="996.657">(solid)</text><text fill="#FFF" font-size="14" x="1306.93" y="995.714">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="999.016"></rect><text fill="#2E6295" font-size="14" x="1115.176" y="1012.011">▯</text><text fill="#FFF" font-size="14" x="1122.88" y="1012.011">&nbsp;</text><text fill="#FFF" font-size="14" textLength="165.696" x="1131.78" y="1012.011">Container,Web Browser</text><text fill="#FFF" font-size="10" textLength="31.035" x="1301.927" y="1012.954">(solid)</text><text fill="#FFF" font-size="14" x="1332.962" y="1012.011">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1110.725" y="1015.313"></rect><text fill="#2E6295" font-size="14" x="1115.176" y="1028.308">▯</text><text fill="#FFF" font-size="14" x="1122.88" y="1028.308">&nbsp;</text><text fill="#FFF" font-size="14" textLength="68.414" x="1131.78" y="1028.308">Container</text><text fill="#FFF" font-size="10" textLength="31.035" x="1204.644" y="1029.251">(solid)</text><text fill="#FFF" font-size="14" x="1235.679" y="1028.308">&nbsp;</text><text fill="#444" font-size="14" x="1115.176" y="1044.604">─</text><text fill="#FFF" font-size="14" x="1123.604" y="1044.604">&nbsp;</text><text fill="#444" font-size="14" textLength="86.57" x="1132.505" y="1044.604">Relationship</text><text fill="#FFF" font-size="14" x="1223.525" y="1044.604">&nbsp;</text><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="884.938" y2="884.938"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="901.234" y2="901.234"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="917.531" y2="917.531"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="933.828" y2="933.828"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="950.125" y2="950.125"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="966.422" y2="966.422"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="982.719" y2="982.719"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="999.016" y2="999.016"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="1015.313" y2="1015.313"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="1031.609" y2="1031.609"></line><line style="stroke:none;" x1="1110.725" x2="1407.2" y1="1047.906" y2="1047.906"></line><line style="stroke:none;" x1="1110.725" x2="1110.725" y1="884.938" y2="1047.906"></line><line style="stroke:none;" x1="1407.2" x2="1407.2" y1="884.938" y2="1047.906"></line></g></g></svg></center><p></p>
+</div>
+<div class="tabbed-block">
+<p></p><center><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../img/DevelopmentDeployment.png" data-desc-position="bottom"><img alt="DevelopmentDeploymentPNG" src="../../img/DevelopmentDeployment.png"></a></center><p></p>
+</div>
+</div>
+</div>
+<p>LiveDeployment</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">SVG</label><label for="__tabbed_2_2">PNG</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p></p><center><svg contentstyletype="text/css" data-diagram-type="DESCRIPTION" preserveAspectRatio="meet" version="1.1" viewBox="0 0 1855 1022" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify"><!--?plantuml 1.2026.8?--><defs></defs><g font-family="sans-serif" lengthAdjust="spacing"><g class="title" data-source-line="1"><text fill="#444" font-size="24" font-weight="700" textLength="674.402" x="586.894" y="32.277">Deployment View: Internet Banking System - Live</text></g><!--cluster Live.Customersmobiledevice--><g class="cluster" data-qualified-name="Live.Customersmobiledevice" data-source-line="115" id="ent0001"><rect fill="#FFF" height="201" style="stroke:#444;stroke-width:1;" width="247" x="27.1" y="234.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="231.766" x="34.717" y="251.789">Customer's mobile device</text><text fill="#444" font-size="12" textLength="134.297" x="83.452" y="266.701">[Apple iOS or Android]</text></g><!--cluster Live.Customerscomputer--><g class="cluster" data-qualified-name="Live.Customerscomputer" data-source-line="115" id="ent0003"><rect fill="#FFF" height="302" style="stroke:#444;stroke-width:1;" width="286.2" x="7" y="459.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="193.086" x="53.557" y="476.789">Customer's computer</text><text fill="#444" font-size="12" textLength="222.674" x="38.763" y="491.701">[Microsoft Windows or Apple macOS]</text></g><!--cluster Live.Customerscomputer.WebBrowser--><g class="cluster" data-qualified-name="Live.Customerscomputer.Live.Customerscomputer.WebBrowser" data-source-line="115" id="ent0004"><rect fill="#FFF" height="219" style="stroke:#444;stroke-width:1;" width="238.2" x="31" y="518.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="119.648" x="90.276" y="535.789">Web Browser</text><text fill="#444" font-size="12" textLength="201.908" x="49.146" y="550.701">[Chrome, Firefox, Safari, or Edge]</text></g><!--cluster Live.BigBankplc--><g class="cluster" data-qualified-name="Live.BigBankplc" data-source-line="115" id="ent0006"><rect fill="#FFF" height="718" style="stroke:#444;stroke-width:1;" width="1335.99" x="505.2" y="55.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="111.719" x="1117.336" y="72.789">Big Bank plc</text><text fill="#444" font-size="12" textLength="157.131" x="1094.63" y="87.701">[Big Bank plc data center]</text></g><!--cluster Live.BigBankplc.bigbankweb--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankweb" data-source-line="115" id="ent0007"><rect fill="#FFF" height="268" style="stroke:#444;stroke-width:1;" width="285.48" x="529.2" y="476.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="183.148" x="580.366" y="493.789">bigbank-web*** (x4)</text><text fill="#444" font-size="12" textLength="116.9" x="613.49" y="508.701">[Ubuntu 16.04 LTS]</text></g><!--cluster Live.BigBankplc.bigbankweb.ApacheTomcat--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankweb.Live.BigBankplc.bigbankweb.ApacheTomcat" data-source-line="115" id="ent0008"><rect fill="#FFF" height="185" style="stroke:#444;stroke-width:1;" width="237.48" x="553.2" y="535.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="138.438" x="602.721" y="552.789">Apache Tomcat</text><text fill="#444" font-size="12" textLength="125.326" x="609.277" y="567.701">[Apache Tomcat 8.x]</text></g><!--cluster Live.BigBankplc.bigbankapi--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankapi" data-source-line="115" id="ent0010"><rect fill="#FFF" height="268" style="stroke:#444;stroke-width:1;" width="280.56" x="531.66" y="184.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="173.797" x="585.042" y="201.789">bigbank-api*** (x8)</text><text fill="#444" font-size="12" textLength="116.9" x="613.49" y="216.701">[Ubuntu 16.04 LTS]</text></g><!--cluster Live.BigBankplc.bigbankapi.ApacheTomcat--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankapi.Live.BigBankplc.bigbankapi.ApacheTomcat" data-source-line="115" id="ent0011"><rect fill="#FFF" height="185" style="stroke:#444;stroke-width:1;" width="232.56" x="555.66" y="243.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="138.438" x="602.721" y="260.789">Apache Tomcat</text><text fill="#444" font-size="12" textLength="125.326" x="609.277" y="275.701">[Apache Tomcat 8.x]</text></g><!--cluster Live.BigBankplc.bigbankdb01--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankdb01" data-source-line="115" id="ent0013"><rect fill="#FFF" height="345" style="stroke:#444;stroke-width:1;" width="320.26" x="1019.68" y="404.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="124.484" x="1117.568" y="421.789">bigbank-db01</text><text fill="#444" font-size="12" textLength="116.9" x="1121.36" y="436.701">[Ubuntu 16.04 LTS]</text></g><!--cluster Live.BigBankplc.bigbankdb01.OraclePrimary--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankdb01.Live.BigBankplc.bigbankdb01.OraclePrimary" data-source-line="115" id="ent0014"><rect fill="#FFF" height="246" style="stroke:#444;stroke-width:1;" width="256.26" x="1051.68" y="471.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="146.781" x="1106.419" y="488.789">Oracle - Primary</text><text fill="#444" font-size="12" textLength="74.092" x="1142.764" y="503.701">[Oracle 12c]</text></g><!--cluster Live.BigBankplc.bigbankdb02--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankdb02" data-source-line="115" id="ent0016"><rect fill="#FFF" height="345" style="stroke:#444;stroke-width:1;" width="320.25" x="1496.94" y="182.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="124.484" x="1594.823" y="199.789">bigbank-db02</text><text fill="#444" font-size="12" textLength="116.9" x="1598.615" y="214.701">[Ubuntu 16.04 LTS]</text></g><!--cluster Live.BigBankplc.bigbankdb02.OracleSecondary--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankdb02.Live.BigBankplc.bigbankdb02.OracleSecondary" data-source-line="115" id="ent0017"><rect fill="#FFF" height="246" style="stroke:#444;stroke-width:1;" width="256.25" x="1528.94" y="249.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="170.703" x="1571.713" y="266.789">Oracle - Secondary</text><text fill="#444" font-size="12" textLength="74.092" x="1620.019" y="281.701">[Oracle 12c]</text></g><!--cluster Live.BigBankplc.bigbankprod001--><g class="cluster" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankprod001" data-source-line="115" id="ent0019"><rect fill="#FFF" height="191" style="stroke:#444;stroke-width:1;" width="238.44" x="1060.59" y="114.938"></rect><text fill="#444" font-size="16" font-weight="700" textLength="154.5" x="1102.56" y="131.789">bigbank-prod001</text></g><!--entity Live.Customersmobiledevice.MobileApp_1--><g class="entity" data-qualified-name="Live.Customersmobiledevice.Live.Customersmobiledevice.MobileApp_1" data-source-line="71" id="ent0002"><rect fill="#438DD5" height="134.078" style="stroke:#2E6295;stroke-width:0.5;" width="214.353" x="42.92" y="285.898"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="60.188" x="99.573" y="310.749">Mobile</text><text fill="#FFF" font-size="16" font-weight="700" x="159.76" y="310.749">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="35.289" x="165.331" y="310.749">App</text><text fill="#FFF" font-size="12" font-style="italic" textLength="59.854" x="120.17" y="325.661">[Xamarin]</text><text fill="#FFF" font-size="14" x="147.871" y="341.486">&nbsp;</text><text fill="#FFF" font-size="14" textLength="59.732" x="52.92" y="357.783">Provides</text><text fill="#FFF" font-size="14" x="112.652" y="357.783">&nbsp;</text><text fill="#FFF" font-size="14" x="117.103" y="357.783">a</text><text fill="#FFF" font-size="14" x="125.682" y="357.783">&nbsp;</text><text fill="#FFF" font-size="14" textLength="48.296" x="130.132" y="357.783">limited</text><text fill="#FFF" font-size="14" x="178.428" y="357.783">&nbsp;</text><text fill="#FFF" font-size="14" textLength="46.45" x="182.878" y="357.783">subset</text><text fill="#FFF" font-size="14" x="229.328" y="357.783">&nbsp;</text><text fill="#FFF" font-size="14" textLength="13.494" x="233.778" y="357.783">of</text><text fill="#FFF" font-size="14" textLength="22.976" x="78.192" y="374.08">the</text><text fill="#FFF" font-size="14" x="101.168" y="374.08">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.836" x="105.618" y="374.08">Internet</text><text fill="#FFF" font-size="14" x="161.454" y="374.08">&nbsp;</text><text fill="#FFF" font-size="14" textLength="56.096" x="165.904" y="374.08">banking</text><text fill="#FFF" font-size="14" textLength="87.322" x="58.348" y="390.377">functionality</text><text fill="#FFF" font-size="14" x="145.67" y="390.377">&nbsp;</text><text fill="#FFF" font-size="14" textLength="14.055" x="150.12" y="390.377">to</text><text fill="#FFF" font-size="14" x="164.175" y="390.377">&nbsp;</text><text fill="#FFF" font-size="14" textLength="73.22" x="168.625" y="390.377">customers</text><text fill="#FFF" font-size="14" textLength="20.754" x="67.774" y="406.674">via</text><text fill="#FFF" font-size="14" x="88.528" y="406.674">&nbsp;</text><text fill="#FFF" font-size="14" textLength="32.621" x="92.979" y="406.674">their</text><text fill="#FFF" font-size="14" x="125.6" y="406.674">&nbsp;</text><text fill="#FFF" font-size="14" textLength="47.482" x="130.05" y="406.674">mobile</text><text fill="#FFF" font-size="14" x="177.532" y="406.674">&nbsp;</text><text fill="#FFF" font-size="14" textLength="50.436" x="181.983" y="406.674">device.</text></g><!--entity Live.Customerscomputer.WebBrowser.SinglePageApplication_1--><g class="entity" data-qualified-name="Live.Customerscomputer.Live.Customerscomputer.WebBrowser.Live.Customerscomputer.WebBrowser.SinglePageApplication_1" data-source-line="71" id="ent0005"><rect fill="#438DD5" height="152.703" style="stroke:#2E6295;stroke-width:0.5;" width="206.197" x="47" y="569.588"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="107.656" x="96.271" y="594.439">Single-Page</text><text fill="#FFF" font-size="16" font-weight="700" textLength="102.055" x="99.071" y="613.064">Application</text><text fill="#FFF" font-size="12" font-style="italic" textLength="64.834" x="76.909" y="627.976">[JavaScript</text><text fill="#FFF" font-size="12" font-style="italic" x="141.743" y="627.976">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="22.576" x="145.558" y="627.976">and</text><text fill="#FFF" font-size="12" font-style="italic" x="168.134" y="627.976">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="51.34" x="171.948" y="627.976">Angular]</text><text fill="#FFF" font-size="14" x="147.874" y="643.801">&nbsp;</text><text fill="#FFF" font-size="14" textLength="59.732" x="57" y="660.098">Provides</text><text fill="#FFF" font-size="14" x="116.732" y="660.098">&nbsp;</text><text fill="#FFF" font-size="14" textLength="16.358" x="121.183" y="660.098">all</text><text fill="#FFF" font-size="14" x="137.541" y="660.098">&nbsp;</text><text fill="#FFF" font-size="14" textLength="13.494" x="141.991" y="660.098">of</text><text fill="#FFF" font-size="14" x="155.485" y="660.098">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="159.936" y="660.098">the</text><text fill="#FFF" font-size="14" x="182.911" y="660.098">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.836" x="187.361" y="660.098">Internet</text><text fill="#FFF" font-size="14" textLength="56.096" x="66.912" y="676.395">banking</text><text fill="#FFF" font-size="14" x="123.008" y="676.395">&nbsp;</text><text fill="#FFF" font-size="14" textLength="87.322" x="127.458" y="676.395">functionality</text><text fill="#FFF" font-size="14" x="214.78" y="676.395">&nbsp;</text><text fill="#FFF" font-size="14" textLength="14.055" x="219.23" y="676.395">to</text><text fill="#FFF" font-size="14" textLength="73.22" x="65.651" y="692.692">customers</text><text fill="#FFF" font-size="14" x="138.871" y="692.692">&nbsp;</text><text fill="#FFF" font-size="14" textLength="20.754" x="143.321" y="692.692">via</text><text fill="#FFF" font-size="14" x="164.075" y="692.692">&nbsp;</text><text fill="#FFF" font-size="14" textLength="32.621" x="168.525" y="692.692">their</text><text fill="#FFF" font-size="14" x="201.146" y="692.692">&nbsp;</text><text fill="#FFF" font-size="14" textLength="28.95" x="205.596" y="692.692">web</text><text fill="#FFF" font-size="14" textLength="60.771" x="119.713" y="708.989">browser.</text></g><!--entity Live.BigBankplc.bigbankweb.ApacheTomcat.WebApplication_1--><g class="entity" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankweb.Live.BigBankplc.bigbankweb.ApacheTomcat.Live.BigBankplc.bigbankweb.ApacheTomcat.WebApplication_1" data-source-line="71" id="ent0009"><rect fill="#438DD5" height="117.781" style="stroke:#2E6295;stroke-width:0.5;" width="205.486" x="569.2" y="587.048"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="39.953" x="598.154" y="611.899">Web</text><text fill="#FFF" font-size="16" font-weight="700" x="638.107" y="611.899">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="102.055" x="643.678" y="611.899">Application</text><text fill="#FFF" font-size="12" font-style="italic" textLength="30.029" x="604.745" y="626.811">[Java</text><text fill="#FFF" font-size="12" font-style="italic" x="634.774" y="626.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="22.576" x="638.589" y="626.811">and</text><text fill="#FFF" font-size="12" font-style="italic" x="661.165" y="626.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="38.725" x="664.979" y="626.811">Spring</text><text fill="#FFF" font-size="12" font-style="italic" x="703.704" y="626.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="31.623" x="707.518" y="626.811">MVC]</text><text fill="#FFF" font-size="14" x="669.718" y="642.636">&nbsp;</text><text fill="#FFF" font-size="14" textLength="57.121" x="579.2" y="658.933">Delivers</text><text fill="#FFF" font-size="14" x="636.321" y="658.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="640.771" y="658.933">the</text><text fill="#FFF" font-size="14" x="663.747" y="658.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="38.438" x="668.197" y="658.933">static</text><text fill="#FFF" font-size="14" x="706.636" y="658.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="53.601" x="711.086" y="658.933">content</text><text fill="#FFF" font-size="14" textLength="26.339" x="584.645" y="675.23">and</text><text fill="#FFF" font-size="14" x="610.984" y="675.23">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="615.434" y="675.23">the</text><text fill="#FFF" font-size="14" x="638.409" y="675.23">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.836" x="642.86" y="675.23">Internet</text><text fill="#FFF" font-size="14" x="698.696" y="675.23">&nbsp;</text><text fill="#FFF" font-size="14" textLength="56.096" x="703.146" y="675.23">banking</text><text fill="#FFF" font-size="14" textLength="41.446" x="588.449" y="691.527">single</text><text fill="#FFF" font-size="14" x="629.895" y="691.527">&nbsp;</text><text fill="#FFF" font-size="14" textLength="34.966" x="634.346" y="691.527">page</text><text fill="#FFF" font-size="14" x="669.311" y="691.527">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.676" x="673.762" y="691.527">application.</text></g><!--entity Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1--><g class="entity" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankapi.Live.BigBankplc.bigbankapi.ApacheTomcat.Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1" data-source-line="71" id="ent0012"><rect fill="#438DD5" height="117.781" style="stroke:#2E6295;stroke-width:0.5;" width="200.564" x="571.66" y="295.048"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="30.063" x="603.098" y="319.899">API</text><text fill="#FFF" font-size="16" font-weight="700" x="633.161" y="319.899">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="102.055" x="638.731" y="319.899">Application</text><text fill="#FFF" font-size="12" font-style="italic" textLength="30.029" x="604.744" y="334.811">[Java</text><text fill="#FFF" font-size="12" font-style="italic" x="634.773" y="334.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="22.576" x="638.588" y="334.811">and</text><text fill="#FFF" font-size="12" font-style="italic" x="661.164" y="334.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="38.725" x="664.978" y="334.811">Spring</text><text fill="#FFF" font-size="12" font-style="italic" x="703.703" y="334.811">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="31.623" x="707.517" y="334.811">MVC]</text><text fill="#FFF" font-size="14" x="669.717" y="350.636">&nbsp;</text><text fill="#FFF" font-size="14" textLength="59.732" x="581.66" y="366.933">Provides</text><text fill="#FFF" font-size="14" x="641.392" y="366.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="55.836" x="645.843" y="366.933">Internet</text><text fill="#FFF" font-size="14" x="701.679" y="366.933">&nbsp;</text><text fill="#FFF" font-size="14" textLength="56.096" x="706.129" y="366.933">banking</text><text fill="#FFF" font-size="14" textLength="87.322" x="609.164" y="383.23">functionality</text><text fill="#FFF" font-size="14" x="696.487" y="383.23">&nbsp;</text><text fill="#FFF" font-size="14" textLength="20.754" x="700.937" y="383.23">via</text><text fill="#FFF" font-size="14" x="721.691" y="383.23">&nbsp;</text><text fill="#FFF" font-size="14" x="726.141" y="383.23">a</text><text fill="#FFF" font-size="14" textLength="84.185" x="614.326" y="399.527">JSON/HTTPS</text><text fill="#FFF" font-size="14" x="698.51" y="399.527">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.599" x="702.96" y="399.527">API.</text></g><!--entity Live.BigBankplc.bigbankdb01.OraclePrimary.Database_1--><g class="entity" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankdb01.Live.BigBankplc.bigbankdb01.OraclePrimary.Live.BigBankplc.bigbankdb01.OraclePrimary.Database_1" data-source-line="75" id="ent0015"><path d="M1075.68,560.398 C1075.68,550.398 1179.807,550.398 1179.807,550.398 C1179.807,550.398 1283.935,550.398 1283.935,560.398 L1283.935,683.476 C1283.935,693.476 1179.807,693.476 1179.807,693.476 C1179.807,693.476 1075.68,693.476 1075.68,683.476 L1075.68,560.398" fill="#438DD5" style="stroke:#2E6295;stroke-width:0.5;"></path><path d="M1075.68,560.398 C1075.68,570.398 1179.807,570.398 1179.807,570.398 C1179.807,570.398 1283.935,570.398 1283.935,560.398" fill="none" style="stroke:#2E6295;stroke-width:0.5;"></path><text fill="#FFF" font-size="16" font-weight="700" textLength="85.148" x="1137.233" y="589.249">Database</text><text fill="#FFF" font-size="12" font-style="italic" textLength="43.729" x="1099.036" y="604.161">[Oracle</text><text fill="#FFF" font-size="12" font-style="italic" x="1142.764" y="604.161">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="57.258" x="1146.579" y="604.161">Database</text><text fill="#FFF" font-size="12" font-style="italic" x="1203.837" y="604.161">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="52.928" x="1207.651" y="604.161">Schema]</text><text fill="#FFF" font-size="14" x="1177.582" y="619.986">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.604" x="1097.246" y="636.283">Stores</text><text fill="#FFF" font-size="14" x="1141.851" y="636.283">&nbsp;</text><text fill="#FFF" font-size="14" textLength="30.536" x="1146.301" y="636.283">user</text><text fill="#FFF" font-size="14" x="1176.837" y="636.283">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.081" x="1181.287" y="636.283">registration</text><text fill="#FFF" font-size="14" textLength="85.497" x="1109.274" y="652.58">information,</text><text fill="#FFF" font-size="14" x="1194.771" y="652.58">&nbsp;</text><text fill="#FFF" font-size="14" textLength="51.119" x="1199.222" y="652.58">hashed</text><text fill="#FFF" font-size="14" textLength="101.773" x="1085.68" y="668.877">authentication</text><text fill="#FFF" font-size="14" x="1187.453" y="668.877">&nbsp;</text><text fill="#FFF" font-size="14" textLength="82.031" x="1191.904" y="668.877">credentials,</text><text fill="#FFF" font-size="14" textLength="47.175" x="1122.102" y="685.174">access</text><text fill="#FFF" font-size="14" x="1169.277" y="685.174">&nbsp;</text><text fill="#FFF" font-size="14" textLength="33.086" x="1173.727" y="685.174">logs,</text><text fill="#FFF" font-size="14" x="1206.813" y="685.174">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.25" x="1211.263" y="685.174">etc.</text></g><!--entity Live.BigBankplc.bigbankdb02.OracleSecondary.Database_1--><g class="entity" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankdb02.Live.BigBankplc.bigbankdb02.OracleSecondary.Live.BigBankplc.bigbankdb02.OracleSecondary.Database_1" data-source-line="75" id="ent0018"><path d="M1552.94,319.398 C1552.94,309.398 1657.067,309.398 1657.067,309.398 C1657.067,309.398 1761.195,309.398 1761.195,319.398 L1761.195,442.476 C1761.195,452.476 1657.067,452.476 1657.067,452.476 C1657.067,452.476 1552.94,452.476 1552.94,442.476 L1552.94,319.398" fill="#438DD5" style="stroke:#2E6295;stroke-width:0.5;"></path><path d="M1552.94,319.398 C1552.94,329.398 1657.067,329.398 1657.067,329.398 C1657.067,329.398 1761.195,329.398 1761.195,319.398" fill="none" style="stroke:#2E6295;stroke-width:0.5;"></path><text fill="#FFF" font-size="16" font-weight="700" textLength="85.148" x="1614.493" y="348.249">Database</text><text fill="#FFF" font-size="12" font-style="italic" textLength="43.729" x="1576.296" y="363.161">[Oracle</text><text fill="#FFF" font-size="12" font-style="italic" x="1620.024" y="363.161">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="57.258" x="1623.839" y="363.161">Database</text><text fill="#FFF" font-size="12" font-style="italic" x="1681.097" y="363.161">&nbsp;</text><text fill="#FFF" font-size="12" font-style="italic" textLength="52.928" x="1684.911" y="363.161">Schema]</text><text fill="#FFF" font-size="14" x="1654.842" y="378.986">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.604" x="1574.506" y="395.283">Stores</text><text fill="#FFF" font-size="14" x="1619.111" y="395.283">&nbsp;</text><text fill="#FFF" font-size="14" textLength="30.536" x="1623.561" y="395.283">user</text><text fill="#FFF" font-size="14" x="1654.097" y="395.283">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.081" x="1658.547" y="395.283">registration</text><text fill="#FFF" font-size="14" textLength="85.497" x="1586.534" y="411.58">information,</text><text fill="#FFF" font-size="14" x="1672.031" y="411.58">&nbsp;</text><text fill="#FFF" font-size="14" textLength="51.119" x="1676.482" y="411.58">hashed</text><text fill="#FFF" font-size="14" textLength="101.773" x="1562.94" y="427.877">authentication</text><text fill="#FFF" font-size="14" x="1664.713" y="427.877">&nbsp;</text><text fill="#FFF" font-size="14" textLength="82.031" x="1669.164" y="427.877">credentials,</text><text fill="#FFF" font-size="14" textLength="47.175" x="1599.362" y="444.174">access</text><text fill="#FFF" font-size="14" x="1646.537" y="444.174">&nbsp;</text><text fill="#FFF" font-size="14" textLength="33.086" x="1650.987" y="444.174">logs,</text><text fill="#FFF" font-size="14" x="1684.073" y="444.174">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.25" x="1688.523" y="444.174">etc.</text></g><!--entity Live.BigBankplc.bigbankprod001.MainframeBankingSystem_1--><g class="entity" data-qualified-name="Live.BigBankplc.Live.BigBankplc.bigbankprod001.Live.BigBankplc.bigbankprod001.MainframeBankingSystem_1" data-source-line="197" id="ent0020"><rect fill="#999" height="138.734" style="stroke:#6B6B6B;stroke-width:0.5;" width="206.437" x="1076.59" y="151.568"></rect><text fill="#FFF" font-size="16" font-weight="700" textLength="96.766" x="1091.965" y="176.419">Mainframe</text><text fill="#FFF" font-size="16" font-weight="700" x="1188.73" y="176.419">&nbsp;</text><text fill="#FFF" font-size="16" font-weight="700" textLength="73.352" x="1194.3" y="176.419">Banking</text><text fill="#FFF" font-size="16" font-weight="700" textLength="66.648" x="1146.484" y="195.044">System</text><text fill="#FFF" font-size="14" x="1177.583" y="211.813">&nbsp;</text><text fill="#FFF" font-size="14" textLength="44.604" x="1106.876" y="228.109">Stores</text><text fill="#FFF" font-size="14" x="1151.48" y="228.109">&nbsp;</text><text fill="#FFF" font-size="14" textLength="16.358" x="1155.93" y="228.109">all</text><text fill="#FFF" font-size="14" x="1172.289" y="228.109">&nbsp;</text><text fill="#FFF" font-size="14" textLength="13.494" x="1176.739" y="228.109">of</text><text fill="#FFF" font-size="14" x="1190.233" y="228.109">&nbsp;</text><text fill="#FFF" font-size="14" textLength="22.976" x="1194.683" y="228.109">the</text><text fill="#FFF" font-size="14" x="1217.659" y="228.109">&nbsp;</text><text fill="#FFF" font-size="14" textLength="30.632" x="1222.109" y="228.109">core</text><text fill="#FFF" font-size="14" textLength="56.096" x="1086.59" y="244.406">banking</text><text fill="#FFF" font-size="14" x="1142.686" y="244.406">&nbsp;</text><text fill="#FFF" font-size="14" textLength="81.047" x="1147.136" y="244.406">information</text><text fill="#FFF" font-size="14" x="1228.183" y="244.406">&nbsp;</text><text fill="#FFF" font-size="14" textLength="40.394" x="1232.633" y="244.406">about</text><text fill="#FFF" font-size="14" textLength="77.67" x="1104.989" y="260.703">customers,</text><text fill="#FFF" font-size="14" x="1182.659" y="260.703">&nbsp;</text><text fill="#FFF" font-size="14" textLength="67.519" x="1187.109" y="260.703">accounts,</text><text fill="#FFF" font-size="14" textLength="90.829" x="1119.044" y="277">transactions,</text><text fill="#FFF" font-size="14" x="1209.873" y="277">&nbsp;</text><text fill="#FFF" font-size="14" textLength="26.25" x="1214.323" y="277">etc.</text></g><!--link Live.BigBankplc.bigbankweb.ApacheTomcat.WebApplication_1 to Live.Customerscomputer.WebBrowser.SinglePageApplication_1--><g class="link" data-entity-1="ent0009" data-entity-2="ent0005" data-link-type="dependency" data-source-line="1779" id="lnk21"><path d="M568.77,645.938 C477.59,645.938 352.74,645.938 261.49,645.938" fill="none" id="Live.BigBankplc.bigbankweb.ApacheTomcat.WebApplication_1-to-Live.Customerscomputer.WebBrowser.SinglePageApplication_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="253.49,645.938,261.49,648.938,261.49,642.938,253.49,645.938" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="55.348" x="310.2" y="629.076">Delivers</text><text fill="#444" font-size="12" font-weight="700" x="365.548" y="629.076">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="369.725" y="629.076">to</text><text fill="#444" font-size="12" font-weight="700" x="383.706" y="629.076">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="22.418" x="387.884" y="629.076">the</text><text fill="#444" font-size="12" font-weight="700" x="410.302" y="629.076">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="74.156" x="414.479" y="629.076">customer's</text><text fill="#444" font-size="12" font-weight="700" textLength="27.814" x="355.903" y="643.045">web</text><text fill="#444" font-size="12" font-weight="700" x="383.718" y="643.045">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="55.037" x="387.895" y="643.045">browser</text></g><!--link Live.Customersmobiledevice.MobileApp_1 to Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1--><g class="link" data-entity-1="ent0002" data-entity-2="ent0012" data-link-type="dependency" data-source-line="1779" id="lnk22"><path d="M257.55,353.138 C349.49,353.318 473.33,353.562 563.24,353.732" fill="none" id="Live.Customersmobiledevice.MobileApp_1-to-Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="571.24,353.748,563.246,350.732,563.234,356.732,571.24,353.748" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="43.301" x="338.2" y="336.386">Makes</text><text fill="#444" font-size="12" font-weight="700" x="381.501" y="336.386">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="22.547" x="385.679" y="336.386">API</text><text fill="#444" font-size="12" font-weight="700" x="408.225" y="336.386">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="30.58" x="412.403" y="336.386">calls</text><text fill="#444" font-size="12" font-weight="700" x="442.983" y="336.386">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="447.161" y="336.386">to</text><text fill="#444" font-size="12" font-style="italic" textLength="81.521" x="358.91" y="350.355">[JSON/HTTPS]</text></g><!--link Live.Customerscomputer.WebBrowser.SinglePageApplication_1 to Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1--><g class="link" data-entity-1="ent0005" data-entity-2="ent0012" data-link-type="dependency" data-source-line="1779" id="lnk23"><path d="M253.49,588.418 C345.63,536.668 473.195,465.016 564.445,413.756" fill="none" id="Live.Customerscomputer.WebBrowser.SinglePageApplication_1-to-Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="571.42,409.838,562.976,411.14,565.914,416.371,571.42,409.838" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="43.301" x="338.2" y="439.856">Makes</text><text fill="#444" font-size="12" font-weight="700" x="381.501" y="439.856">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="22.547" x="385.679" y="439.856">API</text><text fill="#444" font-size="12" font-weight="700" x="408.225" y="439.856">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="30.58" x="412.403" y="439.856">calls</text><text fill="#444" font-size="12" font-weight="700" x="442.983" y="439.856">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="447.161" y="439.856">to</text><text fill="#444" font-size="12" font-style="italic" textLength="81.521" x="358.91" y="453.825">[JSON/HTTPS]</text></g><!--link Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1 to Live.BigBankplc.bigbankdb01.OraclePrimary.Database_1--><g class="link" data-entity-1="ent0012" data-entity-2="ent0015" data-link-type="dependency" data-source-line="1779" id="lnk24"><path d="M772.09,413.218 C838.95,452.438 929.62,504.128 1011.68,545.938 C1032.13,556.358 1047.034,563.581 1068.334,573.391" fill="none" id="Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1-to-Live.BigBankplc.bigbankdb01.OraclePrimary.Database_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="1075.6,576.738,1069.589,570.666,1067.079,576.116,1075.6,576.738" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="41.209" x="831.68" y="432.546">Reads</text><text fill="#444" font-size="12" font-weight="700" x="872.889" y="432.546">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="31.887" x="877.067" y="432.546">from</text><text fill="#444" font-size="12" font-weight="700" x="908.953" y="432.546">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="25.23" x="913.131" y="432.546">and</text><text fill="#444" font-size="12" font-weight="700" x="938.362" y="432.546">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="42.135" x="942.539" y="432.546">writes</text><text fill="#444" font-size="12" font-weight="700" x="984.674" y="432.546">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="988.852" y="432.546">to</text><text fill="#444" font-size="12" font-style="italic" textLength="38.754" x="897.879" y="446.515">[JDBC]</text></g><!--link Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1 to Live.BigBankplc.bigbankdb02.OracleSecondary.Database_1--><g class="link" data-entity-1="ent0012" data-entity-2="ent0018" data-link-type="dependency" data-source-line="1779" id="lnk25"><path d="M772.62,356.678 C959.95,361.818 1354.763,372.658 1544.803,377.878" fill="none" id="Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1-to-Live.BigBankplc.bigbankdb02.OracleSecondary.Database_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="1552.8,378.098,1544.885,374.879,1544.721,380.877,1552.8,378.098" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="41.209" x="1094.31" y="346.576">Reads</text><text fill="#444" font-size="12" font-weight="700" x="1135.519" y="346.576">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="31.887" x="1139.697" y="346.576">from</text><text fill="#444" font-size="12" font-weight="700" x="1171.583" y="346.576">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="25.23" x="1175.761" y="346.576">and</text><text fill="#444" font-size="12" font-weight="700" x="1200.992" y="346.576">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="42.135" x="1205.169" y="346.576">writes</text><text fill="#444" font-size="12" font-weight="700" x="1247.304" y="346.576">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="1251.482" y="346.576">to</text><text fill="#444" font-size="12" font-style="italic" textLength="38.754" x="1160.509" y="360.545">[JDBC]</text></g><!--link Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1 to Live.BigBankplc.bigbankprod001.MainframeBankingSystem_1--><g class="link" data-entity-1="ent0012" data-entity-2="ent0020" data-link-type="dependency" data-source-line="1779" id="lnk26"><path d="M772.58,327.738 C860.37,304.658 979.993,273.212 1068.613,249.912" fill="none" id="Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1-to-Live.BigBankplc.bigbankprod001.MainframeBankingSystem_1" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="1076.35,247.878,1067.85,247.01,1069.376,252.813,1076.35,247.878" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="43.301" x="856.18" y="250.896">Makes</text><text fill="#444" font-size="12" font-weight="700" x="899.481" y="250.896">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="22.547" x="903.659" y="250.896">API</text><text fill="#444" font-size="12" font-weight="700" x="926.205" y="250.896">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="30.58" x="930.383" y="250.896">calls</text><text fill="#444" font-size="12" font-weight="700" x="960.963" y="250.896">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="965.141" y="250.896">to</text><text fill="#444" font-size="12" font-style="italic" textLength="77.203" x="879.049" y="264.865">[XML/HTTPS]</text></g><!--link Live.BigBankplc.bigbankdb01.OraclePrimary to Live.BigBankplc.bigbankdb02.OracleSecondary--><g class="link" data-entity-1="ent0014" data-entity-2="ent0017" data-link-type="dependency" data-source-line="1779" id="lnk27"><path d="M1309.787,507.609 C1310.61,507.562 1311.435,507.515 1312.263,507.468 C1318.881,507.092 1325.638,506.708 1332.506,506.318 C1359.976,504.757 1389.218,503.095 1418.459,501.434 C1447.7,499.772 1476.94,498.111 1504.409,496.55 C1511.277,496.16 1518.033,495.776 1524.651,495.4 C1525.478,495.353 1526.304,495.306 1527.126,495.259 C1527.538,495.236 1519.962,495.666 1520.372,495.643" fill="none" id="Live.BigBankplc.bigbankdb01.OraclePrimary-to-Live.BigBankplc.bigbankdb02.OracleSecondary" style="stroke:#444;stroke-width:1;"></path><polygon fill="#444" points="1528.359,495.189,1520.202,492.648,1520.542,498.638,1528.359,495.189" style="stroke:#444;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"></polygon><text fill="#444" font-size="12" font-weight="700" textLength="70.424" x="1356.94" y="495.366">Replicates</text><text fill="#444" font-size="12" font-weight="700" x="1427.364" y="495.366">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="30.521" x="1431.542" y="495.366">data</text><text fill="#444" font-size="12" font-weight="700" x="1462.063" y="495.366">&nbsp;</text><text fill="#444" font-size="12" font-weight="700" textLength="13.98" x="1466.241" y="495.366">to</text></g><g class="legend" data-source-line="1576"><rect fill="none" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="800.938"></rect><text fill="#000" font-size="14" font-weight="700" textLength="57.921" x="1534.715" y="813.933">Legend</text><text fill="#FFF" font-size="14" x="1597.51" y="813.933">&nbsp;</text><rect fill="#1168BD" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="817.234"></rect><text fill="#3C7FC0" font-size="14" x="1539.166" y="830.229">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="830.229">&nbsp;</text><text fill="#FFF" font-size="14" textLength="50.613" x="1555.77" y="830.229">system</text><text fill="#FFF" font-size="14" x="1610.834" y="830.229">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="833.531"></rect><text fill="#3C7FC0" font-size="14" x="1539.166" y="846.526">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="846.526">&nbsp;</text><text fill="#FFF" font-size="14" textLength="66.336" x="1555.77" y="846.526">container</text><text fill="#FFF" font-size="14" x="1626.556" y="846.526">&nbsp;</text><rect fill="#FFF" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="849.828"></rect><text fill="#A2A2A2" font-size="14" x="1539.166" y="862.823">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="862.823">&nbsp;</text><text fill="#000" font-size="14" textLength="34.938" x="1555.77" y="862.823">node</text><text fill="#FFF" font-size="14" x="1595.159" y="862.823">&nbsp;</text><rect fill="#FFF" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="866.125"></rect><text fill="#444" font-size="14" x="1539.166" y="879.12">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="879.12">&nbsp;</text><text fill="#444" font-size="14" textLength="55.631" x="1555.77" y="879.12">Failover</text><text fill="#444" font-size="10" textLength="31.035" x="1615.851" y="880.063">(solid)</text><text fill="#FFF" font-size="14" x="1646.886" y="879.12">&nbsp;</text><rect fill="#999" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="882.422"></rect><text fill="#6B6B6B" font-size="14" x="1539.166" y="895.417">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="895.417">&nbsp;</text><text fill="#FFF" font-size="14" textLength="235.484" x="1555.77" y="895.417">Software System,Existing System</text><text fill="#FFF" font-size="10" textLength="31.035" x="1795.705" y="896.36">(solid)</text><text fill="#FFF" font-size="14" x="1826.74" y="895.417">&nbsp;</text><rect fill="#FFF" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="898.719"></rect><text fill="#444" font-size="14" x="1539.166" y="911.714">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="911.714">&nbsp;</text><text fill="#444" font-size="14" textLength="57.962" x="1555.77" y="911.714">Element</text><text fill="#444" font-size="10" textLength="31.035" x="1618.182" y="912.657">(solid)</text><text fill="#FFF" font-size="14" x="1649.217" y="911.714">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="915.016"></rect><text fill="#2E6295" font-size="14" x="1539.166" y="928.011">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="928.011">&nbsp;</text><text fill="#FFF" font-size="14" textLength="150.589" x="1555.77" y="928.011">Container,Mobile App</text><text fill="#FFF" font-size="10" textLength="31.035" x="1710.809" y="928.954">(solid)</text><text fill="#FFF" font-size="14" x="1741.844" y="928.011">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="931.313"></rect><text fill="#2E6295" font-size="14" x="1539.166" y="944.308">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="944.308">&nbsp;</text><text fill="#FFF" font-size="14" textLength="139.665" x="1555.77" y="944.308">Container,Database</text><text fill="#FFF" font-size="10" textLength="31.035" x="1699.885" y="945.251">(solid)</text><text fill="#FFF" font-size="14" x="1730.92" y="944.308">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="947.609"></rect><text fill="#2E6295" font-size="14" x="1539.166" y="960.604">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="960.604">&nbsp;</text><text fill="#FFF" font-size="14" textLength="165.696" x="1555.77" y="960.604">Container,Web Browser</text><text fill="#FFF" font-size="10" textLength="31.035" x="1725.917" y="961.548">(solid)</text><text fill="#FFF" font-size="14" x="1756.952" y="960.604">&nbsp;</text><rect fill="#438DD5" height="16.297" style="stroke:none;" width="296.475" x="1534.715" y="963.906"></rect><text fill="#2E6295" font-size="14" x="1539.166" y="976.901">▯</text><text fill="#FFF" font-size="14" x="1546.87" y="976.901">&nbsp;</text><text fill="#FFF" font-size="14" textLength="68.414" x="1555.77" y="976.901">Container</text><text fill="#FFF" font-size="10" textLength="31.035" x="1628.634" y="977.845">(solid)</text><text fill="#FFF" font-size="14" x="1659.669" y="976.901">&nbsp;</text><text fill="#444" font-size="14" x="1539.166" y="993.198">─</text><text fill="#FFF" font-size="14" x="1547.594" y="993.198">&nbsp;</text><text fill="#444" font-size="14" textLength="86.57" x="1556.495" y="993.198">Relationship</text><text fill="#FFF" font-size="14" x="1647.515" y="993.198">&nbsp;</text><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="800.938" y2="800.938"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="817.234" y2="817.234"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="833.531" y2="833.531"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="849.828" y2="849.828"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="866.125" y2="866.125"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="882.422" y2="882.422"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="898.719" y2="898.719"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="915.016" y2="915.016"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="931.313" y2="931.313"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="947.609" y2="947.609"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="963.906" y2="963.906"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="980.203" y2="980.203"></line><line style="stroke:none;" x1="1534.715" x2="1831.19" y1="996.5" y2="996.5"></line><line style="stroke:none;" x1="1534.715" x2="1534.715" y1="800.938" y2="996.5"></line><line style="stroke:none;" x1="1831.19" x2="1831.19" y1="800.938" y2="996.5"></line></g></g></svg></center><p></p>
+</div>
+<div class="tabbed-block">
+<p></p><center><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../img/LiveDeployment.png" data-desc-position="bottom"><img alt="LiveDeploymentPNG" src="../../img/LiveDeployment.png"></a></center><p></p>
+</div>
+</div>
+</div>
+<div style="font-size: small; font-style: italic;">
+11/11/2026 @ 01:07
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
