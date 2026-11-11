@@ -30,10 +30,6 @@ jobs:
           java-version: "temurin:1.21"
       - name: Run tests
         run: sbt clean coverage test
-      - name: Upload coverage data to Coveralls
-        run: sbt coverageReport coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       - name: Scalafmt
         run: sbt scalafmtCheckAll
       - name: Scalafix
