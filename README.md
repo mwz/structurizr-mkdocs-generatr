@@ -1,7 +1,7 @@
 # Structurizr MkDocs Generatr
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mwz/structurizr-mkdocs-generatr)](https://central.sonatype.com/artifact/io.github.mwz/structurizr-mkdocs-generatr)
-[![Coverage Status](https://coveralls.io/repos/github/mwz/structurizr-mkdocs-generatr/badge.svg?branch=main)](https://coveralls.io/github/mwz/structurizr-mkdocs-generatr?branch=main)
+[![Codecov](https://codecov.io/gh/mwz/structurizr-mkdocs-generatr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mwz/structurizr-mkdocs-generatr)
 
 **A static [MkDocs](https://www.mkdocs.org) site generator for
 [C4 architecture model](https://c4model.com) documentation created with
@@ -251,6 +251,19 @@ mkdocs serve -w example -f example/mkdocs.yml
 Alternatively run the project using an IDE of your choice. There is a
 `launch.json` configuration provided for VSCode to run the project against the
 root and the example directory.
+
+### Test coverage
+
+To run the tests and generate a coverage report, run:
+
+```bash
+sbt clean coverage test coverageReport
+```
+
+Open `target/scoverage-report/index.html` to view the report locally. GitHub
+Actions uploads the XML report to
+[Codecov](https://app.codecov.io/gh/mwz/structurizr-mkdocs-generatr) for pushes
+and pull requests to `main`.
 
 ## Contributing
 

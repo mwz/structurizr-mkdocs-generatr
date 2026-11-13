@@ -41,7 +41,7 @@ cap.
 sbt test
 sbt "testOnly io.github.mwz.structurizr.mkdocs.MarkdownTest"                     # single suite
 sbt 'testOnly *MarkdownTest -- "--tests=generate image tabs"' # single test by name
-sbt clean coverage test                                       # tests with coverage (as in CI)
+sbt clean coverage test coverageReport                        # tests with coverage report (as in CI)
 
 # Lint / format (scalafmt + scalafix DisableSyntax/RemoveUnused)
 sbt scalafmtAll

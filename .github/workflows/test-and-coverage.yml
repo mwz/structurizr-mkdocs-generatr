@@ -12,6 +12,9 @@ permissions:
 jobs:
   test-and-coverage:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Git checkout (merge)
         uses: actions/checkout@v7
@@ -28,8 +31,15 @@ jobs:
         uses: japgolly/setup-everything-scala@3f8419e4a4011d1a97e35335d1226decdd8117b2 # v4.1
         with:
           java-version: "temurin:1.21"
-      - name: Run tests
-        run: sbt clean coverage test
+      - name: Run tests and generate coverage report
+        run: sbt clean coverage test coverageReport
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        with:
+          use_oidc: true
+          files: target/scoverage-report/scoverage.xml
+          disable_search: true
+          fail_ci_if_error: true
       - name: Scalafmt
         run: sbt scalafmtCheckAll
       - name: Scalafix
