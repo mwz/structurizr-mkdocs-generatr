@@ -45,6 +45,19 @@ lazy val root = (project in file("."))
     crossPaths := false,
     assembly / mainClass := Some("io.github.mwz.structurizr.mkdocs.Main"),
     assembly / assemblyJarName := "structurizr-mkdocs-generatr.jar",
+    Compile / resourceGenerators += Def.task {
+      val resourceDirectory = (Compile / resourceManaged).value / "META-INF"
+      val projectDirectory = baseDirectory.value
+      Seq("LICENSE", "NOTICE").map { name =>
+        val destination = resourceDirectory / name
+        IO.copyFile(projectDirectory / name, destination)
+        destination
+      }
+    }.taskValue,
+    Compile / packageDoc / mappings ++= Seq(
+      (baseDirectory.value / "LICENSE") -> "META-INF/LICENSE",
+      (baseDirectory.value / "NOTICE") -> "META-INF/NOTICE"
+    ),
     assembly / assemblyMergeStrategy := {
       case PathList(ps @ _*) if Assembly.isReadme(ps.last) || Assembly.isLicenseFile(ps.last) =>
         MergeStrategy.rename
