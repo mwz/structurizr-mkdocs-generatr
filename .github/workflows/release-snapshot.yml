@@ -4,24 +4,30 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: read
+
 jobs:
   release-snapshot:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           fetch-tags: true
       - name: Setup Scala
-        uses: japgolly/setup-everything-scala@v3.1
+        uses: japgolly/setup-everything-scala@3f8419e4a4011d1a97e35335d1226decdd8117b2 # v4.1
         with:
           java-version: "temurin:1.21"
       - name: Test
-        run: sbt coverage test coverageReport
-        env:
-          GITHUB_TOKEN: ""
+        run: sbt test
+      # Publishes a -SNAPSHOT to the Central Portal snapshots repository
+      # (snapshots must be enabled for the io.github.mwz namespace)
       - name: Release snapshot
-        run: sbt publish
+        run: sbt ci-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

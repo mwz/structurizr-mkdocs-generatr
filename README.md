@@ -1,6 +1,6 @@
 # Structurizr MkDocs Generatr
 
-[![Static Badge](https://img.shields.io/badge/version-v0.2.0-blue)](https://github.com/mwz/structurizr-mkdocs-generatr/packages/2196232?version=0.2.0)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mwz/structurizr-mkdocs-generatr)](https://central.sonatype.com/artifact/io.github.mwz/structurizr-mkdocs-generatr)
 [![Coverage Status](https://coveralls.io/repos/github/mwz/structurizr-mkdocs-generatr/badge.svg?branch=main)](https://coveralls.io/github/mwz/structurizr-mkdocs-generatr?branch=main)
 
 **A static [MkDocs](https://www.mkdocs.org) site generator for
@@ -84,24 +84,22 @@ Missing features:
    `mkdocs.tmpl.yml` files are located. It will create `docs` directory with all
    the static content and `mkdocs.yml` config.
 
-   - download the jar from Github Releases and run it:
+   - Download the jar from
+     [GitHub Releases](https://github.com/mwz/structurizr-mkdocs-generatr/releases)
+     and run it:
 
      ```bash
+     curl -L -O https://github.com/mwz/structurizr-mkdocs-generatr/releases/latest/download/structurizr-mkdocs-generatr.jar
+
      java -jar structurizr-mkdocs-generatr.jar
      ```
 
-   - or download the jar from GitHub Packages and run it:
+   - Or use [Coursier](https://get-coursier.io) to run it from
+     [Maven Central](https://central.sonatype.com/artifact/io.github.mwz/structurizr-mkdocs-generatr):
 
      ```bash
-     curl -H "Authorization: token $GITHUB_TOKEN" -L -O \
-     https://maven.pkg.github.com/mwz/structurizr-mkdocs-generatr/io/github/mwz/structurizr-mkdocs-generatr/0.2.0/structurizr-mkdocs-generatr-0.2.0.jar
-
-     java -jar structurizr-mkdocs-generatr-0.2.0.jar
+     cs launch io.github.mwz:structurizr-mkdocs-generatr:0.3.0
      ```
-
-   - or use [Coursier](https://get-coursier.io) to run it (since the artifact is
-     published to GitHub Packages, you'll need additional Coursier configuration
-     to make it work)
 
 3. Preview the generated site:
    - MkDocs ([installation](https://www.mkdocs.org/getting-started))

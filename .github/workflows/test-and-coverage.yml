@@ -6,36 +6,34 @@ on:
   pull_request:
     branches: ["main"]
 
+permissions:
+  contents: read
+
 jobs:
   test-and-coverage:
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout (merge)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         if: github.event_name != 'pull_request'
         with:
           fetch-depth: 0
       - name: Git checkout (PR)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         if: github.event_name == 'pull_request'
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Setup Scala
-        uses: japgolly/setup-everything-scala@v3.1
+        uses: japgolly/setup-everything-scala@3f8419e4a4011d1a97e35335d1226decdd8117b2 # v4.1
         with:
           java-version: "temurin:1.21"
       - name: Run tests
         run: sbt clean coverage test
-        env:
-          GITHUB_TOKEN: ""
-      - name: Upload coverage data to Coveralls
-        run: sbt coverageReport coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-          GITHUB_TOKEN: ""
+      - name: License headers
+        run: sbt headerCheckAll
+      - name: Dependency licenses
+        run: sbt licenseCheck
       - name: Publish local
         if: github.event_name == 'pull_request'
         run: sbt publishLocal
-        env:
-          GITHUB_TOKEN: ""

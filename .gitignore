@@ -1,5 +1,4 @@
 .DS_Store
-mkdocs/
 /docs/
 example/docs/
 example/site/
@@ -10,6 +9,7 @@ example/mkdocs.yml
 **/target
 project/plugins/project/
 boot/
+.sbtboot/
 lib_managed/
 src_managed/
 .scala-build
