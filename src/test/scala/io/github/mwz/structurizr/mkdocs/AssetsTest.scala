@@ -72,7 +72,7 @@ class AssetsTest extends CatsEffectSuite:
           IO.both(Files[IO].walk(source).compile.toList, Files[IO].walk(target).compile.toList)
             .map { (sourceFiles, destFiles) =>
               // check if the same files present in source and destination dirs
-              assertEquals(sourceFiles.map(source.relativize), destFiles.map(target.relativize))
+              assertEquals(sourceFiles.map(source.relativize).toSet, destFiles.map(target.relativize).toSet)
             }
             .flatMap { _ =>
               val content =
