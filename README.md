@@ -1,7 +1,8 @@
 # Structurizr MkDocs Generatr
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mwz/structurizr-mkdocs-generatr)](https://central.sonatype.com/artifact/io.github.mwz/structurizr-mkdocs-generatr)
-[![Coverage Status](https://coveralls.io/repos/github/mwz/structurizr-mkdocs-generatr/badge.svg?branch=main)](https://coveralls.io/github/mwz/structurizr-mkdocs-generatr?branch=main)
+[![Sonatype snapshot](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmwz%2Fstructurizr-mkdocs-generatr%2Fbadges%2Fsnapshot.json)](#snapshots)
+[![Codecov](https://codecov.io/gh/mwz/structurizr-mkdocs-generatr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mwz/structurizr-mkdocs-generatr)
 
 **A static [MkDocs](https://www.mkdocs.org) site generator for
 [C4 architecture model](https://c4model.com) documentation created with
@@ -103,7 +104,7 @@ Missing features:
      [Maven Central](https://central.sonatype.com/artifact/io.github.mwz/structurizr-mkdocs-generatr):
 
      ```bash
-     cs launch io.github.mwz:structurizr-mkdocs-generatr:<version>
+     cs launch 'io.github.mwz:structurizr-mkdocs-generatr:<version>'
      ```
 
 3. Preview the generated site:
@@ -116,6 +117,27 @@ Missing features:
      ```bash
      techdocs-cli serve --no-docker -v
      ```
+
+### Snapshots
+
+Snapshots are unreleased builds published from `main` to
+[Sonatype's snapshot repository](https://central.sonatype.org/publish/publish-portal-snapshots/).
+The snapshot badge above shows the latest published snapshot version.
+Each snapshot has its own version.
+
+Replace `<snapshot-version>` with the full version from the badge, including
+`-SNAPSHOT`, and run it with Coursier:
+
+```bash
+cs launch \
+  --repository https://central.sonatype.com/repository/maven-snapshots/ \
+  --ttl 0s \
+  'io.github.mwz:structurizr-mkdocs-generatr:<snapshot-version>'
+```
+
+The `--ttl 0s` option makes Coursier check for snapshot updates on each run.
+Append generator arguments after `--`, for example
+`-- --path path/to/project --assets-dir pictures`.
 
 ### Arguments
 
@@ -251,6 +273,19 @@ mkdocs serve -w example -f example/mkdocs.yml
 Alternatively run the project using an IDE of your choice. There is a
 `launch.json` configuration provided for VSCode to run the project against the
 root and the example directory.
+
+### Test coverage
+
+To run the tests and generate a coverage report, run:
+
+```bash
+sbt clean coverage test coverageReport
+```
+
+Open `target/scoverage-report/index.html` to view the report locally. GitHub
+Actions uploads the XML report to
+[Codecov](https://app.codecov.io/gh/mwz/structurizr-mkdocs-generatr) for pushes
+and pull requests to `main`.
 
 ## Contributing
 

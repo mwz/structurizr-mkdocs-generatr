@@ -5,7 +5,12 @@ on:
     branches: ["main"]
 
 permissions:
-  contents: read
+  contents: write # update the snapshot badge branch
+
+concurrency:
+  # Keep the run-number check and badge update serialised.
+  group: release-snapshot
+  cancel-in-progress: false
 
 jobs:
   release-snapshot:
@@ -31,3 +36,55 @@ jobs:
           PGP_SECRET: ${{ secrets.PGP_SECRET }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+      - name: Generate snapshot badge
+        id: snapshot-badge
+        shell: bash
+        run: |
+          shopt -s nullglob
+          poms=(target/structurizr-mkdocs-generatr-*-SNAPSHOT.pom)
+
+          # sbt-ci-release skips snapshots when main points at a release tag.
+          if (( ${#poms[@]} == 0 )); then
+            echo "No snapshot was published; leaving the badge unchanged."
+            exit 0
+          fi
+          if (( ${#poms[@]} != 1 )); then
+            echo "Expected one published snapshot POM" >&2
+            exit 1
+          fi
+
+          : "${GITHUB_RUN_NUMBER:?}"
+          published_run=0
+          badge_ref=$(git ls-remote --heads origin refs/heads/badges)
+          if [[ -n "$badge_ref" ]]; then
+            git fetch --no-tags origin refs/heads/badges:refs/remotes/origin/badges
+            # An existing badge without run metadata is upgraded on the next publication.
+            if git cat-file -e origin/badges:snapshot-run-number.txt 2>/dev/null; then
+              published_run=$(git show origin/badges:snapshot-run-number.txt)
+            fi
+          fi
+          if [[ ! "$published_run" =~ ^(0|[1-9][0-9]*)$ ]]; then
+            echo "Invalid published snapshot run number" >&2
+            exit 1
+          fi
+          if (( GITHUB_RUN_NUMBER < published_run )); then
+            echo "Run $published_run already published a newer snapshot; leaving the badge unchanged."
+            exit 0
+          fi
+
+          version=${poms[0]#target/structurizr-mkdocs-generatr-}
+          version=${version%.pom}
+          mkdir -p target/snapshot-badge
+          jq --null-input --arg version "$version" \
+            '{schemaVersion: 1, label: "Sonatype snapshot", message: $version, color: "orange"}' \
+            > target/snapshot-badge/snapshot.json
+          printf '%s\n' "$GITHUB_RUN_NUMBER" > target/snapshot-badge/snapshot-run-number.txt
+          echo "generated=true" >> "$GITHUB_OUTPUT"
+      - name: Publish snapshot badge
+        if: steps.snapshot-badge.outputs.generated == 'true'
+        uses: JamesIves/github-pages-deploy-action@fa24774553152dd7873cd16ebd8d959b010c5445 # v4.9.0
+        with:
+          branch: badges
+          folder: target/snapshot-badge
+          clean: false
+          force: false
