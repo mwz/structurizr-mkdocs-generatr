@@ -187,8 +187,8 @@ MkDocs customisations:
 - **Java 21+** The project is written in Scala and requires Java 21 or higher to
   run. I recommend using
   [Temurin LTS](https://adoptium.net/temurin/releases/?version=21).
-  `.tool-versions` files is provided, so you can used
-  [asdf](https://asdf-vm.com/guide/getting-started.html) to install it.
+  A `.tool-versions` file is provided, so you can use
+  [mise](https://mise.jdx.dev/getting-started.html) to install it.
 
 - **Graphviz** The project uses Graphviz to generate diagrams - please install
   Graphviz on your machine. You can download it from
@@ -241,6 +241,9 @@ MkDocs customisations:
 ## Development
 
 To run this project locally, you need to have JDK 21+ installed on your machine.
+To build the example site, you also need [uv](https://docs.astral.sh/uv/). The
+`.tool-versions` file pins Java, Python and uv, so `mise install` installs all
+of them.
 
 To run using sbt:
 
@@ -267,8 +270,11 @@ To run the the project against the `example` directory execute the following:
 
 ```bash
 sbt "run --path example --assets-dir pictures"
-mkdocs serve -w example -f example/mkdocs.yml
+uv run --project example mkdocs serve -w example -f example/mkdocs.yml
 ```
+
+The MkDocs dependencies for the example are defined in `example/pyproject.toml`
+and locked in `example/uv.lock`. `uv run` creates the environment on first use.
 
 Alternatively run the project using an IDE of your choice. There is a
 `launch.json` configuration provided for VSCode to run the project against the
