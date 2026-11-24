@@ -24,7 +24,7 @@ jobs:
       - name: Setup Scala
         uses: japgolly/setup-everything-scala@3f8419e4a4011d1a97e35335d1226decdd8117b2 # v4.1
         with:
-          java-version: "temurin:1.21"
+          java-version: "temurin:21"
       - name: Test
         run: sbt test
       # Publishes a -SNAPSHOT to the Central Portal snapshots repository
