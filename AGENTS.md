@@ -22,8 +22,13 @@ sbt run
 
 # Run against the bundled example
 sbt "run --path example --assets-dir pictures"
-mkdocs serve -w example -f example/mkdocs.yml
+uv run --project example mkdocs serve -w example -f example/mkdocs.yml
 ```
+
+The example's MkDocs toolchain is a uv project (`example/pyproject.toml` +
+`example/uv.lock`, Python and uv pinned in `.tool-versions`). CI builds it with
+`uv run --project example --locked mkdocs build`, so update the lock
+(`uv lock --project example`) whenever you change its dependencies.
 
 All dependencies resolve from Maven Central, so `sbt` compile / test /
 `assembly` work with **no credentials**. Releases are published to Maven Central
