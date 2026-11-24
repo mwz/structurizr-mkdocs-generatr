@@ -18,7 +18,7 @@ jobs:
       - name: Setup Scala
         uses: japgolly/setup-everything-scala@3f8419e4a4011d1a97e35335d1226decdd8117b2 # v4.1
         with:
-          java-version: "temurin:1.21"
+          java-version: "temurin:21"
       - name: Setup Graphviz
         uses: ts-graphviz/setup-graphviz@6005aebc0168bb7f1c4b55f1e611648e57fb15d0 # v2.0.3
       - name: Test & run
