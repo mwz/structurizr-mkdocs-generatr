@@ -3,6 +3,8 @@
 example/docs/
 example/site/
 example/mkdocs.yml
+.*.generatr-cache/
+.*.generatr-state.json
 *.jar
 
 # sbt

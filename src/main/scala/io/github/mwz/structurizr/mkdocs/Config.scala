@@ -22,7 +22,7 @@ import java.nio.file.Path
 
 import cli.CommandLineArgs
 
-case class Config(path: PathConfig, assets: AssetsPathConfig)
+case class Config(path: PathConfig, assets: AssetsPathConfig, forceDiagrams: Boolean = false)
 case class PathConfig(basePath: Path, docsPath: Path)
 case class AssetsPathConfig(source: Path, destination: Path)
 
@@ -37,6 +37,6 @@ object Config:
       source = options.path.resolve(options.assetsDir),
       destination = docsPath.resolve("img")
     )
-    Config(PathConfig(options.path, docsPath), assets)
+    Config(PathConfig(options.path, docsPath), assets, options.forceDiagrams)
 
 extension (path: Path) def fs2Path: FS2Path = FS2Path.fromNioPath(path)

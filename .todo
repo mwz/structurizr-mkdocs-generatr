@@ -10,14 +10,12 @@ Fill content:
 Save files:
   ☐ remove flexmark extensions?
 
-Diagrams:
-  ☐ skip generating diagrams when up-to-date
-
 Config:
   ☐ add inline-select-svg plugin to mkdocs config
   ☐ generate a basic mkdocs.tmpl.yml file if it doesn't exist
 
 Archive:
+  ✔ skip generating diagrams when up-to-date @done(26-11-25 22:17) @project(Diagrams)
   ✔ Deployment views @done(25-01-30 11:34) @project(Fill content)
   ✔ Static image views @done(24-08-27 15:17) @project(Fill content)
   ✔ add diagram description if available @done(24-08-27 15:18) @project(Diagrams)
