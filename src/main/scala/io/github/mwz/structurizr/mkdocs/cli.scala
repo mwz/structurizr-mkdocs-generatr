@@ -33,5 +33,7 @@ object cli:
       @HelpMessage(
         "The directory where the documentation markdown files will be generated, relative to the 'path' argument. Needs to match MkDocs' 'docs_dir' setting. (defaults to 'docs')"
       )
-      docsDir: String = "docs"
+      docsDir: String = "docs",
+      @HelpMessage("Regenerate every diagram, even if its existing images are up to date.")
+      forceDiagrams: Boolean = false
   )

@@ -21,6 +21,13 @@ jobs:
           java-version: "temurin:21"
       - name: Setup Graphviz
         uses: ts-graphviz/setup-graphviz@6005aebc0168bb7f1c4b55f1e611648e57fb15d0 # v2.0.3
+      - name: Cache rendered diagrams
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: example/.docs.generatr-cache
+          key: ${{ runner.os }}-${{ runner.arch }}-example-diagrams-v1-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-example-diagrams-v1-
       - name: Test & run
         run: sbt "test; run --path example --assets-dir pictures"
       - name: Setup uv

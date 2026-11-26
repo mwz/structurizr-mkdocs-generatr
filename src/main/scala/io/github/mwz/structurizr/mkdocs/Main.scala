@@ -40,7 +40,7 @@ object Main extends IOCaseApp[CommandLineArgs]:
       workspace.getModel().getProperties().asScala.getOrElse("structurizr.groupSeparator", "/")
     )
     images = Assets(config.assets)
-    diagrams = Diagrams(workspace, config.assets)
+    diagrams = Diagrams(workspace, config)
     postProcess = PostProcess(config.path)
     _ <- exec(docs, softwareSystems, images, diagrams, MkDocs(config.path, Clock[IO]), postProcess)
   yield ()

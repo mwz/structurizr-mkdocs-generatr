@@ -122,8 +122,8 @@ Missing features:
 
 Snapshots are unreleased builds published from `main` to
 [Sonatype's snapshot repository](https://central.sonatype.org/publish/publish-portal-snapshots/).
-The snapshot badge above shows the latest published snapshot version.
-Each snapshot has its own version.
+The snapshot badge above shows the latest published snapshot version. Each
+snapshot has its own version.
 
 Replace `<snapshot-version>` with the full version from the badge, including
 `-SNAPSHOT`, and run it with Coursier:
@@ -151,6 +151,33 @@ The generator accepts the following arguments:
 - `--docs-dir` - the directory where the documentation markdown files will be
   generated, relative to the `path` argument. Needs to match MkDocs' `docs_dir`
   setting (defaults to `docs`)
+- `--force-diagrams` - regenerate every diagram
+
+### Diagram exports
+
+The generator reuses a view's cached SVG and PNG when the PlantUML definition
+and renderer configuration match. It restores the images if the output files are
+missing or have changed. Views with custom PlantUML includes, external images or
+inline PlantUML function calls such as `%date()` render on every run.
+
+For the default output directory `docs`, the generator stores rendered images in
+`.docs.generatr-cache` beside it. Restore this directory before running the
+generator in CI. A fresh `docs` directory receives only the current images.
+After a successful export, the generator removes cache entries for views that
+have been renamed or deleted.
+
+For an example of saving the cache per commit and using `restore-keys` to reuse
+diagrams from earlier commits, see the
+[Cache rendered diagrams step](.github/workflows/build-example.yml).
+
+The generator records the diagram files it writes to `docs/img` in
+`.docs.generatr-state.json`. On a rerun, it removes obsolete diagram files that
+still match their recorded checksums. It keeps current static assets and files
+that were changed by hand. The parent of the docs directory must be writable
+when the generator needs to update the state file.
+
+To refresh every image, for example after a font change, run the generator with
+`--force-diagrams`.
 
 ### Extra CSS
 
@@ -186,8 +213,8 @@ MkDocs customisations:
 
 - **Java 21+** The project is written in Scala and requires Java 21 or higher to
   run. I recommend using
-  [Temurin LTS](https://adoptium.net/temurin/releases/?version=21).
-  A `.tool-versions` file is provided, so you can use
+  [Temurin LTS](https://adoptium.net/temurin/releases/?version=21). A
+  `.tool-versions` file is provided, so you can use
   [mise](https://mise.jdx.dev/getting-started.html) to install it.
 
 - **Graphviz** The project uses Graphviz to generate diagrams - please install
