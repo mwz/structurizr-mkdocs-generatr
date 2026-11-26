@@ -157,17 +157,20 @@ The generator accepts the following arguments:
 
 The generator reuses a view's cached SVG and PNG when the PlantUML definition
 and renderer configuration match. It restores the images if the output files
-are missing or have changed. The generator renders views with custom PlantUML
-includes or external images on every run.
+are missing or have changed. Views with custom PlantUML includes, external images
+or inline PlantUML function calls such as `%date()` render on every run.
 
 For the default output directory `docs`, the generator stores rendered images in
 `.docs.generatr-cache` beside it. Restore this directory before running the
 generator in CI. A fresh `docs` directory receives only the current images.
+After a successful export, the generator removes cache entries for views that
+have been renamed or deleted.
 
 The generator records the diagram files it writes to `docs/img` in
 `.docs.generatr-state.json`. On a rerun, it removes obsolete diagram files that
 still match their recorded checksums. It keeps current static assets and files
-that were changed by hand.
+that were changed by hand. The parent of the docs directory must be writable
+when the generator needs to update the state file.
 
 To refresh every image, for example after a font change, run the generator
 with `--force-diagrams`.

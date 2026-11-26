@@ -76,10 +76,9 @@ object Diagrams:
           val path = parent / s".$name.generatr-state.json"
           readState(path).tupleLeft(path)
         }
-        cache <- paths.filter(_ => diagrams.nonEmpty).flatTraverse { case (parent, name) =>
-          openCache(parent / s".$name.generatr-cache")
-        }
-        _ <- Files[IO].tempDirectory(Some(dir), ".generatr-", None).use { staging =>
+        cacheDirectory = paths.map { case (parent, name) => parent / s".$name.generatr-cache" }
+        cache <- cacheDirectory.filter(_ => diagrams.nonEmpty).flatTraverse(openCache)
+        _     <- Files[IO].tempDirectory(Some(dir), ".generatr-", None).use { staging =>
           for
             prepared <- Stream
               .emits(diagrams)
@@ -87,12 +86,13 @@ object Diagrams:
               .compile
               .toList
             _ <- prepared.traverse_(_.checkDestination)
-            _ <- prepared.traverse_(_.publish)
-            _ <- state.traverse_ { case (path, previous) =>
-              updateState(path, conf.assets, previous, prepared.flatMap(_.files).toMap)
+            publish = prepared.traverse_(_.publish)
+            _ <- state.fold(publish) { case (path, previous) =>
+              publishWithState(path, conf.assets, previous, prepared.flatMap(_.files).toMap)(publish)
             }
           yield ()
         }
+        _ <- cacheDirectory.traverse_(dir => pruneCache(dir, diagrams.iterator.map(d => fingerprint(d.getKey())).toSet))
       yield ()
 
   private case class ImagePair(directory: FS2Path, name: String):
@@ -179,24 +179,33 @@ object Diagrams:
       }
       .recover { case _: NoSuchFileException => Map.empty }
 
-  private def updateState(
+  private def publishWithState(
       path: FS2Path,
       assets: AssetsPathConfig,
       previous: Map[String, String],
       published: Map[String, String]
+  )(publish: IO[Unit]): IO[Unit] =
+    if previous == published then publish
+    else
+      val current = JsonObject.fromIterable(published.toList.sortBy(_._1).map { case (name, hash) =>
+        name -> hash.asJson
+      })
+      val state = Json.obj("version" -> 1.asJson, "files" -> current.asJson)
+      writeRecord(path, state.spaces2 + "\n")(publish *> removeObsolete(assets, previous, published.keySet))
+
+  private def removeObsolete(
+      assets: AssetsPathConfig,
+      previous: Map[String, String],
+      published: Set[String]
   ): IO[Unit] =
     val source = assets.source.fs2Path
     val destination = assets.destination.fs2Path
     val obsolete = previous.iterator.filter { case (name, _) =>
       imageFilename.matches(name) && !published.contains(name)
     }.toList
-    val current = JsonObject.fromIterable(published.toList.sortBy(_._1).map { case (name, hash) =>
-      name -> hash.asJson
-    })
-    val state = Json.obj("version" -> 1.asJson, "files" -> current.asJson)
     obsolete.traverse_ { case (name, hash) =>
       val image = destination / name
-      val aliasesCurrentImage = published.keysIterator.filter(_.equalsIgnoreCase(name)).toList.existsM { current =>
+      val aliasesCurrentImage = published.iterator.filter(_.equalsIgnoreCase(name)).toList.existsM { current =>
         Files[IO].isSameFile(image, destination / current).recover { case _: NoSuchFileException => false }
       }
       Files[IO]
@@ -208,7 +217,7 @@ object Diagrams:
             IO.unit
           )
         )
-    } *> writeRecord(path, state.spaces2 + "\n").whenA(previous != published)
+    }
 
   private def render(reader: SourceStringReader, key: String, format: DiagramFormat, path: FS2Path): IO[Unit] =
     Resource.fromAutoCloseable(IO.blocking(new FileOutputStream(path.toString))).use { os =>
@@ -227,11 +236,11 @@ object Diagrams:
 
   // These includes are supplied by the pinned PlantUML library.
   private val bundledInclude = raw"!include\s+<C4/C4(?:_Context|_Container|_Component|_Deployment|_Sequence)?>".r
-  private val imageReference = raw"(?i)\bimg:|<img\s".r
+  private val imageOrFunction = raw"(?i)\bimg:|<img\s|%[a-z_]\w*\s*\(".r
 
   private def hasBundledInputs(definition: String): Boolean =
     definition.linesIterator.map(_.trim).forall { line =>
-      (!line.startsWith("!") || bundledInclude.matches(line)) && imageReference.findFirstIn(line).isEmpty
+      (!line.startsWith("!") || bundledInclude.matches(line)) && imageOrFunction.findFirstIn(line).isEmpty
     }
 
   private def openCache(directory: FS2Path): IO[Option[Cache]] =
@@ -247,6 +256,23 @@ object Diagrams:
   private case class Cache(directory: FS2Path, renderer: String):
     def entry(key: String, definition: String): CacheEntry =
       CacheEntry(directory, fingerprint(key), fingerprint(s"$renderer\n$definition"))
+
+  private val cacheFilename = raw"([0-9a-f]{64})\.(?:sha256|svg|png)".r
+
+  private def pruneCache(directory: FS2Path, activeKeys: Set[String]): IO[Unit] =
+    val prune = Files[IO]
+      .list(directory)
+      .evalMap { path =>
+        path.fileName.toString match
+          case cacheFilename(key) if !activeKeys.contains(key) =>
+            Files[IO].isRegularFile(path, false).ifM(Files[IO].deleteIfExists(path).void, IO.unit)
+          case _ => IO.unit
+      }
+      .compile
+      .drain
+    Files[IO].isDirectory(directory, false).ifM(prune, IO.unit).recoverWith { case error: IOException =>
+      IO.println(s"Could not prune the diagram cache in $directory (${error.getMessage}).")
+    }
 
   private case class CacheEntry(directory: FS2Path, key: String, input: String):
     private val record = directory / s"$key.sha256"
@@ -280,15 +306,15 @@ object Diagrams:
       val (svgHash, pngHash) = hashes
       val writeImages = Files[IO].tempDirectory(Some(directory), ".diagram-", None).use { temporary =>
         val copy = ImagePair(temporary, key)
-        staged.copyTo(copy) *> copy.moveTo(images) *> writeRecord(record, s"$input\n$svgHash\n$pngHash\n")
+        staged.copyTo(copy) *> writeRecord(record, s"$input\n$svgHash\n$pngHash\n")(copy.moveTo(images))
       }
       (Files[IO].createDirectories(directory) *> writeImages).recoverWith { case error: IOException =>
         IO.println(s"Could not save the diagram cache in $directory (${error.getMessage}).")
       }
 
-  private def writeRecord(path: FS2Path, contents: String): IO[Unit] =
+  private def writeRecord(path: FS2Path, contents: String)(publish: IO[Unit]): IO[Unit] =
     Files[IO].tempFile(path.parent, ".generatr-", ".tmp", None).use { staged =>
-      Stream.emit(contents).through(Files[IO].writeUtf8(staged)).compile.drain *> replace(staged, path)
+      Stream.emit(contents).through(Files[IO].writeUtf8(staged)).compile.drain *> publish *> replace(staged, path)
     }
 
   private def fingerprint(value: String): String =

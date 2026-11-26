@@ -21,6 +21,8 @@ import cats.syntax.foldable.*
 import com.structurizr.Workspace as SWorkspace
 import fs2.Stream
 import fs2.io.file.Files
+import fs2.io.file.PosixPermission.{OwnerExecute, OwnerRead}
+import fs2.io.file.PosixPermissions
 import munit.CatsEffectSuite
 
 import java.io.IOException
@@ -116,6 +118,81 @@ class DiagramsTest extends CatsEffectSuite:
         _ <- assertIO(Files[IO].exists(output / "Old.png"), false)
         _ <- assertIO(Files[IO].exists(output / "Static.svg"), true)
         _ <- assertIO(Files[IO].exists(output / "Static.png"), false)
+      yield ()
+    }
+
+  test("render views with inline PlantUML functions on every export"):
+    Files[IO].tempDirectory.use { project =>
+      val config = Config(CommandLineArgs(path = project.toNioPath))
+      val output = config.assets.destination.fs2Path
+      val workspace = sequenceWorkspace("Dated", "Static")
+      workspace.getViews().getViewWithKey("Dated").setTitle("Generated on %date()")
+      val runExport = Diagrams(workspace, config).exportAll()
+      val untouched = 120.seconds
+      val dated = List(output / "Dated.svg", output / "Dated.png")
+      val static = output / "Static.svg"
+
+      for
+        _ <- runExport
+        _ <- (static :: dated).traverse_(Files[IO].setFileTimes(_, Some(untouched), None, None, true))
+        _ <- runExport
+        _ <- dated.traverse_(path => Files[IO].getLastModifiedTime(path).map(time => assertNotEquals(time, untouched)))
+        _ <- assertIO(Files[IO].getLastModifiedTime(static), untouched)
+      yield ()
+    }
+
+  test("prune retired views from a restored cache, including when the last view is removed"):
+    Files[IO].tempDirectory.use { project =>
+      val config = Config(CommandLineArgs(path = project.toNioPath))
+      val cache = project / ".docs.generatr-cache"
+      val other = cache / "notes.txt"
+      val entries = Files[IO].list(cache).compile.toList.map(_.toSet)
+      def exportViews(keys: String*) = Diagrams(sequenceWorkspace(keys*), config).exportAll()
+
+      for
+        _      <- exportViews("Keep")
+        keep   <- entries
+        _      <- exportViews("Keep", "Old")
+        before <- entries
+        _      <- Files[IO].deleteRecursively(config.path.docsPath.fs2Path)
+        _      <- Files[IO].delete(project / ".docs.generatr-state.json")
+        _      <- Files[IO].createFile(other)
+        _      <- exportViews("Keep", "Renamed")
+        after  <- entries
+        _      <- IO {
+          assertEquals(keep.size, 3)
+          assertEquals((before -- keep).size, 3)
+          assertEquals(after.intersect(before), keep)
+          assertEquals((after -- keep - other).size, 3)
+        }
+        _ <- exportViews()
+        _ <- assertIO(entries, Set(other))
+      yield ()
+    }
+
+  test("a state staging failure leaves published diagrams intact for the next export"):
+    Files[IO].tempDirectory.use { project =>
+      assume(project.toNioPath.getFileSystem.supportedFileAttributeViews().contains("posix"))
+      val config = Config(CommandLineArgs(path = project.toNioPath))
+      val output = config.assets.destination.fs2Path
+      val images = Files[IO].list(output).map(_.fileName.toString).compile.toList.map(_.toSet)
+      def exportView(key: String) = Diagrams(sequenceWorkspace(key), config).exportAll()
+
+      for
+        _           <- exportView("Original")
+        permissions <- Files[IO].getPosixPermissions(project)
+        _           <- Files[IO]
+          .setPosixPermissions(project, PosixPermissions(OwnerRead, OwnerExecute))
+          .bracket { _ =>
+            for
+              writable <- Files[IO].isWritable(project)
+              _        <- IO(assume(!writable, "The test needs a user subject to directory permissions"))
+              _        <- interceptIO[IOException](exportView("Unpublished"))
+              _        <- assertIO(images, Set("Original.svg", "Original.png"))
+            yield ()
+          }(_ => Files[IO].setPosixPermissions(project, permissions))
+        _ <- exportView("Renamed")
+        _ <- assertIO(images, Set("Renamed.svg", "Renamed.png"))
       yield ()
     }
 
