@@ -196,6 +196,28 @@ class DiagramsTest extends CatsEffectSuite:
       yield ()
     }
 
+  test("a PlantUML render error preserves the published images, state and cache"):
+    Files[IO].tempDirectory.use { project =>
+      val config = Config(CommandLineArgs(path = project.toNioPath))
+      val workspace = sequenceWorkspace("First")
+      val runExport = Diagrams(workspace, config).exportAll()
+      val include = project / "broken.puml"
+      val files = Files[IO].list(config.assets.destination.fs2Path) ++
+        Files[IO].list(project / ".docs.generatr-cache") ++ Stream.emit(project / ".docs.generatr-state.json")
+      val snapshot =
+        files.evalMap(path => Files[IO].readAll(path).compile.toVector.map(path -> _)).compile.toList.map(_.toMap)
+
+      for
+        _      <- runExport
+        before <- snapshot
+        _      <- Stream.emit("!error deliberate render failure\n").through(Files[IO].writeUtf8(include)).compile.drain
+        _      <- IO(workspace.getViews().getConfiguration().addProperty("plantuml.includes", include.toString))
+        error  <- interceptIO[IOException](runExport)
+        _      <- IO(assert(error.getMessage.contains("PlantUML failed to render First as SVG")))
+        _      <- assertIO(snapshot, before)
+      yield ()
+    }
+
   test("check every image destination before publishing any diagram"):
     Files[IO].tempDirectory.use { project =>
       val config = Config(CommandLineArgs(path = project.toNioPath))
