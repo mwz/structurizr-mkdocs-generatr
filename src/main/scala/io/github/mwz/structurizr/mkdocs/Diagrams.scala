@@ -25,7 +25,8 @@ import fs2.Chunk
 import fs2.Stream
 import fs2.hashing.HashAlgorithm.SHA256
 import fs2.hashing.Hashing
-import fs2.io.file.CopyFlag.{AtomicMove, ReplaceExisting}
+import fs2.io.file.CopyFlag.AtomicMove
+import fs2.io.file.CopyFlag.ReplaceExisting
 import fs2.io.file.CopyFlags
 import fs2.io.file.Files
 import fs2.io.file.Path as FS2Path
@@ -33,11 +34,13 @@ import io.circe.Json
 import io.circe.JsonObject
 import io.circe.parser.parse
 import io.circe.syntax.*
+import net.atmp.CucaDiagram
 import net.sourceforge.plantuml.FileFormat
 import net.sourceforge.plantuml.FileFormatOption
 import net.sourceforge.plantuml.SourceStringReader
 import net.sourceforge.plantuml.cli.ExitStatus
-import net.sourceforge.plantuml.dot.{GraphvizRuntimeEnvironment, GraphvizUtils}
+import net.sourceforge.plantuml.dot.GraphvizRuntimeEnvironment
+import net.sourceforge.plantuml.dot.GraphvizUtils
 import net.sourceforge.plantuml.version.Version
 
 import java.io.FileOutputStream
@@ -57,36 +60,36 @@ trait Diagrams:
 object Diagrams:
   def apply(workspace: SWorkspace, conf: Config): Diagrams = new Diagrams:
     def exportAll(): IO[Unit] =
-      val dir = conf.assets.destination.fs2Path
-      val definitions = IO.blocking {
-        val exporter = CustomC4PlantUMLExporter(workspace)
+      val dir: FS2Path = conf.assets.destination.fs2Path
+      val definitions: IO[List[Diagram]] = IO.blocking {
+        val exporter = CustomC4PlantUMLExporter(workspace, conf.plantumlLayout)
         exporter.addSkinParam("svgDimensionStyle", "false")
         exporter.addSkinParam("preserveAspectRatio", "meet")
         exporter.`export`(workspace).asScala.toList
       }
-      val locations = Files[IO]
+      val locations: IO[Option[(FS2Path, String)]] = Files[IO]
         .realPath(conf.path.docsPath.fs2Path)
         .map(docs => docs.parent.map(parent => (parent, docs.fileName.toString)))
         .recover { case _: IOException => None }
       for
-        _        <- Files[IO].createDirectories(dir)
-        diagrams <- definitions
-        paths    <- locations
-        state    <- paths.traverse { case (parent, name) =>
+        _                                             <- Files[IO].createDirectories(dir)
+        diagrams                                      <- definitions
+        paths                                         <- locations
+        state: Option[(FS2Path, Map[String, String])] <- paths.traverse { case (parent, name) =>
           val path = parent / s".$name.generatr-state.json"
           readState(path).tupleLeft(path)
         }
-        cacheDirectory = paths.map { case (parent, name) => parent / s".$name.generatr-cache" }
-        cache <- cacheDirectory.filter(_ => diagrams.nonEmpty).flatTraverse(openCache)
-        _     <- Files[IO].tempDirectory(Some(dir), ".generatr-", None).use { staging =>
+        cacheDirectory: Option[FS2Path] = paths.map { case (parent, name) => parent / s".$name.generatr-cache" }
+        cache: Option[Cache] <- cacheDirectory.traverse(openCache)
+        _                    <- Files[IO].tempDirectory(Some(dir), ".generatr-", None).use { staging =>
           for
-            prepared <- Stream
+            prepared: List[Prepared] <- Stream
               .emits(diagrams)
               .parEvalMapUnordered(4)(diagram => prepare(dir, staging, diagram, cache, conf.forceDiagrams))
               .compile
               .toList
             _ <- prepared.traverse_(_.checkDestination)
-            publish = prepared.traverse_(_.publish)
+            publish: IO[Unit] = prepared.traverse_(_.publish)
             _ <- state.fold(publish) { case (path, previous) =>
               publishWithState(path, conf.assets, previous, prepared.flatMap(_.files).toMap)(publish)
             }
@@ -136,21 +139,27 @@ object Diagrams:
     val definition = diagram.getDefinition()
     val output = ImagePair(dir, key)
     val staged = ImagePair(staging, key)
-    val entry = cache.filter(_ => hasBundledInputs(definition)).map(_.entry(key, definition))
-    val reuse = if (force) IO.pure(None) else entry.flatTraverse(_.restore(output, staged))
-
-    reuse.flatMap {
-      case Some(prepared) => IO.println(s"Skipping up-to-date diagram: $key").as(prepared)
-      case None           =>
-        for
-          _      <- IO.println(s"Generating diagram: $key")
-          reader <- IO.blocking(SourceStringReader(definition))
-          _      <- render(reader, key, DiagramFormat.SVG, staged.svg)
-          _      <- render(reader, key, DiagramFormat.PNG, staged.png)
-          hashes <- staged.checksums
-          _      <- entry.traverse_(_.write(staged, hashes))
-        yield Prepared(output, hashes, Some(staged))
-    }
+    for
+      entry: Option[CacheEntry] <- cache
+        .filter(_ => hasBundledInputs(definition))
+        .flatTraverse(_.entry(key, definition))
+      reuse: Option[Prepared] <- if (force) IO.pure(None) else entry.flatTraverse(_.restore(output, staged))
+      result: Prepared        <- reuse match
+        case Some(prepared) => IO.println(s"Skipping up-to-date diagram: $key").as(prepared)
+        case None           =>
+          for
+            _      <- IO.println(s"Generating diagram: $key")
+            reader <- IO.blocking(SourceStringReader(definition))
+            _      <- render(reader, key, DiagramFormat.SVG, staged.svg)
+            // Check the parsed diagram because a custom include can also select ELK.
+            _ <- reader.getBlocks().asScala.headOption.map(_.getDiagram()) match
+              case Some(graph: CucaDiagram) if graph.isUseElk() => ElkSvg.groupLinks(staged.svg)
+              case _                                            => IO.unit
+            _      <- render(reader, key, DiagramFormat.PNG, staged.png)
+            hashes <- staged.checksums
+            _      <- entry.traverse_(_.write(staged, hashes))
+          yield Prepared(output, hashes, Some(staged))
+    yield result
 
   private val imageFilename = raw"[^/\\:\p{Cntrl}]+\.(?:svg|png)".r
   private val sha256 = "[0-9a-f]{64}".r
@@ -240,22 +249,31 @@ object Diagrams:
 
   private def hasBundledInputs(definition: String): Boolean =
     definition.linesIterator.map(_.trim).forall { line =>
-      (!line.startsWith("!") || bundledInclude.matches(line)) && imageOrFunction.findFirstIn(line).isEmpty
+      (!line.startsWith("!") || bundledInclude.matches(line) || line == PlantUmlLayout.elkPragma) &&
+      imageOrFunction.findFirstIn(line).isEmpty
     }
 
-  private def openCache(directory: FS2Path): IO[Option[Cache]] =
-    IO.blocking {
-      val graphviz = GraphvizRuntimeEnvironment.getInstance()
-      val dot = Option(graphviz.getDotExe()).map(_.getAbsolutePath()).getOrElse("")
-      // Bump this version when the rendering options or cache format change.
-      val renderer =
-        List("1", Version.versionString(), dot, graphviz.dotVersion(), GraphvizUtils.getenvImageLimit().toString)
-      Some(Cache(directory, fingerprint(renderer.mkString("\n"))))
-    }.recover { case _: IOException => None }
+  private def openCache(directory: FS2Path): IO[Cache] =
+    val plantuml = Version.versionString()
+    val size = GraphvizUtils.getenvImageLimit().toString
+    val dotRenderer: IO[Option[String]] = IO
+      .blocking {
+        val graphviz = GraphvizRuntimeEnvironment.getInstance()
+        val dot: String = Option(graphviz.getDotExe()).map(_.getAbsolutePath()).getOrElse("")
+        // Bump this version when the rendering options or cache format change.
+        Some(fingerprint(List("1", plantuml, dot, graphviz.dotVersion(), size).mkString("\n")))
+      }
+      .recover { case _: IOException => None }
+    // Bump the ELK revision when its runtime or SVG grouping changes independently of PlantUML.
+    val elkRenderer: String = fingerprint(List("elk-1", plantuml, size).mkString("\n"))
+    dotRenderer.memoize.map(Cache(directory, _, elkRenderer))
 
-  private case class Cache(directory: FS2Path, renderer: String):
-    def entry(key: String, definition: String): CacheEntry =
-      CacheEntry(directory, fingerprint(key), fingerprint(s"$renderer\n$definition"))
+  private case class Cache(directory: FS2Path, dotRenderer: IO[Option[String]], elkRenderer: String):
+    def entry(key: String, definition: String): IO[Option[CacheEntry]] =
+      val renderer: IO[Option[String]] =
+        if (definition.linesIterator.exists(_.trim == PlantUmlLayout.elkPragma)) IO.pure(Some(elkRenderer))
+        else dotRenderer
+      renderer.map(_.map(id => CacheEntry(directory, fingerprint(key), fingerprint(s"$id\n$definition"))))
 
   private val cacheFilename = raw"([0-9a-f]{64})\.(?:sha256|svg|png)".r
 

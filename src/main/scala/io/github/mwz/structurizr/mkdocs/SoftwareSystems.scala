@@ -16,7 +16,6 @@
 
 package io.github.mwz.structurizr.mkdocs
 
-import io.github.mwz.structurizr.mkdocs.markdown.imageView
 import com.structurizr.model.Container
 import com.structurizr.model.Element
 import com.structurizr.model.Relationship
@@ -24,6 +23,7 @@ import com.structurizr.model.SoftwareSystem
 import com.structurizr.view.ImageView
 import com.structurizr.view.ModelView
 import com.structurizr.view.ViewSet
+import io.github.mwz.structurizr.mkdocs.markdown.imageView
 import mouse.string.*
 
 import java.net.URL

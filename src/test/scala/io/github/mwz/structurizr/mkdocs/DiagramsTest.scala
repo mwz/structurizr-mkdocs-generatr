@@ -19,14 +19,19 @@ package io.github.mwz.structurizr.mkdocs
 import cats.effect.IO
 import cats.syntax.foldable.*
 import com.structurizr.Workspace as SWorkspace
+import com.structurizr.model.SoftwareSystem
 import fs2.Stream
 import fs2.io.file.Files
-import fs2.io.file.PosixPermission.{OwnerExecute, OwnerRead}
+import fs2.io.file.Path
+import fs2.io.file.PosixPermission.OwnerExecute
+import fs2.io.file.PosixPermission.OwnerRead
 import fs2.io.file.PosixPermissions
 import munit.CatsEffectSuite
 
 import java.io.IOException
 import scala.concurrent.duration.*
+import scala.xml.NodeSeq
+import scala.xml.XML
 
 import cli.CommandLineArgs
 
@@ -41,6 +46,60 @@ class DiagramsTest extends CatsEffectSuite:
       val _ = views.createDynamicView(key).add(relationship)
     }
     workspace
+
+  test("select layout per view, reuse grouped ELK images and honour PlantUML includes"):
+    Files[IO].tempDirectory.use { project =>
+      val config = Config(CommandLineArgs(path = project.toNioPath, plantumlLayout = PlantUmlLayout.Elk))
+      val workspace = sequenceWorkspace("Sequence")
+      val views = workspace.getViews()
+      val bank: SoftwareSystem = workspace.getModel().getSoftwareSystemWithName("Bank")
+      val context = views.createSystemContextView(bank, "Context")
+      context.addAllElements()
+      val output: Path = config.assets.destination.fs2Path
+      val svg = output / "Context.svg"
+      val include = project / "layout.puml"
+      val runExport: IO[Unit] = Diagrams(workspace, config).exportAll()
+
+      def hasSegments(shape: String): IO[Boolean] = Files[IO].readUtf8(svg).compile.string.map { contents =>
+        val links: NodeSeq = (XML.loadString(contents) \\ "g").filter(node => (node \ "@class").text == "link")
+        links.size == 1 && (links \ shape).nonEmpty && (links \ "text").text
+          .replace('\u00a0', ' ')
+          .contains("Checks balance")
+      }
+
+      for
+        _        <- runExport
+        _        <- assertIO(hasSegments("line"), true)
+        _        <- Files[IO].setFileTimes(svg, Some(120.seconds), None, None, true)
+        _        <- runExport
+        _        <- assertIO(Files[IO].getLastModifiedTime(svg), 120.seconds)
+        _        <- Files[IO].delete(svg)
+        _        <- runExport
+        _        <- assertIO(hasSegments("line"), true)
+        _        <- IO(views.getConfiguration().addProperty(PlantUmlLayout.property, "dot"))
+        _        <- runExport
+        _        <- assertIO(hasSegments("path"), true)
+        _        <- IO(context.addProperty(PlantUmlLayout.property, "elk"))
+        _        <- runExport
+        _        <- assertIO(hasSegments("line"), true)
+        _        <- IO(views.getConfiguration().addProperty(PlantUmlLayout.property, "elk"))
+        _        <- IO(context.addProperty(PlantUmlLayout.property, "dot"))
+        _        <- runExport
+        _        <- assertIO(hasSegments("path"), true)
+        _        <- IO(context.addProperty("plantuml.includes", include.toString))
+        _        <- Stream.emit("!pragma layout elk").through(Files[IO].writeUtf8(include)).compile.drain
+        _        <- runExport
+        _        <- assertIO(hasSegments("line"), true)
+        _        <- Stream.emit("' no pragma").through(Files[IO].writeUtf8(include)).compile.drain
+        _        <- runExport
+        _        <- assertIO(hasSegments("path"), true)
+        sequence <- Files[IO].readUtf8(output / "Sequence.svg").compile.string
+        _     <- IO(assertEquals(XML.loadString(sequence).attribute("data-diagram-type").map(_.text), Some("SEQUENCE")))
+        _     <- IO(context.addProperty(PlantUmlLayout.property, "unknown"))
+        error <- interceptIO[IllegalArgumentException](runExport)
+        _     <- IO(assert(error.getMessage.contains("Invalid generatr.plantuml.layout 'unknown' for view 'Context'")))
+      yield ()
+    }
 
   test("reuse complete diagram pairs and rebuild only stale views"):
     Files[IO].tempDirectory.use { project =>

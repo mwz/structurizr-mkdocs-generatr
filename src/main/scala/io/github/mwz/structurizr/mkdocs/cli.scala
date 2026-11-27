@@ -35,5 +35,7 @@ object cli:
       )
       docsDir: String = "docs",
       @HelpMessage("Regenerate every diagram, even if its existing images are up to date.")
-      forceDiagrams: Boolean = false
+      forceDiagrams: Boolean = false,
+      @HelpMessage("Default layout engine for PlantUML graph views (dot or elk, defaults to dot).")
+      plantumlLayout: PlantUmlLayout = PlantUmlLayout.Dot
   )

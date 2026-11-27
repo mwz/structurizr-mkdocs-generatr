@@ -108,6 +108,9 @@ cells etc.).
 - Scala 3 syntax, `maxColumn = 120`, aligned style (see
   [.scalafmt.conf](.scalafmt.conf)). tpolecat is enabled, so warnings are
   strict.
+- Prefer explicit type annotations for nested types such as `IO[Option[CacheEntry]]`
+  and for chained calls whose result type is hard to see. Use type inference when
+  the type is obvious, as with a string literal or a direct constructor call.
 - Effects are Cats Effect `IO`; file and stream IO go through
   `fs2.io.file.Files[IO]` and `fs2.Stream`, not `java.nio` directly. There's a
   `fs2Path` extension in

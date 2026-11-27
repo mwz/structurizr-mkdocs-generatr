@@ -1,5 +1,5 @@
 g.link:hover {
-  > path,polygon {
+  > :is(line, path, polygon) {
     stroke-width: 7 !important;
     stroke: red !important;
   }

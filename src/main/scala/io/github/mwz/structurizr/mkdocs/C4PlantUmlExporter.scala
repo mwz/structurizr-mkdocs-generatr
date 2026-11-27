@@ -30,8 +30,23 @@ trait CustomC4PlantUMLExporter extends C4PlantUMLExporter
 
 // Adds custom URLs for Software System and Container elements
 object CustomC4PlantUMLExporter:
-  def apply(workspace: SWorkspace): CustomC4PlantUMLExporter = new CustomC4PlantUMLExporter():
+  def apply(
+      workspace: SWorkspace,
+      defaultLayout: PlantUmlLayout = PlantUmlLayout.Dot
+  ): CustomC4PlantUMLExporter = new CustomC4PlantUMLExporter():
     val tmpUrl: String = "https://temp-url/"
+
+    override def writeIncludes(view: ModelView, writer: IndentingWriter): Unit =
+      if (!renderAsSequenceDiagram(view)) {
+        val value: String = getViewOrViewSetProperty(view, PlantUmlLayout.property, defaultLayout.toString)
+        val layout: PlantUmlLayout = PlantUmlLayout.parse(value).getOrElse {
+          throw new IllegalArgumentException(
+            s"Invalid ${PlantUmlLayout.property} '$value' for view '${view.getKey()}'. Expected dot or elk."
+          )
+        }
+        if (layout == PlantUmlLayout.Elk) writer.writeLine(PlantUmlLayout.elkPragma)
+      }
+      super.writeIncludes(view, writer)
 
     // Assumes a fixed URL structure
     def baseUrl(system: SoftwareSystem): String =

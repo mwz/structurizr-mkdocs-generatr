@@ -17,8 +17,8 @@
 package io.github.mwz.structurizr.mkdocs
 
 import cats.effect.IO
-import cats.syntax.apply.*
 import cats.effect.kernel.Resource
+import cats.syntax.apply.*
 import fs2.io.file.Files
 import fs2.io.file.Path
 import munit.CatsEffectSuite

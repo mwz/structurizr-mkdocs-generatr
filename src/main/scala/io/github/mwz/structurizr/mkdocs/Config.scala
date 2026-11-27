@@ -16,13 +16,33 @@
 
 package io.github.mwz.structurizr.mkdocs
 
+import caseapp.core.Error
+import caseapp.core.argparser.SimpleArgParser
 import fs2.io.file.Path as FS2Path
 
 import java.nio.file.Path
 
 import cli.CommandLineArgs
 
-case class Config(path: PathConfig, assets: AssetsPathConfig, forceDiagrams: Boolean = false)
+enum PlantUmlLayout:
+  case Dot, Elk
+
+object PlantUmlLayout:
+  val property = "generatr.plantuml.layout"
+  val elkPragma = "!pragma layout elk"
+
+  def parse(value: String): Option[PlantUmlLayout] = values.find(_.toString.equalsIgnoreCase(value.trim))
+
+  given SimpleArgParser[PlantUmlLayout] = SimpleArgParser.from("dot|elk") { value =>
+    parse(value).toRight(Error.MalformedValue("dot or elk", value))
+  }
+
+case class Config(
+    path: PathConfig,
+    assets: AssetsPathConfig,
+    forceDiagrams: Boolean         = false,
+    plantumlLayout: PlantUmlLayout = PlantUmlLayout.Dot
+)
 case class PathConfig(basePath: Path, docsPath: Path)
 case class AssetsPathConfig(source: Path, destination: Path)
 
@@ -37,6 +57,6 @@ object Config:
       source = options.path.resolve(options.assetsDir),
       destination = docsPath.resolve("img")
     )
-    Config(PathConfig(options.path, docsPath), assets, options.forceDiagrams)
+    Config(PathConfig(options.path, docsPath), assets, options.forceDiagrams, options.plantumlLayout)
 
 extension (path: Path) def fs2Path: FS2Path = FS2Path.fromNioPath(path)
