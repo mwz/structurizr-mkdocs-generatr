@@ -85,7 +85,7 @@ object Diagrams:
           for
             prepared: List[Prepared] <- Stream
               .emits(diagrams)
-              .parEvalMapUnordered(4)(diagram => prepare(dir, staging, diagram, cache, conf.forceDiagrams))
+              .parEvalMapUnordered(4)(diagram => prepare(dir, staging, diagram, cache, conf))
               .compile
               .toList
             _ <- prepared.traverse_(_.checkDestination)
@@ -133,7 +133,7 @@ object Diagrams:
       staging: FS2Path,
       diagram: Diagram,
       cache: Option[Cache],
-      force: Boolean
+      conf: Config
   ): IO[Prepared] =
     val key = diagram.getKey()
     val definition = diagram.getDefinition()
@@ -142,9 +142,10 @@ object Diagrams:
     for
       entry: Option[CacheEntry] <- cache
         .filter(_ => hasBundledInputs(definition))
-        .flatTraverse(_.entry(key, definition))
-      reuse: Option[Prepared] <- if (force) IO.pure(None) else entry.flatTraverse(_.restore(output, staged))
-      result: Prepared        <- reuse match
+        .flatTraverse(_.entry(key, definition, conf.linkHitArea))
+      reuse: Option[Prepared] <-
+        if (conf.forceDiagrams) IO.pure(None) else entry.flatTraverse(_.restore(output, staged))
+      result: Prepared <- reuse match
         case Some(prepared) => IO.println(s"Skipping up-to-date diagram: $key").as(prepared)
         case None           =>
           for
@@ -153,8 +154,9 @@ object Diagrams:
             _      <- render(reader, key, DiagramFormat.SVG, staged.svg)
             // Check the parsed diagram because a custom include can also select ELK.
             _ <- reader.getBlocks().asScala.headOption.map(_.getDiagram()) match
-              case Some(graph: CucaDiagram) if graph.isUseElk() => ElkSvg.groupLinks(staged.svg)
-              case _                                            => IO.unit
+              case Some(graph: CucaDiagram) if graph.isUseElk() || conf.linkHitArea =>
+                SvgLinks.process(staged.svg, groupElkLinks = graph.isUseElk(), linkHitArea = conf.linkHitArea)
+              case _ => IO.unit
             _      <- render(reader, key, DiagramFormat.PNG, staged.png)
             hashes <- staged.checksums
             _      <- entry.traverse_(_.write(staged, hashes))
@@ -269,11 +271,13 @@ object Diagrams:
     dotRenderer.memoize.map(Cache(directory, _, elkRenderer))
 
   private case class Cache(directory: FS2Path, dotRenderer: IO[Option[String]], elkRenderer: String):
-    def entry(key: String, definition: String): IO[Option[CacheEntry]] =
+    def entry(key: String, definition: String, linkHitArea: Boolean): IO[Option[CacheEntry]] =
       val renderer: IO[Option[String]] =
         if (definition.linesIterator.exists(_.trim == PlantUmlLayout.elkPragma)) IO.pure(Some(elkRenderer))
         else dotRenderer
-      renderer.map(_.map(id => CacheEntry(directory, fingerprint(key), fingerprint(s"$id\n$definition"))))
+      // With hit areas disabled, existing SVGs from before the option was introduced are reusable.
+      val svgOptions = if (linkHitArea) s"link-hit-area=${SvgLinks.hitWidth}\n" else ""
+      renderer.map(_.map(id => CacheEntry(directory, fingerprint(key), fingerprint(s"$id\n$svgOptions$definition"))))
 
   private val cacheFilename = raw"([0-9a-f]{64})\.(?:sha256|svg|png)".r
 

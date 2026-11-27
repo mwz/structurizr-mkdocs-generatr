@@ -37,5 +37,7 @@ object cli:
       @HelpMessage("Regenerate every diagram, even if its existing images are up to date.")
       forceDiagrams: Boolean = false,
       @HelpMessage("Default layout engine for PlantUML graph views (dot or elk, defaults to dot).")
-      plantumlLayout: PlantUmlLayout = PlantUmlLayout.Dot
+      plantumlLayout: PlantUmlLayout = PlantUmlLayout.Dot,
+      @HelpMessage("Use the visible SVG strokes as the hover targets for dot and ELK relationships.")
+      noLinkHitArea: Boolean = false
   )

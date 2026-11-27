@@ -41,7 +41,8 @@ case class Config(
     path: PathConfig,
     assets: AssetsPathConfig,
     forceDiagrams: Boolean         = false,
-    plantumlLayout: PlantUmlLayout = PlantUmlLayout.Dot
+    plantumlLayout: PlantUmlLayout = PlantUmlLayout.Dot,
+    linkHitArea: Boolean           = true
 )
 case class PathConfig(basePath: Path, docsPath: Path)
 case class AssetsPathConfig(source: Path, destination: Path)
@@ -57,6 +58,12 @@ object Config:
       source = options.path.resolve(options.assetsDir),
       destination = docsPath.resolve("img")
     )
-    Config(PathConfig(options.path, docsPath), assets, options.forceDiagrams, options.plantumlLayout)
+    Config(
+      PathConfig(options.path, docsPath),
+      assets,
+      options.forceDiagrams,
+      options.plantumlLayout,
+      linkHitArea = !options.noLinkHitArea
+    )
 
 extension (path: Path) def fs2Path: FS2Path = FS2Path.fromNioPath(path)

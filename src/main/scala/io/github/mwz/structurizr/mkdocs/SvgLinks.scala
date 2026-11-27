@@ -26,13 +26,17 @@ import fs2.io.file.Files
 import fs2.io.file.Path
 
 import scala.annotation.tailrec
+import scala.collection.Seq
 import scala.xml.Document
 import scala.xml.Elem
+import scala.xml.MetaData
 import scala.xml.Node
 import scala.xml.Text
 
-private[mkdocs] object ElkSvg:
-  def groupLinks(staged: Path): IO[Unit] =
+private[mkdocs] object SvgLinks:
+  val hitWidth = "6"
+
+  def process(staged: Path, groupElkLinks: Boolean, linkHitArea: Boolean): IO[Unit] =
     Files[IO]
       .readUtf8(staged)
       .through(events[IO, String](includeComments = true))
@@ -45,7 +49,11 @@ private[mkdocs] object ElkSvg:
           case svg: Elem if svg.label == "svg" =>
             svg.copy(child = svg.child.map {
               case drawing: Elem if drawing.label == "g" && drawing.attribute("class").isEmpty =>
-                drawing.copy(child = groupEdges(drawing.child.toList))
+                val children: Seq[Node] = if (groupElkLinks) groupEdges(drawing.child.toList) else drawing.child
+                drawing.copy(child = children.map {
+                  case link: Elem if linkHitArea && link.label == "g" && hasClass(link, "link") => withHitAreas(link)
+                  case other                                                                    => other
+                })
               case other => other
             })
           case other => other
@@ -54,6 +62,29 @@ private[mkdocs] object ElkSvg:
         if (updated == document.children) IO.unit
         else Stream.emits(updated).map(_.toString).through(Files[IO].writeUtf8(staged)).compile.drain
       }
+
+  private def hasClass(node: Node, name: String): Boolean =
+    node.attribute("class").exists(_.text.split("\\s+").contains(name))
+
+  private val geometry = Set("d", "x1", "y1", "x2", "y2", "transform")
+  private val hitAttributes: MetaData =
+    <g class="link-hit" opacity="0" fill="none" stroke="transparent" stroke-width={hitWidth}
+       pointer-events="stroke" aria-hidden="true"/>.attributes
+
+  private def withHitAreas(group: Elem): Elem =
+    if (group.child.exists(hasClass(_, "link-hit"))) group
+    else
+      val hits: Seq[Elem] = group.child.collect {
+        case segment: Elem if segment.label == "path" || visibleLine(segment) =>
+          val coordinates: MetaData = segment.attributes.filter(attr => geometry.contains(attr.key))
+          segment.copy(attributes = hitAttributes.append(coordinates), child = Nil)
+      }
+      // Keep linked strokes inside their original anchor so the wider target follows the same URL.
+      val children: Seq[Node] = group.child.map {
+        case anchor: Elem if anchor.label == "a" => withHitAreas(anchor)
+        case other                               => other
+      }
+      group.copy(child = hits ++ children)
 
   private def visibleLine(node: Node): Boolean =
     node.label == "line" && !node.attribute("style").exists(_.text.contains("stroke:none"))

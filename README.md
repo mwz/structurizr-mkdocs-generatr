@@ -160,6 +160,8 @@ The generator accepts the following arguments:
 - `--force-diagrams` - regenerate every diagram
 - `--plantuml-layout` - default layout engine for graph views (`dot` or `elk`,
   defaults to `dot`)
+- `--no-link-hit-area` - disable the wider SVG hover targets for dot and ELK
+  relationships
 
 ### Diagram layout
 
@@ -197,9 +199,11 @@ start the generator. An explicit ELK pragma selects ELK even when the
 generator's default is dot.
 
 In an inline SVG, `g.link:hover` targets the relationship's segments, arrowhead
-and label together. The example stylesheet styles both ELK's `line` elements and
-dot's `path` elements. The example uses ELK for its
-[system context view](example/workspace.dsl).
+and label together. A transparent stroke 6 SVG units wide makes each line easier
+to hover. For closely spaced relationships, use `--no-link-hit-area` to limit
+hover to the visible shapes and label. The example stylesheet excludes the
+transparent `.link-hit` elements when highlighting a relationship. The example
+uses ELK for its [container view](example/workspace.dsl).
 
 ### Diagram exports
 

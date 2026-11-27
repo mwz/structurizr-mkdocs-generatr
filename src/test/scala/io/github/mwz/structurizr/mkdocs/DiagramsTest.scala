@@ -59,13 +59,17 @@ class DiagramsTest extends CatsEffectSuite:
       val svg = output / "Context.svg"
       val include = project / "layout.puml"
       val runExport: IO[Unit] = Diagrams(workspace, config).exportAll()
+      val exportWithoutHitArea: IO[Unit] = Diagrams(workspace, config.copy(linkHitArea = false)).exportAll()
 
-      def hasSegments(shape: String): IO[Boolean] = Files[IO].readUtf8(svg).compile.string.map { contents =>
-        val links: NodeSeq = (XML.loadString(contents) \\ "g").filter(node => (node \ "@class").text == "link")
-        links.size == 1 && (links \ shape).nonEmpty && (links \ "text").text
-          .replace('\u00a0', ' ')
-          .contains("Checks balance")
-      }
+      def hasSegments(shape: String, hitArea: Boolean = true): IO[Boolean] =
+        Files[IO].readUtf8(svg).compile.string.map { contents =>
+          val links: NodeSeq = (XML.loadString(contents) \\ "g").filter(node => (node \ "@class").text == "link")
+          val (hits, visible) = (links \ shape).partition(_.attribute("class").exists(_.text == "link-hit"))
+          links.size == 1 && visible.nonEmpty && hits.size == (if (hitArea) visible.size
+                                                               else 0) && (links \ "text").text
+            .replace('\u00a0', ' ')
+            .contains("Checks balance")
+        }
 
       for
         _        <- runExport
@@ -76,7 +80,13 @@ class DiagramsTest extends CatsEffectSuite:
         _        <- Files[IO].delete(svg)
         _        <- runExport
         _        <- assertIO(hasSegments("line"), true)
+        _        <- exportWithoutHitArea
+        _        <- assertIO(hasSegments("line", hitArea = false), true)
         _        <- IO(views.getConfiguration().addProperty(PlantUmlLayout.property, "dot"))
+        _        <- runExport
+        _        <- assertIO(hasSegments("path"), true)
+        _        <- exportWithoutHitArea
+        _        <- assertIO(hasSegments("path", hitArea = false), true)
         _        <- runExport
         _        <- assertIO(hasSegments("path"), true)
         _        <- IO(context.addProperty(PlantUmlLayout.property, "elk"))
