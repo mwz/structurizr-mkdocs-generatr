@@ -65,11 +65,17 @@ Missing features:
    plugins:
      - inline-select-svg
      - glightbox
+   extra_javascript:
+     - https://cdn.jsdelivr.net/npm/@mwz/techdocs-mkdocs-svg-viewer@0.3.0/dist/svg-viewer.js
    theme:
      name: material
      features:
        - content.tabs.link
    ```
+
+   In the standalone example, select **Expand diagram** to pan and zoom an SVG.
+   The optional [SVG viewer](https://github.com/mwz/techdocs-mkdocs-svg-viewer)
+   loads through `extra_javascript`. GLightbox opens PNG images.
 
    For TechDocs, you'll need to include the TechDocs plugin in the plugins
    section:

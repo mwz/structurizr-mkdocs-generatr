@@ -10,6 +10,8 @@ theme:
     - content.tabs.link
 extra_css:
   - css/extra.css
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/@mwz/techdocs-mkdocs-svg-viewer@0.3.0/dist/svg-viewer.js
 markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
