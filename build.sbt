@@ -93,9 +93,9 @@ lazy val root = (project in file("."))
       "org.typelevel"              %% "mouse"              % "1.4.0",
       "org.typelevel"              %% "toolkit"            % "0.2.0",
       "org.gnieh"                  %% "fs2-data-xml-scala" % "1.13.0",
-      "com.structurizr"             % "structurizr-core"   % "6.2.3",
-      "com.structurizr"             % "structurizr-dsl"    % "6.2.3" exclude ("com.google.guava", "guava"),
-      "com.structurizr"             % "structurizr-export" % "6.2.3",
+      "com.structurizr"             % "structurizr-core"   % "6.2.4",
+      "com.structurizr"             % "structurizr-dsl"    % "6.2.4" exclude ("com.google.guava", "guava"),
+      "com.structurizr"             % "structurizr-export" % "6.2.4",
       "net.sourceforge.plantuml"    % "plantuml-mit"       % "1.2026.8" exclude ("com.google.guava", "guava"),
       // The MIT distribution omits the ELK runtime. Match the versions in PlantUML's standard POM.
       "org.eclipse.elk"     % "org.eclipse.elk.core"        % "0.12.0" % Runtime,
