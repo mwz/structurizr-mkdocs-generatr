@@ -17,12 +17,12 @@
 package io.github.mwz.structurizr.mkdocs
 
 import com.structurizr.Workspace as SWorkspace
+import com.structurizr.model.Component
 import com.structurizr.model.Container
 import com.structurizr.model.SoftwareSystem
 import munit.FunSuite
 
 import scala.collection.immutable.TreeMap
-import com.structurizr.model.Component
 
 case class TestSystem(name: String, group: String = "", containers: List[TestContainer] = List.empty)
 case class TestContainer(name: String)

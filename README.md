@@ -158,6 +158,52 @@ The generator accepts the following arguments:
   generated, relative to the `path` argument. Needs to match MkDocs' `docs_dir`
   setting (defaults to `docs`)
 - `--force-diagrams` - regenerate every diagram
+- `--plantuml-layout` - default layout engine for graph views (`dot` or `elk`,
+  defaults to `dot`)
+- `--no-link-hit-area` - disable the wider SVG hover targets for dot and ELK
+  relationships
+
+### Diagram layout
+
+PlantUML uses Graphviz dot by default. To use the bundled Eclipse Layout Kernel
+(ELK) for graph views, run the generator with `--plantuml-layout elk`. The
+selected engine draws both the SVG and PNG. Sequence diagrams use PlantUML's
+sequence layout.
+
+You can also set the engine in `workspace.dsl`. The following example selects
+ELK for the workspace and dot for one container view:
+
+```dsl
+views {
+    properties {
+        "generatr.plantuml.layout" "elk"
+    }
+
+    container internetBankingSystem "Containers" {
+        include *
+        properties {
+            "generatr.plantuml.layout" "dot"
+        }
+    }
+}
+```
+
+A view property takes precedence over the workspace property, which takes
+precedence over the CLI default. To enable ELK for just one view, set
+`"generatr.plantuml.layout" "elk"` in that view's properties.
+
+If you already use a PlantUML include file, you can put `!pragma layout elk` in
+it and reference it with `"plantuml.includes" "layout-elk.puml"` in the view's
+properties. PlantUML resolves the relative path from the directory where you
+start the generator. An explicit ELK pragma selects ELK even when the
+generator's default is dot.
+
+In an inline SVG, `g.link:hover` targets the relationship's segments, arrowhead
+and label together. A transparent stroke 6 SVG units wide makes each line easier
+to hover. For closely spaced relationships, use `--no-link-hit-area` to limit
+hover to the visible shapes and label. The example stylesheet excludes the
+transparent `.link-hit` elements when highlighting a relationship. The example
+uses ELK for its [container view](example/workspace.dsl).
 
 ### Diagram exports
 
@@ -223,9 +269,8 @@ MkDocs customisations:
   `.tool-versions` file is provided, so you can use
   [mise](https://mise.jdx.dev/getting-started.html) to install it.
 
-- **Graphviz** The project uses Graphviz to generate diagrams - please install
-  Graphviz on your machine. You can download it from
-  [here](https://plantuml.com/graphviz-dot).
+- **Graphviz** Install Graphviz for views that use the default dot engine. You
+  can download it from [here](https://plantuml.com/graphviz-dot).
 
 - **svg inlining** The project generates diagrams in png and svg formats. The
   svg images need to be inlined to support hyperlinks for navigation. Please use

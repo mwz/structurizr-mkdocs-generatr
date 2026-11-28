@@ -1,5 +1,9 @@
+g.link {
+  cursor: default;
+}
+
 g.link:hover {
-  > path,polygon {
+  > :is(line, path, polygon):not(.link-hit) {
     stroke-width: 7 !important;
     stroke: red !important;
   }

@@ -16,8 +16,8 @@
 
 package io.github.mwz.structurizr.mkdocs
 
-import io.github.mwz.structurizr.mkdocs.markdown.imgTabs
 import com.structurizr.documentation.Section as SSection
+import io.github.mwz.structurizr.mkdocs.markdown.imgTabs
 
 trait Docs:
   def sections(): Seq[Section]

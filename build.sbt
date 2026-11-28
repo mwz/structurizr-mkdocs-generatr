@@ -92,12 +92,18 @@ lazy val root = (project in file("."))
       "io.circe"                   %% "circe-yaml-v12"     % "0.16.1",
       "org.typelevel"              %% "mouse"              % "1.4.0",
       "org.typelevel"              %% "toolkit"            % "0.2.0",
+      "org.gnieh"                  %% "fs2-data-xml-scala" % "1.13.0",
       "com.structurizr"             % "structurizr-core"   % "6.2.4",
       "com.structurizr"             % "structurizr-dsl"    % "6.2.4" exclude ("com.google.guava", "guava"),
       "com.structurizr"             % "structurizr-export" % "6.2.4",
       "net.sourceforge.plantuml"    % "plantuml-mit"       % "1.2026.8" exclude ("com.google.guava", "guava"),
-      "org.codehaus.groovy"         % "groovy-jsr223"      % "3.0.25" % Runtime,
-      "org.typelevel"              %% "toolkit-test"       % "0.2.0"  % Test,
-      "org.typelevel"              %% "munit-cats-effect"  % "2.2.1"  % Test
+      // The MIT distribution omits the ELK runtime. Match the versions in PlantUML's standard POM.
+      "org.eclipse.elk"     % "org.eclipse.elk.core"        % "0.12.0" % Runtime,
+      "org.eclipse.elk"     % "org.eclipse.elk.alg.layered" % "0.12.0" % Runtime,
+      "org.eclipse.elk"     % "org.eclipse.elk.alg.mrtree"  % "0.12.0" % Runtime,
+      "org.eclipse.xtext"   % "org.eclipse.xtext.xbase.lib" % "2.44.0" % Runtime,
+      "org.codehaus.groovy" % "groovy-jsr223"               % "3.0.25" % Runtime,
+      "org.typelevel"      %% "toolkit-test"                % "0.2.0"  % Test,
+      "org.typelevel"      %% "munit-cats-effect"           % "2.2.1"  % Test
     )
   )

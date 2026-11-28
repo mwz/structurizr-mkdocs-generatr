@@ -225,6 +225,9 @@ workspace "Big Bank plc" "This is an example workspace to illustrate the key fea
 
         container internetBankingSystem "Containers" {
             include *
+            properties {
+                "generatr.plantuml.layout" "elk"
+            }
             animation {
                 customer mainframe email
                 webApplication
